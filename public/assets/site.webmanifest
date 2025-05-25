@@ -1,6 +1,6 @@
 {
-  "name": "Consulta del Tiempo",
-  "short_name": "El Tiempo",
+  "name": "Informe semanal de obra",
+  "short_name": "Informe Obra",
   "icons": [
     {
       "src": "favicon.webp",
@@ -13,7 +13,7 @@
       "type": "image/webp"
     }
   ],
-  "theme_color": "#3498db",
-  "background_color": "#ffffff",
+  "theme_color": "#3B8C88",         
+  "background_color": "#F5F1E8",    
   "display": "standalone"
 }
