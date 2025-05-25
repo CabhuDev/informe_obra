@@ -1,14 +1,14 @@
 /* Cambia SOLAMENTE esta línea por la URL de tu webhook */
-const WEBHOOK_URL = "https://abcd1234.ngrok.io/webhook/obra-form";
+const WEBHOOK_URL = "http://localhost:5678/webhook-test/informe_obra";
 
-const form   = document.getElementById("obraForm");
-const status = document.getElementById("status");
+let form   = document.getElementById("obraForm");
+let status = document.getElementById("status");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   // 1. Convertir el formulario en objeto plano
-  const data = Object.fromEntries(new FormData(form).entries());
+  let data = Object.fromEntries(new FormData(form).entries());
 
   // 2. Enviar JSON al webhook
   try {
