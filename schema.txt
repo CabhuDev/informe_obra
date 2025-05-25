@@ -1,0 +1,19 @@
+obra-form/
+├─ .gitignore
+├─ .env            
+├─ public/
+│   ├─ index.html
+│   ├─ css/
+│   │   └─ style.css
+│   ├─ js/
+│   │   └─ script.js
+│   ├─ assets/         # logos, iconos, futuros PDFs
+│   └─ config/
+│       ├─ prod.json   # {"webhook": "https://n8n.onrender.com/webhook/obra-form"}
+│       └─ dev.json    # {"webhook": "http://localhost:5678/webhook/obra-form"}
+├─ n8n/
+│   ├─ workflows/
+│   │   └─ informe_obra_n8n_workflow.json
+│   └─ env.example     # plantilla de variables
+├─ render.yaml         # define Static Site + (opcional) Web Service de n8n
+└─ README.md
