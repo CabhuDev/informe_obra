@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Informe semanal de obra</title>
+
+  <!-- PicoCSS (CDN) -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.7/css/pico.min.css" />
+  <!-- Nuestro CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <main class="container">
+    <h1>Informe semanal</h1>
+
+    <form id="obraForm" autocomplete="off">
+      <label>
+        Proyecto
+        <input name="projectName" placeholder="Nombre obra" required />
+      </label>
+
+      <label>
+        Fecha
+        <input type="date" name="date" required />
+      </label>
+
+      <label>
+        Avance (%)  
+        <input type="number" name="advance" min="0" max="100" required />
+      </label>
+
+      <label>
+        Observaciones
+        <textarea name="observations" rows="3"></textarea>
+      </label>
+
+      <label>
+        Incidencias
+        <textarea name="incidences" rows="3"></textarea>
+      </label>
+
+      <!-- Descomenta para fotos
+      <label>
+        Fotos (máx 3)
+        <input type="file" name="photos" accept="image/*" multiple capture="environment" />
+      </label>
+      -->
+
+      <button type="submit">Enviar informe</button>
+    </form>
+
+    <p id="status"></p>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

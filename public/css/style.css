@@ -1,0 +1,11 @@
+/* Estilos propios (PicoCSS ya aporta la base) */
+
+main {
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+#status {
+  margin-top: 1rem;
+  font-weight: 600;
+}

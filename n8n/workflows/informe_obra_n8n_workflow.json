@@ -1,0 +1,218 @@
+{
+  "name": "Informe Semanal Obra AI",
+  "settings": {
+    "executionTimeout": 300
+  },
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "obra-form",
+        "responseMode": "onReceived",
+        "options": {
+          "responseData": "Received"
+        }
+      }
+    },
+    {
+      "id": "2",
+      "name": "Set Form Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "projectName",
+              "value": "={{$json[\"body\"][\"projectName\"]}}"
+            },
+            {
+              "name": "date",
+              "value": "={{$json[\"body\"][\"date\"]}}"
+            },
+            {
+              "name": "advance",
+              "value": "={{$json[\"body\"][\"advance\"]}}"
+            },
+            {
+              "name": "observations",
+              "value": "={{$json[\"body\"][\"observations\"]}}"
+            },
+            {
+              "name": "incidences",
+              "value": "={{$json[\"body\"][\"incidences\"]}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "3",
+      "name": "OpenAI - Redactar",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [
+        750,
+        300
+      ],
+      "parameters": {
+        "operation": "chatCompletion",
+        "model": "gpt-4o",
+        "messagesUi": {
+          "message": [
+            {
+              "role": "system",
+              "content": "Eres un redactor técnico experto en construcción. Devuelve JSON con las claves obs_ai y summary_ai."
+            },
+            {
+              "role": "user",
+              "content": "Observaciones: {{$json[\"observations\"]}}\nIncidencias: {{$json[\"incidences\"]}}\nAvance: {{$json[\"advance\"]}}%\n"
+            }
+          ]
+        },
+        "responseFormat": "json"
+      },
+      "credentials": {
+        "openaiApi": {
+          "id": "__OPENAI_CREDENTIAL_ID__",
+          "name": "OpenAI"
+        }
+      }
+    },
+    {
+      "id": "4",
+      "name": "Crear HTML Informe",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ],
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "html",
+              "value": "<html>\n<head><style>\nbody{font-family: Arial, sans-serif;}\nh1{color:#0b5394}\nh2{color:#134f5c}\n.section{margin-bottom:20px;}\n</style></head>\n<body>\n<h1>Informe Semanal - {{ $json[\"projectName\"] }}</h1>\n<p><strong>Fecha:</strong> {{ $json[\"date\"] }}</p>\n<div class=\"section\">\n  <h2>Resumen Ejecutivo</h2>\n  <p>{{ $node[\"OpenAI - Redactar\"].json[\"summary_ai\"] }}</p>\n</div>\n<div class=\"section\">\n  <h2>Avance de la Obra</h2>\n  <p>{{ $json[\"advance\"] }} %</p>\n</div>\n<div class=\"section\">\n  <h2>Observaciones</h2>\n  <p>{{ $node[\"OpenAI - Redactar\"].json[\"obs_ai\"] }}</p>\n</div>\n</body></html>\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "5",
+      "name": "Convertir a PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ],
+      "parameters": {
+        "url": "https://api.pdf.co/v1/pdf/convert/from/html",
+        "method": "POST",
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\"html\": \"={{$json[\\\"html\\\"]}}\", \"name\": \"Informe-Semanal.pdf\", \"margins\": \"0px\"}",
+        "headerParametersJson": "{\"x-api-key\": \"{{ $env.PDFCO_API_KEY }}\"}"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Enviar Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        300
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "toEmail": "direccion@empresa.com, jefe.obra@empresa.com",
+        "subject": "Informe semanal {{ $json[\"projectName\"] }} - {{ $json[\"date\"] }}",
+        "message": "Hola equipo,<br/><br/>\nTenéis disponible el informe semanal de la obra <strong>{{ $json[\"projectName\"] }}</strong>.<br/>\nPodéis descargar el PDF en el siguiente enlace:<br/>\n<a href=\"{{ $node[\"Convertir a PDF\"].json[\"url\"] }}\">Descargar Informe</a><br/><br/>\nSaludos,<br/>n8n Automation\n",
+        "htmlBody": true
+      },
+      "credentials": {
+        "gmailOAuth2Api": {
+          "id": "__GMAIL_CREDENTIAL_ID__",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Form Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Form Data": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Redactar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Redactar": {
+      "main": [
+        [
+          {
+            "node": "Crear HTML Informe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear HTML Informe": {
+      "main": [
+        [
+          {
+            "node": "Convertir a PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convertir a PDF": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "version": 1
+}
