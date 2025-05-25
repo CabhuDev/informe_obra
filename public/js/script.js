@@ -1,5 +1,5 @@
 /* Cambia SOLAMENTE esta línea por la URL de tu webhook */
-const WEBHOOK_URL = "http://localhost:5678/webhook-test/informe_obra";
+const WEBHOOK_URL = "http://localhost:5678/webhook-test/form-obra";
 
 let form   = document.getElementById("obraForm");
 let status = document.getElementById("status");
