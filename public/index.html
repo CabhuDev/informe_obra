@@ -58,6 +58,19 @@
       </label>
       -->
 
+      <div class="audio-recorder">
+        <label>Observaciones de voz:</label>
+        <div class="recorder-controls">
+          <button type="button" id="startRecording" class="outline">🎙️ Iniciar grabación</button>
+          <button type="button" id="stopRecording" class="outline" disabled>⏹️ Detener</button>
+          <span id="recordingStatus"></span>
+        </div>
+        <audio id="audioPlayback" controls style="display:none; width:100%; margin-top:10px;"></audio>
+        <!-- Este campo oculto almacenará el audio como base64 -->
+        <input type="hidden" name="audioData" id="audioData">
+      </div>
+    
+
       <button type="submit">Enviar informe</button>
     </form>
 
@@ -65,5 +78,7 @@
   </main>
 
   <script src="js/script.js"></script>
+  <script src="js/audioRecord.js"></script>
+
 </body>
 </html>
