@@ -3,16 +3,7 @@ const WEBHOOK_URL = "http://localhost:5678/webhook-test/form-obra";
 
 let form = document.getElementById("obraForm");
 let status = document.getElementById("status");
-let audioCapture = document.getElementById("audioCapture");
-let audioPlayback = document.getElementById("audioPlayback");
-
-// Mostrar vista previa del audio cuando se seleccione un archivo
-audioCapture.addEventListener("change", function() {
-  if (this.files && this.files[0]) {
-    audioPlayback.src = URL.createObjectURL(this.files[0]);
-    audioPlayback.style.display = "block";
-  }
-});
+let audioRecord = document.getElementById("audioPlayback");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -29,14 +20,21 @@ form.addEventListener("submit", async (e) => {
     // Enviar como multipart/form-data (NO como JSON)
     let res = await fetch(WEBHOOK_URL, {
       method: "POST",
-      body: formData // No se establece Content-Type para que el navegador lo haga automáticamente
+      body: formData
     });
 
     if (res.ok) {
       status.textContent = "✅ Informe enviado correctamente";
       form.reset();
-      audioPlayback.style.display = "none";
-      audioPlayback.src = "";
+      
+      // Resetear completamente la interfaz de audio
+      audioRecord.style.display = "none";
+      audioRecord.src = "";
+      document.getElementById("audioData").value = "";
+      document.getElementById("recordingStatus").textContent = "";
+      document.getElementById("startRecording").disabled = false;
+      document.getElementById("stopRecording").disabled = true;
+      
     } else {
       status.textContent = "❌ Error al enviar";
     }

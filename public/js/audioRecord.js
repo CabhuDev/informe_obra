@@ -136,3 +136,10 @@ window.AudioDecoder = {
 
 // Log para verificar que el script se cargó correctamente
 console.log("Módulo de grabación de audio inicializado");
+
+console.log("Botones encontrados:", {
+    startButton: !!startRecordingButton,
+    stopButton: !!stopRecordingButton,
+    audioPlayback: !!audioPlayback,
+    audioData: !!audioData
+});
