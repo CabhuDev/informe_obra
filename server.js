@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
@@ -36,6 +37,41 @@ app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
+
+// Proxy reverso para N8N - ACCESO A N8N A TRAVÉS DEL FRONTEND
+app.use('/n8n', createProxyMiddleware({
+  target: 'http://localhost:5678',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/n8n': '', // Elimina /n8n del path antes de enviar a N8N
+  },
+  onError: (err, req, res) => {
+    console.error('Error del proxy N8N:', err.message);
+    res.status(502).json({
+      error: 'N8N no está disponible',
+      message: 'El servicio N8N está iniciándose o no está funcionando'
+    });
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    console.log(`Proxy N8N: ${req.method} ${req.path} -> http://localhost:5678${req.path.replace('/n8n', '')}`);
+  }
+}));
+
+// Proxy para webhooks de N8N - ENDPOINTS DE WEBHOOK
+app.use('/webhook', createProxyMiddleware({
+  target: 'http://localhost:5678',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/webhook': '/webhook', // Mantiene /webhook en el path
+  },
+  onError: (err, req, res) => {
+    console.error('Error del webhook N8N:', err.message);
+    res.status(502).json({
+      error: 'Webhook N8N no disponible',
+      message: 'El servicio de webhooks N8N no está funcionando'
+    });
+  }
+}));
 
 // Ruta principal - formulario de informes
 app.get('/', (req, res) => {

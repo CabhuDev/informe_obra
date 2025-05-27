@@ -13,8 +13,7 @@ services:
       - key: N8N_HOST
         value: 0.0.0.0
       - key: N8N_PROTOCOL
-        value: http
-      - key: WEBHOOK_URL
+        value: http      - key: WEBHOOK_URL
         value: https://informe-obra-ai.onrender.com/webhook/form-obra
       
       # Configuración de N8N

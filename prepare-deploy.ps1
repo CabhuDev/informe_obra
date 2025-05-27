@@ -75,6 +75,11 @@ Write-Host "   GMAIL_USER=tu-email@gmail.com" -ForegroundColor Gray
 Write-Host "   GMAIL_PASSWORD=tu-app-password" -ForegroundColor Gray
 Write-Host "   WEBHOOK_URL=https://tu-app.onrender.com/webhook/form-obra" -ForegroundColor Gray
 Write-Host ""
+Write-Host "URLs una vez desplegado:" -ForegroundColor Yellow
+Write-Host "  Frontend: https://tu-app.onrender.com" -ForegroundColor Green
+Write-Host "  N8N Editor: https://tu-app.onrender.com/n8n/" -ForegroundColor Green
+Write-Host "  Webhooks: https://tu-app.onrender.com/webhook/form-obra" -ForegroundColor Green
+Write-Host ""
 Write-Host "Consulta DEPLOY_GUIDE.md para detalles completos" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Tu sistema estara en: https://tu-app.onrender.com" -ForegroundColor Green

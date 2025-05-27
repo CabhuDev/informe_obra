@@ -61,7 +61,7 @@ WEBHOOK_URL=https://informe-obra-ai.onrender.com/webhook/form-obra
 Una vez desplegado tendrás:
 
 - **🏠 Frontend:** `https://informe-obra-ai.onrender.com`
-- **⚙️ N8N Editor:** `https://informe-obra-ai.onrender.com:5678`
+- **⚙️ N8N Editor:** `https://informe-obra-ai.onrender.com/n8n/`
 - **🔗 Webhook:** `https://informe-obra-ai.onrender.com/webhook/form-obra`
 - **💾 Health Check:** `https://informe-obra-ai.onrender.com/health`
 

@@ -62,7 +62,7 @@ WEBHOOK_URL=https://tu-app.onrender.com/webhook/form-obra
 ## 🌐 **URLs Finales Automáticas**
 
 - **🏠 Formulario:** `https://tu-app.onrender.com`
-- **⚙️ N8N Editor:** `https://tu-app.onrender.com:5678`
+- **⚙️ N8N Editor:** `https://tu-app.onrender.com/n8n/`
 - **🔗 Webhook:** `https://tu-app.onrender.com/webhook/form-obra`
 - **💓 Health Check:** `https://tu-app.onrender.com/health`
 
