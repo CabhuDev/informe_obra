@@ -1,0 +1,64 @@
+services:
+  - type: web
+    name: informe-obra-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      # N8N Core Configuration
+      - key: NODE_ENV
+        value: production
+      - key: N8N_HOST
+        value: 0.0.0.0
+      - key: N8N_PROTOCOL
+        value: http
+      - key: WEBHOOK_URL
+        sync: false
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+      - key: DB_TYPE
+        value: sqlite
+      - key: DB_SQLITE_DATABASE
+        value: /home/node/.n8n/database.sqlite
+      - key: N8N_USER_MANAGEMENT_DISABLED
+        value: true
+      - key: N8N_DIAGNOSTICS_ENABLED
+        value: false
+      - key: N8N_VERSION_NOTIFICATIONS_ENABLED
+        value: false
+      - key: N8N_TEMPLATES_ENABLED
+        value: false
+      - key: N8N_ONBOARDING_FLOW_DISABLED
+        value: true
+      - key: EXECUTIONS_DATA_PRUNE
+        value: true
+      - key: EXECUTIONS_DATA_MAX_AGE
+        value: 168
+        
+      # OpenAI API (ChatGPT para transcripción)
+      - key: OPENAI_API_KEY
+        sync: false
+        
+      # Google APIs (Drive + Gmail)
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+        
+      # Gmail Configuration
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_PASSWORD
+        sync: false
+        
+      # Optional: OAuth2 Tokens (si usas OAuth en lugar de contraseña)
+      - key: GMAIL_CLIENT_ID
+        sync: false
+      - key: GMAIL_CLIENT_SECRET
+        sync: false
+      - key: GMAIL_REFRESH_TOKEN
+        sync: false

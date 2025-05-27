@@ -19,6 +19,32 @@ yarn-error.log*
 node_modules/
 build/
 dist/
+
+# ──────────────────
+# 4. Datos de N8N
+# ──────────────────
+.n8n/
+.n8n-backup/
+
+# ──────────────────
+# 5. Docker y Render
+# ──────────────────
+.dockerignore
+.render/
+
+# ──────────────────
+# 6. Sistema
+# ──────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# ──────────────────
+# 7. Archivos temporales
+# ──────────────────
+*.tmp
+*.temp
 public/dist/
 .cache/
 

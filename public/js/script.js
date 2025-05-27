@@ -1,9 +1,22 @@
-/* Cambia SOLAMENTE esta línea por la URL de tu webhook */
-const WEBHOOK_URL = "http://localhost:5678/webhook-test/form-obra";
+/* URL del webhook - detecta automáticamente el entorno */
+const WEBHOOK_URL = (() => {
+  const hostname = window.location.hostname;
+  const protocol = window.location.protocol;
+  
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    // Desarrollo local
+    return "http://localhost:5678/webhook/obra-form";
+  } else {
+    // Producción en Render
+    return `${protocol}//${hostname}/webhook/obra-form`;
+  }
+})();
 
 let form = document.getElementById("obraForm");
 let status = document.getElementById("status");
 let audioRecord = document.getElementById("audioPlayback");
+
+console.log("🔗 Webhook URL configurada:", WEBHOOK_URL);
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -14,10 +27,11 @@ form.addEventListener("submit", async (e) => {
   submitButton.disabled = true;
 
   try {
-    // Usar FormData para manejar archivos (en lugar de JSON)
+    // Usar FormData para manejar archivos
     const formData = new FormData(form);
     
-    // Enviar como multipart/form-data (NO como JSON)
+    console.log("📤 Enviando datos a:", WEBHOOK_URL);
+    
     let res = await fetch(WEBHOOK_URL, {
       method: "POST",
       body: formData
