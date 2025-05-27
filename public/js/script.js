@@ -5,10 +5,10 @@ const WEBHOOK_URL = (() => {
   
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
     // Desarrollo local
-    return "http://localhost:5678/webhook/obra-form";
+    return "http://localhost:10000/webhook/form-obra";
   } else {
     // Producción en Render
-    return `${protocol}//${hostname}/webhook/obra-form`;
+    return `${protocol}//${hostname}/webhook/form-obra`;
   }
 })();
 

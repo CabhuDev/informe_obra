@@ -11,11 +11,10 @@ services:
       - key: NODE_ENV
         value: production
       - key: N8N_HOST
-        value: 0.0.0.0
-      - key: N8N_PROTOCOL
+        value: 0.0.0.0      - key: N8N_PROTOCOL
         value: http
       - key: WEBHOOK_URL
-        sync: false
+        value: https://informe-obra-ai.onrender.com/webhook/form-obra
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
       - key: DB_TYPE

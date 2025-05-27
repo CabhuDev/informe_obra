@@ -67,7 +67,7 @@ RUN if [ -d "/tmp/n8n-workflows" ]; then \
 # Volver al usuario n8n
 USER node
 
-# Exponer puerto por defecto (Render asigna PORT dinámicamente)
+# Exponer puerto para Render (puerto dinámico)
 EXPOSE 10000
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
