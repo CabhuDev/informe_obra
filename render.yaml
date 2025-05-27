@@ -40,8 +40,7 @@ services:
       # OpenAI API (ChatGPT para transcripción)
       - key: OPENAI_API_KEY
         sync: false
-        
-      # Google APIs (Drive + Gmail)
+          # Google APIs (Drive + Gmail OAuth2 - mismo proyecto)
       - key: GOOGLE_CLIENT_ID
         sync: false
       - key: GOOGLE_CLIENT_SECRET
@@ -49,16 +48,10 @@ services:
       - key: GOOGLE_REDIRECT_URI
         sync: false
         
-      # Gmail Configuration
-      - key: GMAIL_USER
-        sync: false
-      - key: GMAIL_PASSWORD
-        sync: false
-        
-      # Optional: OAuth2 Tokens (si usas OAuth en lugar de contraseña)
+      # Gmail OAuth2 (mismas credenciales que Drive)
       - key: GMAIL_CLIENT_ID
         sync: false
       - key: GMAIL_CLIENT_SECRET
         sync: false
-      - key: GMAIL_REFRESH_TOKEN
+      - key: GMAIL_USER
         sync: false
