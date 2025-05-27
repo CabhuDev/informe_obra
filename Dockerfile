@@ -26,9 +26,11 @@ WORKDIR /app
 
 # Copiar archivos del proyecto
 COPY public/ /app/public/
+COPY server.js /app/
+COPY docker-entrypoint.sh /app/
 
 # Instalar dependencias de Node.js
-COPY package*.json ./
+COPY package*.json /app/
 RUN npm install --only=production
 
 # Variables de entorno para N8N
@@ -46,8 +48,7 @@ ENV N8N_HOST=0.0.0.0 \
     GENERIC_TIMEZONE=Europe/Madrid
 
 # Script de inicio
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
 
 # Crear directorio para datos de N8N
 RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node/.n8n
@@ -55,12 +56,13 @@ RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node/.n8n
 # Crear directorio temporal para workflows
 RUN mkdir -p /tmp/n8n-workflows
 
-# Copiar workflows si existen (usando un patrón que funcione)
-COPY n8n /tmp/n8n-workflows/ 
+# Copiar workflows si existen
+COPY n8n/ /tmp/n8n-workflows/ 
 
 # Mover workflows al directorio correcto
-RUN if [ -d "/tmp/n8n-workflows" ]; then \
-      cp -r /tmp/n8n-workflows/* /home/node/.n8n/ 2>/dev/null || true; \
+RUN if [ -d "/tmp/n8n-workflows/workflows" ]; then \
+      mkdir -p /home/node/.n8n/workflows; \
+      cp -r /tmp/n8n-workflows/workflows/* /home/node/.n8n/workflows/ 2>/dev/null || true; \
       chown -R node:node /home/node/.n8n; \
     fi
 
@@ -70,4 +72,4 @@ USER node
 # Exponer puerto para Render (puerto dinámico)
 EXPOSE 10000
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

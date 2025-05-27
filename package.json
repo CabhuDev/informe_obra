@@ -2,16 +2,16 @@
   "name": "informe-obra-render",
   "version": "1.0.0",
   "description": "Sistema de informes de obra con N8N y AI en Render",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "n8n start",
-    "dev": "n8n start"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6",
     "informe-obra-render": "file:",
-    "puppeteer": "^21.6.1"
+    "n8n": "^1.0.0"
   },
   "engines": {
     "node": ">=18.0.0"

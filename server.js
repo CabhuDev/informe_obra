@@ -17,12 +17,24 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Proxy para N8N - webhooks y API
+// Health check
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Proxy para N8N - webhooks y API con manejo de errores
 app.use('/webhook', createProxyMiddleware({
     target: `http://127.0.0.1:${N8N_PORT}`,
     changeOrigin: true,
     ws: true,
-    logLevel: 'info'
+    logLevel: 'info',
+    onError: (err, req, res) => {
+        console.error('❌ Webhook proxy error:', err.message);
+        res.status(503).json({ error: 'N8N service unavailable' });
+    },
+    onProxyReq: (proxyReq, req, res) => {
+        console.log(`📤 Webhook request: ${req.method} ${req.url}`);
+    }
 }));
 
 app.use('/n8n', createProxyMiddleware({
@@ -32,7 +44,11 @@ app.use('/n8n', createProxyMiddleware({
     pathRewrite: {
         '^/n8n': ''
     },
-    logLevel: 'info'
+    logLevel: 'info',
+    onError: (err, req, res) => {
+        console.error('❌ N8N proxy error:', err.message);
+        res.status(503).json({ error: 'N8N admin interface unavailable' });
+    }
 }));
 
 app.listen(PORT, '0.0.0.0', () => {
