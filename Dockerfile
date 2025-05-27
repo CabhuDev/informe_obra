@@ -4,7 +4,7 @@ FROM n8nio/n8n:latest
 # Cambiar a usuario root para instalar dependencias
 USER root
 
-# Instalar dependencias del sistema
+# Instalar dependencias del sistema y nginx
 RUN apk add --no-cache \
     chromium \
     nss \
@@ -15,7 +15,10 @@ RUN apk add --no-cache \
     python3 \
     py3-pip \
     bash \
-    curl
+    curl \
+    nginx \
+    nodejs \
+    npm
 
 # Variables de entorno para Puppeteer
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
@@ -28,10 +31,13 @@ WORKDIR /app
 COPY public/ /app/public/
 COPY server.js /app/
 COPY docker-entrypoint.sh /app/
-
-# Instalar dependencias de Node.js
 COPY package*.json /app/
+
+# Instalar dependencias de Node.js para el frontend
 RUN npm install --only=production
+
+# Copiar workflows de N8N
+COPY n8n/ /app/n8n/
 
 # Variables de entorno para N8N
 ENV N8N_HOST=0.0.0.0 \
@@ -45,31 +51,25 @@ ENV N8N_HOST=0.0.0.0 \
     N8N_ONBOARDING_FLOW_DISABLED=true \
     EXECUTIONS_DATA_PRUNE=true \
     EXECUTIONS_DATA_MAX_AGE=168 \
-    GENERIC_TIMEZONE=Europe/Madrid
+    GENERIC_TIMEZONE=Europe/Madrid \
+    N8N_METRICS=true \
+    N8N_LOG_LEVEL=info
 
-# Script de inicio
+# Configurar nginx
+RUN mkdir -p /var/log/nginx /var/lib/nginx/tmp /etc/nginx/conf.d
+
+# Hacer ejecutable el script de inicio
 RUN chmod +x /app/docker-entrypoint.sh
 
-# Crear directorio para datos de N8N
-RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node/.n8n
+# Crear directorio para datos de N8N y configurar permisos
+RUN mkdir -p /home/node/.n8n/workflows && \
+    chown -R node:node /home/node/.n8n
 
-# Crear directorio temporal para workflows
-RUN mkdir -p /tmp/n8n-workflows
-
-# Copiar workflows si existen
-COPY n8n/ /tmp/n8n-workflows/ 
-
-# Mover workflows al directorio correcto
-RUN if [ -d "/tmp/n8n-workflows/workflows" ]; then \
-      mkdir -p /home/node/.n8n/workflows; \
-      cp -r /tmp/n8n-workflows/workflows/* /home/node/.n8n/workflows/ 2>/dev/null || true; \
-      chown -R node:node /home/node/.n8n; \
-    fi
-
-# Volver al usuario n8n
+# Cambiar al usuario node para mayor seguridad
 USER node
 
-# Exponer puerto para Render (puerto dinámico)
-EXPOSE 10000
+# Exponer puerto dinámico para Render
+EXPOSE ${PORT:-10000}
 
+# Comando de inicio
 ENTRYPOINT ["/app/docker-entrypoint.sh"]

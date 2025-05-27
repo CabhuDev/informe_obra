@@ -1,24 +1,34 @@
-# Sistema de Informes de Obra - Despliegue en Render
+# Sistema de Informes de Obra con N8N y IA
 
-Este proyecto es un sistema completo de captura y procesamiento de informes de construcción con grabación de audio, automatización N8N y generación de reportes con IA.
+Sistema completo de captura y procesamiento de informes de construcción con:
+- 📱 Frontend web para captura de datos y audio
+- 🤖 N8N para automatización de workflows  
+- 🧠 OpenAI para transcripción y análisis con IA
+- 📧 Envío automático de informes por email
+- ☁️ Despliegue gratuito en Render con HTTPS
 
-## 🚀 Despliegue en Render (Gratis)
+## 🚀 Despliegue en Render (100% Gratis)
+
+### ¿Por qué Render y no ngrok?
+
+| Característica | Render (✅ Recomendado) | Ngrok (❌ Solo desarrollo) |
+|---|---|---|
+| **URLs** | Permanentes con HTTPS | Temporales, cambian cada reinicio |
+| **Costo** | Gratis (750h/mes) | Limitado gratis, requiere pago |
+| **Estabilidad** | Producción real | Solo para testing |
+| **SSL/HTTPS** | Automático | Requiere configuración |
+| **Escalabilidad** | Automática | Manual |
 
 ### Prerrequisitos
 
-1. Cuenta en [Render.com](https://render.com)
-2. Repositorio de Git con el código
-3. Cuenta de Gmail para envío de emails
+1. Cuenta en [Render.com](https://render.com) (gratis)
+2. Repositorio de GitHub con el código
+3. API Key de OpenAI
+4. Cuenta de Gmail con contraseña de aplicación
 
-### Paso 1: Preparar el Repositorio
+### Paso 1: Verificar Archivos
 
-1. Sube todo el código a un repositorio de GitHub
-2. Asegúrate de que todos los archivos estén presentes:
-   - `Dockerfile`
-   - `render.yaml`
-   - `docker-entrypoint.sh`
-   - `package.json`
-   - Carpeta `public/` con todos los archivos HTML, CSS y JS
+Ejecuta el script de verificación:
 
 ### Paso 2: Crear el Servicio en Render
 
