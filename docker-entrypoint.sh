@@ -63,6 +63,12 @@ wait_for_n8n() {
     for i in {1..30}; do
         if curl -f -s "http://127.0.0.1:$N8N_PORT/healthz" > /dev/null 2>&1; then
             echo "✅ N8N está listo!"
+            # Verificar también que puede recibir webhooks
+            if curl -f -s "http://127.0.0.1:$N8N_PORT/webhook" > /dev/null 2>&1; then
+                echo "✅ Webhooks N8N disponibles!"
+            else
+                echo "⚠️  N8N corriendo pero webhooks no disponibles aún"
+            fi
             return 0
         fi
         echo "⏳ Intento $i/30..."
@@ -76,6 +82,7 @@ wait_for_n8n() {
 if ! wait_for_n8n; then
     echo "🔍 Verificando logs de N8N..."
     tail -20 /tmp/n8n.log || echo "No se pudieron leer los logs"
+    echo "🔄 Intentando continuar de todos modos..."
 fi
 
 echo "🌐 Iniciando servidor Express..."

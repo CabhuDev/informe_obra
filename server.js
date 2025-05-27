@@ -9,6 +9,9 @@ const N8N_PORT = process.env.N8N_PORT || 5678;
 console.log(`🔧 Configurando servidor en puerto ${PORT}`);
 console.log(`🔗 N8N ejecutándose en puerto ${N8N_PORT}`);
 
+// Middleware para parsing JSON
+app.use(express.json());
+
 // Configurar Express para servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -20,6 +23,40 @@ app.get('/', (req, res) => {
 // Health check
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Diagnóstico de N8N
+app.get('/debug/n8n', async (req, res) => {
+    try {
+        const response = await fetch(`http://127.0.0.1:${N8N_PORT}/healthz`);
+        const isHealthy = response.ok;
+        
+        res.json({
+            n8n_status: isHealthy ? 'running' : 'not_responding',
+            n8n_port: N8N_PORT,
+            express_port: PORT,
+            timestamp: new Date().toISOString(),
+            webhook_url: `http://127.0.0.1:${N8N_PORT}/webhook/form-obra`
+        });
+    } catch (error) {
+        res.json({
+            n8n_status: 'error',
+            error: error.message,
+            n8n_port: N8N_PORT,
+            express_port: PORT,
+            timestamp: new Date().toISOString()
+        });
+    }
+});
+
+// Webhook de prueba directo (bypass N8N para testing)
+app.post('/test-webhook', express.json(), (req, res) => {
+    console.log('🧪 Test webhook recibido:', req.body);
+    res.json({ 
+        message: 'Webhook de prueba recibido correctamente',
+        data: req.body,
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Proxy para N8N - webhooks y API con manejo de errores

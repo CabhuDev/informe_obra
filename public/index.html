@@ -30,7 +30,7 @@
         Email
         <input type="email" name="email" placeholder="Email donde te llegará el informe" required />
       </label>
-      
+
       <label>
         Proyecto
         <input name="projectName" placeholder="Nombre obra" required />
@@ -74,16 +74,77 @@
         <!-- Este campo oculto almacenará el audio como base64 -->
         <input type="hidden" name="audioData" id="audioData">
       </div>
-    
-
-      <button type="submit">Enviar informe</button>
+        <button type="submit">Enviar informe</button>
     </form>
 
     <p id="status"></p>
+    
+    <!-- Panel de diagnóstico temporal -->
+    <details style="margin-top: 2rem; border: 1px solid #ccc; padding: 1rem; border-radius: 5px;">
+      <summary>🔧 Diagnóstico del Sistema</summary>
+      <div style="margin-top: 1rem;">
+        <button type="button" onclick="checkHealth()" style="margin: 0.5rem;">Check Health</button>
+        <button type="button" onclick="checkN8N()" style="margin: 0.5rem;">Check N8N</button>
+        <button type="button" onclick="testWebhook()" style="margin: 0.5rem;">Test Webhook</button>
+        <div id="debugOutput" style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; font-family: monospace; white-space: pre-wrap; max-height: 200px; overflow-y: auto;"></div>
+      </div>
+    </details>
   </main>
 
   <script src="js/script.js"></script>
   <script src="js/audioRecord.js"></script>
+  
+  <script>
+    // Funciones de diagnóstico temporal
+    function log(message) {
+      const output = document.getElementById('debugOutput');
+      output.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+      output.scrollTop = output.scrollHeight;
+    }
+    
+    async function checkHealth() {
+      try {
+        const response = await fetch('/health');
+        const data = await response.json();
+        log('✅ Health check: ' + JSON.stringify(data, null, 2));
+      } catch (error) {
+        log('❌ Health check error: ' + error.message);
+      }
+    }
+    
+    async function checkN8N() {
+      try {
+        const response = await fetch('/debug/n8n');
+        const data = await response.json();
+        log('🔍 N8N Status: ' + JSON.stringify(data, null, 2));
+      } catch (error) {
+        log('❌ N8N check error: ' + error.message);
+      }
+    }
+    
+    async function testWebhook() {
+      try {
+        const testData = {
+          projectName: 'Test Project',
+          date: new Date().toISOString().split('T')[0],
+          advance: '50%',
+          observations: 'Test observation',
+          incidences: 'Test incidence'
+        };
+        
+        const response = await fetch('/test-webhook', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(testData)
+        });
+        
+        const result = await response.json();
+        log('🧪 Test webhook result: ' + JSON.stringify(result, null, 2));
+      } catch (error) {
+        log('❌ Test webhook error: ' + error.message);
+      }
+    }
+  </script>
 
 </body>
 </html>
