@@ -18,7 +18,9 @@ services:
     networks:
       - obratec-network
     depends_on:
-      - n8n  # N8N Workflow Automation - CONFIGURACIÓN SEGURA
+      - n8n
+
+  # N8N Workflow Automation - CONFIGURACIÓN SEGURA
   n8n:
     image: n8nio/n8n:latest
     container_name: obratec-n8n
@@ -26,9 +28,6 @@ services:
     # IMPORTANTE: No exponer puerto 5678 externamente
     expose:
       - "5678"
-    # Solo comunicación interna con el contenedor app
-    networks:
-      - obratec-network
     environment:
       # Configuración básica desde .env
       - N8N_HOST=${N8N_HOST}
@@ -64,11 +63,7 @@ services:
       - N8N_ENDPOINTS_WEBHOOK_WAITING=webhook-waiting
       - N8N_ENDPOINTS_WEBHOOK_TEST=webhook-test
       
-      # Desactivar funciones innecesarias
-      - N8N_DIAGNOSTICS_ENABLED=false
-      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
-      - N8N_TEMPLATES_ENABLED=false
-      - N8N_ONBOARDING_FLOW_DISABLED=true
+      # Configuración adicional
       - N8N_METRICS=true
       - N8N_LOG_LEVEL=info
       
@@ -78,7 +73,8 @@ services:
       
       # Zona horaria desde .env
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
-        # Limpieza automática de ejecuciones
+      
+      # Limpieza automática de ejecuciones
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=168
       
