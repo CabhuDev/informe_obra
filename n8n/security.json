@@ -1,0 +1,55 @@
+{
+  "security": {
+    "blockEnvAccessInNode": true,
+    "excludeNodesFromSettings": [
+      "n8n-nodes-base.executeCommand",
+      "n8n-nodes-base.executeWorkflow",
+      "n8n-nodes-base.function",
+      "n8n-nodes-base.functionItem"
+    ],
+    "functionAllowBuiltin": [],
+    "functionAllowExternal": [],
+    "allowedMimeTypes": [
+      "application/json",
+      "audio/mpeg",
+      "audio/wav",
+      "audio/webm",
+      "audio/mp4",
+      "application/pdf"
+    ],
+    "maxFileSize": "10MB"
+  },
+  "ui": {
+    "disabled": false,
+    "authenticationRequired": true,
+    "hideCredentials": true,
+    "hideWorkflows": true,
+    "readOnly": true
+  },
+  "endpoints": {
+    "webhook": {
+      "enabled": true,
+      "path": "webhook"
+    },
+    "webhookWaiting": {
+      "enabled": true,
+      "path": "webhook-waiting"
+    },
+    "webhookTest": {
+      "enabled": false,
+      "path": "webhook-test"
+    },
+    "rest": {
+      "enabled": false
+    },
+    "form": {
+      "enabled": false
+    }
+  },
+  "workflows": {
+    "allowEditing": false,
+    "allowCreation": false,
+    "allowDeletion": false,
+    "allowExecution": true
+  }
+}

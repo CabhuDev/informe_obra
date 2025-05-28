@@ -30,59 +30,91 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Proxy específico para OAuth de N8N (debe ir ANTES del proxy general)
-const n8nOAuthProxy = createProxyMiddleware({
+// MIDDLEWARE DE SEGURIDAD - BLOQUEAR ACCESO A UI DE N8N
+const blockN8NUI = (req, res, next) => {
+  const blockedPaths = [
+    '/n8n/',
+    '/n8n',
+    '/editor',
+    '/editor/',
+    '/workflows',
+    '/workflows/',
+    '/credentials',
+    '/credentials/',
+    '/executions',
+    '/executions/',
+    '/settings',
+    '/settings/'
+  ];
+  
+  // Verificar si la ruta está bloqueada
+  const isBlocked = blockedPaths.some(path => req.originalUrl.startsWith(path));
+  
+  if (isBlocked) {
+    console.warn(`🚫 BLOCKED ACCESS to N8N UI: ${req.originalUrl} from IP: ${req.ip}`);
+    return res.status(403).json({
+      error: 'Access Forbidden',
+      message: 'El acceso a la interfaz de administración está bloqueado',
+      timestamp: new Date().toISOString()
+    });
+  }
+  
+  next();
+};
+
+// Aplicar middleware de bloqueo
+app.use(blockN8NUI);
+
+// Proxy específico SOLO para webhooks (rutas permitidas)
+const webhookProxy = createProxyMiddleware({
   target: 'http://obratec-n8n:5678',
   changeOrigin: true,
   pathRewrite: {
-    '^/rest': '/rest', // Mantener la ruta /rest tal como está
+    '^/webhook': '/webhook', // Mantener webhook tal como está
+  },
+  headers: {
+    'X-Forwarded-Proto': 'https',
+    'X-Forwarded-Host': 'obratec.app',
+    'X-Forwarded-For': 'obratec.app'
+  },
+  onError: (err, req, res) => {
+    console.error('Webhook Proxy Error:', err.message);
+    res.status(502).json({ 
+      error: 'Webhook service unavailable',
+      message: 'El servicio de webhook no está disponible' 
+    });
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    console.log('✅ Webhook allowed:', req.method, req.url);
+  }
+});
+
+// Proxy RESTRINGIDO para OAuth (solo para credenciales Google)
+const restrictedOAuthProxy = createProxyMiddleware({
+  target: 'http://obratec-n8n:5678',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/rest': '/rest',
   },
   headers: {
     'X-Forwarded-Proto': 'https',
     'X-Forwarded-Host': 'n8n.obratec.app'
   },
   onError: (err, req, res) => {
-    console.error('N8N OAuth Proxy Error:', err.message);
+    console.error('OAuth Proxy Error:', err.message);
     res.status(502).json({ 
-      error: 'N8N OAuth service unavailable',
+      error: 'OAuth service unavailable',
       message: 'El servicio de autenticación no está disponible' 
     });
   },
   onProxyReq: (proxyReq, req, res) => {
-    console.log('Proxying OAuth to N8N:', req.method, req.url);
-    // Asegurar que los headers correctos se envían a N8N
-    proxyReq.setHeader('Host', 'n8n.obratec.app');
-    proxyReq.setHeader('X-Forwarded-Proto', 'https');
+    console.log('🔐 OAuth request:', req.method, req.url);
   }
 });
 
-// Proxy para N8N - rutas /n8n/ y /webhook/
-const n8nProxy = createProxyMiddleware({
-  target: 'http://obratec-n8n:5678',
-  changeOrigin: true,
-  pathRewrite: {
-    '^/n8n': '', // /n8n/path -> /path
-  },
-  headers: {
-    'X-Forwarded-Proto': 'https',
-    'X-Forwarded-Host': 'obratec.app'
-  },
-  onError: (err, req, res) => {
-    console.error('N8N Proxy Error:', err.message);
-    res.status(502).json({ 
-      error: 'N8N service unavailable',
-      message: 'El servicio de automatización no está disponible' 
-    });
-  },
-  onProxyReq: (proxyReq, req, res) => {
-    console.log('Proxying to N8N:', req.method, req.url);
-  }
-});
-
-// Aplicar proxy para rutas específicas (OAuth tiene prioridad)
-app.use('/rest', n8nOAuthProxy);
-app.use('/n8n', n8nProxy);
-app.use('/webhook', n8nProxy);
+// Aplicar proxies SOLO para rutas específicas y necesarias
+app.use('/webhook', webhookProxy);
+app.use('/rest/oauth2-credential/callback', restrictedOAuthProxy);
 
 // Ruta principal - servir index.html
 app.get('/', (req, res) => {

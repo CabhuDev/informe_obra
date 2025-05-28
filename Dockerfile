@@ -24,11 +24,18 @@ RUN apk add --no-cache \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Crear directorio de trabajo
+# Crear directorio de trabajo y configuraciones de seguridad
 WORKDIR /app
+
+# Crear directorios necesarios para n8n
+RUN mkdir -p /home/node/.n8n/workflows && \
+    mkdir -p /home/node/.n8n/config && \
+    chown -R node:node /home/node/.n8n
 
 # Copiar archivos del proyecto
 COPY public/ /app/public/
+COPY n8n/security.json /home/node/.n8n/config/security.json
+COPY n8n/workflows/ /home/node/.n8n/workflows/
 COPY server.js /app/
 COPY docker-entrypoint.sh /app/
 COPY package*.json /app/

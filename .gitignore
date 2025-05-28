@@ -1,8 +1,10 @@
 # ──────────────────
-# 1. Variables de entorno
+# 1. Variables de entorno y configuración sensible
 # ──────────────────
 .env
 .env.*               # .env.local, .env.prod, etc.
+config/local.json
+config/production.json
 
 # ──────────────────
 # 2. Ficheros y carpetas temporales
@@ -12,6 +14,9 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.pid
+*.seed
+*.pid.lock
 
 # ──────────────────
 # 3. Dependencias y builds
@@ -19,45 +24,55 @@ yarn-error.log*
 node_modules/
 build/
 dist/
+coverage/
+.nyc_output
+.cache/
+.parcel-cache
 
 # ──────────────────
-# 4. Datos de N8N
+# 4. Datos de N8N y base de datos
 # ──────────────────
 .n8n/
 .n8n-backup/
+*.sqlite
+*.db
+n8n_data/
 
 # ──────────────────
-# 5. Docker y Render
+# 5. Docker y servicios
 # ──────────────────
 .dockerignore
 .render/
 
 # ──────────────────
-# 6. Sistema
+# 6. Sistema y IDEs
 # ──────────────────
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
+*.swp
+*.swo
 
 # ──────────────────
-# 7. Archivos temporales
+# 7. Archivos temporales y backups
 # ──────────────────
 *.tmp
 *.temp
+*.bak
+*~
 public/dist/
-.cache/
 
 # ──────────────────
-# 4. Artefactos del sistema / IDE
+# 8. Certificados y claves
 # ──────────────────
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
+*.pem
+*.key
+*.crt
 
 # ──────────────────
-# 5. Datos locales de n8n (credenciales, ejecuciones…)
+# 9. Scripts de despliegue privados
 # ──────────────────
-.n8n/
-.n8n-backup/
+deploy-private.sh
+deploy-private.ps1
+start-n8n.ps1
