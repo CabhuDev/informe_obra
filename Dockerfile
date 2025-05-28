@@ -61,9 +61,9 @@ RUN mkdir -p /var/log/nginx /var/lib/nginx/tmp /etc/nginx/conf.d
 # Hacer ejecutable el script de inicio
 RUN chmod +x /app/docker-entrypoint.sh
 
-# Crear directorio para datos de N8N y configurar permisos
-RUN mkdir -p /home/node/.n8n/workflows && \
-    chown -R node:node /home/node/.n8n
+# Crear directorio para datos de N8N y logs de aplicación, configurar permisos
+RUN mkdir -p /home/node/.n8n/workflows /app/logs && \
+    chown -R node:node /home/node/.n8n /app
 
 # Cambiar al usuario node para mayor seguridad
 USER node

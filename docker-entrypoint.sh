@@ -54,8 +54,8 @@ fi
 
 log "✅ Archivos de aplicación verificados"
 
-# Crear directorio de logs si no existe
-mkdir -p /var/log/app
+# Crear directorio de logs si no existe (en el directorio de la app)
+mkdir -p /app/logs
 
 # Función para manejar señales de terminación
 cleanup() {
