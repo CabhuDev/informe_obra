@@ -19,15 +19,14 @@ services:
       - obratec-network
     depends_on:
       - n8n
-
   # N8N Workflow Automation - CONFIGURACIÓN SEGURA
   n8n:
     image: n8nio/n8n:latest
     container_name: obratec-n8n
     restart: unless-stopped
-    # IMPORTANTE: No exponer puerto 5678 externamente
-    expose:
-      - "5678"
+    # IMPORTANTE: Exponer puerto 5678 solo para acceso local via Nginx
+    ports:
+      - "127.0.0.1:5678:5678"
     environment:
       # Configuración básica desde .env
       - N8N_HOST=${N8N_HOST}
