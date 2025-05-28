@@ -32,7 +32,7 @@ app.get('/health', (req, res) => {
 
 // Proxy específico para OAuth de N8N (debe ir ANTES del proxy general)
 const n8nOAuthProxy = createProxyMiddleware({
-  target: 'http://localhost:5678',
+  target: 'http://obratec-n8n:5678',
   changeOrigin: true,
   pathRewrite: {
     '^/rest': '/rest', // Mantener la ruta /rest tal como está
@@ -58,7 +58,7 @@ const n8nOAuthProxy = createProxyMiddleware({
 
 // Proxy para N8N - rutas /n8n/ y /webhook/
 const n8nProxy = createProxyMiddleware({
-  target: 'http://localhost:5678',
+  target: 'http://obratec-n8n:5678',
   changeOrigin: true,
   pathRewrite: {
     '^/n8n': '', // /n8n/path -> /path
