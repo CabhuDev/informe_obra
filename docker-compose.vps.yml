@@ -19,7 +19,6 @@ services:
       - obratec-network
     depends_on:
       - n8n
-
   # N8N Workflow Automation
   n8n:
     image: n8nio/n8n:latest
@@ -28,14 +27,21 @@ services:
     ports:
       - "5678:5678"
     environment:
-      # Configuración básica
-      - N8N_HOST=0.0.0.0
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=http
-      - NODE_ENV=production
+      # Configuración básica desde .env
+      - N8N_HOST=${N8N_HOST}
+      - N8N_PORT=${N8N_PORT}
+      - N8N_PROTOCOL=${N8N_PROTOCOL}
+      - N8N_EDITOR_BASE_URL=${N8N_EDITOR_BASE_URL}
+      - NODE_ENV=${NODE_ENV}
+      
+      # Configuración de seguridad desde .env
+      - N8N_USER_MANAGEMENT_DISABLED=${N8N_USER_MANAGEMENT_DISABLED}
+      - N8N_BASIC_AUTH_ACTIVE=${N8N_BASIC_AUTH_ACTIVE}
+      - N8N_RUNNERS_ENABLED=${N8N_RUNNERS_ENABLED}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       
       # Desactivar funciones innecesarias
-      - N8N_USER_MANAGEMENT_DISABLED=true
       - N8N_DIAGNOSTICS_ENABLED=false
       - N8N_VERSION_NOTIFICATIONS_ENABLED=false
       - N8N_TEMPLATES_ENABLED=false
@@ -43,9 +49,12 @@ services:
       - N8N_METRICS=true
       - N8N_LOG_LEVEL=info
       
-      # Base de datos SQLite
-      - DB_TYPE=sqlite
-      - DB_SQLITE_DATABASE=/home/node/.n8n/database.sqlite
+      # Base de datos SQLite desde .env
+      - DB_TYPE=${DB_TYPE}
+      - DB_SQLITE_DATABASE=${DB_SQLITE_DATABASE}
+      
+      # Zona horaria desde .env
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
       
       # Limpieza automática de ejecuciones
       - EXECUTIONS_DATA_PRUNE=true
