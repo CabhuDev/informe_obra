@@ -55,16 +55,12 @@ services:
       
       # Zona horaria desde .env
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
-      
-      # Limpieza automática de ejecuciones
+        # Limpieza automática de ejecuciones
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=168
       
-      # Zona horaria
-      - GENERIC_TIMEZONE=Europe/Madrid
-      
       # URLs del sistema
-      - WEBHOOK_URL=https://obratec.app/webhook/form-obra
+      - WEBHOOK_URL=${WEBHOOK_URL}
       
       # API Keys (se cargan desde .env)
       - OPENAI_API_KEY=${OPENAI_API_KEY}
@@ -74,9 +70,6 @@ services:
       - GMAIL_CLIENT_SECRET=${GMAIL_CLIENT_SECRET}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      
-      # Encriptación N8N
-      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       
     volumes:
       - n8n_data:/home/node/.n8n
