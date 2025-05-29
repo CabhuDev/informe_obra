@@ -121,30 +121,44 @@ async function startRecording() {
             audioChunks.push(event.data);
         }
     });
-    
-    // Cuando se completa la grabación
-    mediaRecorder.addEventListener("stop", () => {
-      // Crear un blob con todos los fragmentos de audio
+      // Cuando se completa la grabación
+    mediaRecorder.addEventListener("stop", async () => {
+        // Crear un blob con todos los fragmentos de audio
         // Usar el tipo MIME detectado o un fallback
         const blobType = mimeType || 'audio/wav';
-        const audioBlob = new Blob(audioChunks, { 
+        const originalBlob = new Blob(audioChunks, { 
             type: blobType
         });
       
         // Crear URL para reproducir el audio
-        const audioUrl = URL.createObjectURL(audioBlob);
+        const audioUrl = URL.createObjectURL(originalBlob);
         audioPlayback.src = audioUrl;
         audioPlayback.style.display = "block";
         
-        // Convertir el blob a Base64 para enviarlo con el formulario
-        const reader = new FileReader();
-        reader.readAsDataURL(audioBlob);
-        reader.onloadend = () => {
-            // Extraer la parte Base64 (sin el prefijo de datos)
-            const base64Audio = reader.result.split(',')[1];
-            audioData.value = base64Audio;
-            console.log(`Audio grabado y convertido a Base64 (${blobType})`);
-        };
+        // Convertir a WAV para compatibilidad con OpenAI Whisper
+        try {
+            const wavBlob = await convertToWav(originalBlob);
+            
+            // Convertir el blob WAV a Base64 para enviarlo con el formulario
+            const reader = new FileReader();
+            reader.readAsDataURL(wavBlob);
+            reader.onloadend = () => {
+                // Extraer la parte Base64 (sin el prefijo de datos)
+                const base64Audio = reader.result.split(',')[1];
+                audioData.value = base64Audio;
+                console.log(`Audio convertido a WAV y codificado en Base64`);
+            };
+        } catch (error) {
+            console.error('Error al convertir audio:', error);
+            // Fallback: usar el audio original
+            const reader = new FileReader();
+            reader.readAsDataURL(originalBlob);
+            reader.onloadend = () => {
+                const base64Audio = reader.result.split(',')[1];
+                audioData.value = base64Audio;
+                console.log(`Audio original convertido a Base64 (${blobType})`);
+            };
+        }
       
         // Detener acceso al micrófono
         stream.getTracks().forEach(track => track.stop());
@@ -201,6 +215,114 @@ window.AudioDecoder = {
     clearRecording,
     isRecording: () => isRecording
 };
+
+/**
+ * Convierte un blob de audio a formato WAV
+ * @param {Blob} audioBlob - El blob de audio a convertir
+ * @returns {Promise<Blob>} - Blob de audio en formato WAV
+ */
+async function convertToWav(audioBlob) {
+    return new Promise((resolve, reject) => {
+        try {
+            // Crear un contexto de audio
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Crear un FileReader para leer el blob
+            const reader = new FileReader();
+            
+            reader.onload = async function(e) {
+                try {
+                    // Decodificar el audio
+                    const arrayBuffer = e.target.result;
+                    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                    
+                    // Crear buffer WAV
+                    const wavBuffer = audioBufferToWav(audioBuffer);
+                    const wavBlob = new Blob([wavBuffer], { type: 'audio/wav' });
+                    
+                    console.log('Audio convertido exitosamente a WAV');
+                    resolve(wavBlob);
+                } catch (decodeError) {
+                    console.error('Error al decodificar audio:', decodeError);
+                    reject(decodeError);
+                }
+            };
+            
+            reader.onerror = function(error) {
+                console.error('Error al leer el blob de audio:', error);
+                reject(error);
+            };
+            
+            reader.readAsArrayBuffer(audioBlob);
+        } catch (error) {
+            console.error('Error en convertToWav:', error);
+            reject(error);
+        }
+    });
+}
+
+/**
+ * Convierte un AudioBuffer a formato WAV
+ * @param {AudioBuffer} buffer - Buffer de audio a convertir
+ * @returns {ArrayBuffer} - Buffer en formato WAV
+ */
+function audioBufferToWav(buffer) {
+    const numberOfChannels = buffer.numberOfChannels;
+    const length = buffer.length * numberOfChannels * 2 + 44;
+    const arrayBuffer = new ArrayBuffer(length);
+    const view = new DataView(arrayBuffer);
+    const channels = [];
+    let sample;
+    let offset = 0;
+    let pos = 0;
+
+    // Escribir header WAV
+    function setUint16(data) {
+        view.setUint16(pos, data, true);
+        pos += 2;
+    }
+
+    function setUint32(data) {
+        view.setUint32(pos, data, true);
+        pos += 4;
+    }
+
+    // Header RIFF
+    setUint32(0x46464952); // "RIFF"
+    setUint32(length - 8); // file length - 8
+    setUint32(0x45564157); // "WAVE"
+
+    // Subchunk 1
+    setUint32(0x20746d66); // "fmt " chunk
+    setUint32(16); // length = 16
+    setUint16(1); // PCM (uncompressed)
+    setUint16(numberOfChannels);
+    setUint32(buffer.sampleRate);
+    setUint32(buffer.sampleRate * 2 * numberOfChannels); // avg. bytes/sec
+    setUint16(numberOfChannels * 2); // block-align
+    setUint16(16); // 16-bit (hardcoded in this demo)
+
+    // Subchunk 2
+    setUint32(0x61746164); // "data" - chunk
+    setUint32(length - pos - 4); // chunk length
+
+    // Escribir datos de audio intercalados
+    for (let i = 0; i < numberOfChannels; i++) {
+        channels.push(buffer.getChannelData(i));
+    }
+
+    while (pos < length) {
+        for (let i = 0; i < numberOfChannels; i++) {
+            sample = Math.max(-1, Math.min(1, channels[i][offset])); // clamp
+            sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0; // scale to 16-bit signed int
+            view.setInt16(pos, sample, true); // write 16-bit sample
+            pos += 2;
+        }
+        offset++; // next sample
+    }
+
+    return arrayBuffer;
+}
 
 // Log para verificar que el script se cargó correctamente
 console.log("Módulo de grabación de audio inicializado");

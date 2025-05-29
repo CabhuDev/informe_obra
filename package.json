@@ -1,12 +1,22 @@
 {
-  "name": "informe-obra-frontend",
+  "name": "obratec-informe-obra",
   "version": "1.0.0",
-  "description": "Sistema de Informes de Obra Automatizado - Frontend con Proxy N8N",
+  "description": "Sistema automatizado de informes de construcción con AI y grabación de audio",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "powershell -ExecutionPolicy Bypass -File tests/test-sistema-wav.ps1",
+    "test:webhook": "powershell -ExecutionPolicy Bypass -File tests/test-webhook-clean.ps1",
+    "test:wav": "powershell -ExecutionPolicy Bypass -File tests/test-wav-clean.ps1",
+    "deploy": "powershell -ExecutionPolicy Bypass -File deploy/deploy-vps.sh",
+    "setup": "powershell -ExecutionPolicy Bypass -File scripts/final-setup.ps1",
+    "clean": "rm -rf node_modules package-lock.json && npm install",
+    "status": "powershell -ExecutionPolicy Bypass -File manage.ps1 status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "local"
   },
   "keywords": [
     "construccion",
@@ -14,7 +24,12 @@
     "n8n",
     "automation",
     "express",
-    "proxy"
+    "proxy",
+    "ai",
+    "audio-recording",
+    "whisper",
+    "openai",
+    "gmail"
   ],
   "author": "Pablo Cabello",
   "license": "MIT",
@@ -24,7 +39,8 @@
     "express": "^4.18.2",
     "helmet": "^7.1.0",
     "http-proxy-middleware": "^2.0.6",
-    "informe-obra-frontend": "file:"
+    "informe-obra-frontend": "file:",
+    "obratec-informe-obra": "file:"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
