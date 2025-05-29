@@ -41,15 +41,23 @@ $n8nFiles = @(
     "n8n\workflows\informe_obra_n8n_workflow.json"
 )
 
+# Función para sincronizar archivos
 function Sync-Files {
-    param($fileList, $description, $requiresRestart = $false)
+    param($fileList, $description)
     
     Write-Host "📁 Sincronizando $description..." -ForegroundColor Yellow
+    
+    $requiresRestart = $false
     
     foreach ($file in $fileList) {
         if (Test-Path $file) {
             $relativePath = $file -replace '\\', '/'
             Write-Host "  ✅ $relativePath" -ForegroundColor Green
+            
+            # Verificar si es un archivo crítico
+            if ($criticalFiles -contains $file) {
+                $requiresRestart = $true
+            }
             
             if (-not $DryRun) {
                 try {
@@ -68,55 +76,44 @@ function Sync-Files {
     
     if ($requiresRestart -and -not $DryRun) {
         Write-Host "  🔄 Reiniciando contenedores..." -ForegroundColor Blue
-        $restartResult = ssh "${VPS_USER}@${VPS_HOST}" "cd $VPS_PATH && docker-compose -f docker-compose.vps.yml restart" 2>&1
+        $restartResult = ssh "${VPS_USER}@${VPS_HOST}" "cd $VPS_PATH; docker-compose -f docker-compose.vps.yml restart" 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  ✅ Contenedores reiniciados" -ForegroundColor Green
         } else {
             Write-Host "  ❌ Error al reiniciar: $restartResult" -ForegroundColor Red
         }
     }
+    Write-Host ""
 }
 
-# Sincronizar archivos por categorías
-Sync-Files $criticalFiles "archivos críticos del frontend" $true
-Sync-Files $configFiles "archivos de configuración" $false
-Sync-Files $n8nFiles "workflows N8N" $false
-
-# Crear carpetas organizadas en VPS si no existen
-if (-not $DryRun) {
-    Write-Host "`n📂 Creando estructura de carpetas en VPS..." -ForegroundColor Yellow
-    $folders = @("scripts", "tests", "docs", "config")
-    foreach ($folder in $folders) {
-        ssh "${VPS_USER}@${VPS_HOST}" "mkdir -p ${VPS_PATH}/$folder"
-        Write-Host "  ✅ $folder/" -ForegroundColor Green
-    }
-}
+# Ejecutar sincronización
+Sync-Files $criticalFiles "archivos críticos"
+Sync-Files $configFiles "configuración"
+Sync-Files $n8nFiles "workflows N8N"
 
 # Verificar estado final
-Write-Host "`n🔍 Verificando estado del sistema..." -ForegroundColor Blue
+Write-Host "📊 Estado de contenedores en VPS:" -ForegroundColor Blue
 if (-not $DryRun) {
-    $statusResult = ssh "${VPS_USER}@${VPS_HOST}" "cd $VPS_PATH && docker-compose -f docker-compose.vps.yml ps"
+    $statusResult = ssh "${VPS_USER}@${VPS_HOST}" "cd $VPS_PATH; docker-compose -f docker-compose.vps.yml ps"
     Write-Host $statusResult -ForegroundColor White
     
     # Verificar URLs
     Write-Host "`n🌐 Verificando URLs..." -ForegroundColor Blue
-    $urls = @{
-        "Frontend" = "https://obratec.app"
-        "N8N" = "https://n8n.obratec.app"
+    
+    try {
+        $response1 = Invoke-WebRequest -Uri "https://obratec.app" -Method HEAD -TimeoutSec 10
+        Write-Host "  ✅ https://obratec.app - $($response1.StatusCode)" -ForegroundColor Green
+    } catch {
+        Write-Host "  ❌ https://obratec.app - Error" -ForegroundColor Red
     }
     
-    foreach ($service in $urls.GetEnumerator()) {
-        try {
-            $response = Invoke-WebRequest -Uri $service.Value -Method Head -TimeoutSec 10 -UseBasicParsing
-            Write-Host "  ✅ $($service.Key): $($service.Value)" -ForegroundColor Green
-        } catch {
-            Write-Host "  ❌ $($service.Key): $($service.Value) (Error: $($_.Exception.Message))" -ForegroundColor Red
-        }
+    try {
+        $response2 = Invoke-WebRequest -Uri "https://n8n.obratec.app" -Method HEAD -TimeoutSec 10
+        Write-Host "  ✅ https://n8n.obratec.app - $($response2.StatusCode)" -ForegroundColor Green
+    } catch {
+        Write-Host "  ❌ https://n8n.obratec.app - Error" -ForegroundColor Red
     }
 }
 
-Write-Host "`n✅ SINCRONIZACIÓN COMPLETADA" -ForegroundColor Green
-Write-Host "🎯 Próximos pasos:" -ForegroundColor Blue
-Write-Host "  1. Probar sistema en: https://obratec.app" -ForegroundColor White
-Write-Host "  2. Verificar N8N en: https://n8n.obratec.app" -ForegroundColor White
-Write-Host "  3. Ejecutar pruebas: .\tests\test-sistema-wav.ps1" -ForegroundColor White
+Write-Host "`n✅ Sincronización completada!" -ForegroundColor Green
+Write-Host "💡 Para probar el sistema: .\manage.ps1 test" -ForegroundColor Cyan
