@@ -8,7 +8,7 @@ services:
     container_name: obratec-app
     restart: unless-stopped
     ports:
-      - "3000:3000"    
+      - "3000:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
@@ -19,31 +19,12 @@ services:
       - obratec-network
     depends_on:
       - n8n
-      - gotenberg
-
-  # Gotenberg - Servicio de generación de PDFs
-  gotenberg:
-    image: gotenberg/gotenberg:8
-    container_name: obratec-gotenberg
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:3001:3000"
-    command:
-      - gotenberg
-      - --chromium-disable-web-security
-      - --chromium-allow-list=file:///*
-      - --chromium-disable-javascript=false
-      - --chromium-allow-file-access-from-files
-      - --chromium-allow-insecure-localhost
-      - --chromium-ignore-certificate-errors
-    networks:
-      - obratec-network
-
   # N8N Workflow Automation - CONFIGURACIÓN SEGURA
   n8n:
     image: n8nio/n8n:latest
     container_name: obratec-n8n
     restart: unless-stopped
+    # IMPORTANTE: Exponer puerto 5678 solo para acceso local via Nginx
     ports:
       - "127.0.0.1:5678:5678"
     environment:
