@@ -1,0 +1,692 @@
+{
+  "name": "obratec-informe Obra",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "form-obra",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1020,
+        400
+      ],
+      "id": "b9fcc67a-14ba-4005-860c-5dd0b93473a3",
+      "name": "Webhook",
+      "webhookId": "dd6ab9a8-8f72-4d74-9eb1-390de7b04719"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1d44880f-155d-4eba-a7ea-9afab6310de4",
+              "name": "projectName",
+              "value": "={{ $json.body.projectName }}",
+              "type": "string"
+            },
+            {
+              "id": "282b276b-4969-42de-8866-96e69ac5e7b7",
+              "name": "date",
+              "value": "={{ $json.body.date }}",
+              "type": "string"
+            },
+            {
+              "id": "2459fd91-acad-49db-b51c-9295499dc1e7",
+              "name": "advance",
+              "value": "={{ $json.body.advance }}",
+              "type": "string"
+            },
+            {
+              "id": "1e6cfff5-27c5-40ca-b95c-f660f6c47c13",
+              "name": "observations",
+              "value": "={{ $json.body.observations }}",
+              "type": "string"
+            },
+            {
+              "id": "9714886b-476f-4da2-b086-6390373ba681",
+              "name": "incidences",
+              "value": "={{ $json.body.incidences }}",
+              "type": "string"
+            },
+            {
+              "id": "16bc351d-bf3e-4b99-9361-55fad7dc2306",
+              "name": "audioData",
+              "value": "={{ $json.body.audioData }}",
+              "type": "string"
+            },
+            {
+              "id": "ce41cf48-6b21-4931-8b03-572a61d0bd82",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "f4a0c3d7-8e21-4b35-9a1d-6c7e2f9b0a4e",
+              "name": "photos_count",
+              "value": "={{ $json.body.photos_count || 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "a2b5c8d1-9e4f-4c26-8a3d-7c9e5f1b2a6e",
+              "name": "photo_0_image",
+              "value": "={{ $json.body.photo_0_image || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "b3c6d9e2-0f5g-5d37-9b4e-8d0f6g2c3b7f",
+              "name": "photo_0_text",
+              "value": "={{ $json.body.photo_0_text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "c4d7e0f3-1g6h-6e48-ac5f-9e1g7h3d4c8g",
+              "name": "photo_0_voice",
+              "value": "={{ $json.body.photo_0_voice || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "d5e8f1g4-2h7i-7f59-bd6g-0f2h8i4e5d9h",
+              "name": "photo_1_image",
+              "value": "={{ $json.body.photo_1_image || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "e6f9g2h5-3i8j-8g60-ce7h-1g3i9j5f6e0i",
+              "name": "photo_1_text",
+              "value": "={{ $json.body.photo_1_text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "f7g0h3i6-4j9k-9h71-df8i-2h4j0k6g7f1j",
+              "name": "photo_1_voice",
+              "value": "={{ $json.body.photo_1_voice || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "g8h1i4j7-5k0l-0i82-eg9j-3i5k1l7h8g2k",
+              "name": "photo_2_image",
+              "value": "={{ $json.body.photo_2_image || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "h9i2j5k8-6l1m-1j93-fh0k-4j6l2m8i9h3l",
+              "name": "photo_2_text",
+              "value": "={{ $json.body.photo_2_text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "i0j3k6l9-7m2n-2k04-gi1l-5k7m3n9j0i4m",
+              "name": "photo_2_voice",
+              "value": "={{ $json.body.photo_2_voice || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "j1k4l7m0-8n3o-3l15-hj2m-6l8n4o0k1j5n",
+              "name": "photo_3_image",
+              "value": "={{ $json.body.photo_3_image || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "k2l5m8n1-9o4p-4m26-ik3n-7m9o5p1l2k6o",
+              "name": "photo_3_text",
+              "value": "={{ $json.body.photo_3_text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "l3m6n9o2-0p5q-5n37-jl4o-8n0p6q2m3l7p",
+              "name": "photo_3_voice",
+              "value": "={{ $json.body.photo_3_voice || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "m4n7o0p3-1q6r-6o48-km5p-9o1q7r3n4m8q",
+              "name": "photo_4_image",
+              "value": "={{ $json.body.photo_4_image || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "n5o8p1q4-2r7s-7p59-ln6q-0p2r8s4o5n9r",
+              "name": "photo_4_text",
+              "value": "={{ $json.body.photo_4_text || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "o6p9q2r5-3s8t-8q60-mo7r-1q3s9t5p6o0s",
+              "name": "photo_4_voice",
+              "value": "={{ $json.body.photo_4_voice || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -800,
+        400
+      ],
+      "id": "ddda84ba-b3fd-4cd8-8215-e1745ec9c470",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dd17a8db-6e29-4bda-8d5b-a4c4e218d8af",
+              "leftValue": "={{ $json.audioData }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -620,
+        400
+      ],
+      "id": "e2139444-22f4-4a49-9119-e9162abe4dfe",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "audioData",
+        "binaryPropertyName": "audio",
+        "options": {
+          "fileName": "record.wav"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        580
+      ],
+      "id": "d412fea3-276d-4770-a5de-ec9dd88d3e2e",
+      "name": "Convert to File3"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "binaryPropertyName": "audio",
+        "options": {
+          "language": "es"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -220,
+        580
+      ],
+      "id": "5805c182-ce93-4ab8-89bf-2976e90cbfd9",
+      "name": "OpenAI2",
+      "credentials": {
+        "openAiApi": {
+          "id": "Ewblt2ZhxCOUhpri",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "chatgpt-4o-latest",
+          "mode": "list",
+          "cachedResultName": "CHATGPT-4O-LATEST"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Eres jefe de obra. Devuelve SOLO un JSON con estas claves:\n  summary  → 3-4 líneas de resumen ejecutivo\n  obs      → Observaciones técnicas combinadas (texto + voz + incidencias)\nNo añadas texto fuera del JSON.\n"
+            },
+            {
+              "content": "=Nombre del proyecto: {{ $('Edit Fields1').item.json.projectName }}\nFecha informe: {{ $('Edit Fields1').item.json.date }}\nObservaciones formulario: {{ $('Edit Fields1').item.json.observations }}\nIncidencias: {{ $('Edit Fields1').item.json.incidences }}\nTranscripción voz: {{ $json.text }}\nAvance obra: {{ $('Edit Fields1').item.json.advance }} %\nCantidad de fotos: {{ $('Edit Fields1').item.json.photos_count }}\nComentarios de fotos: {{ $('Edit Fields1').item.json.photo_0_text ? 'Foto 1: ' + $('Edit Fields1').item.json.photo_0_text : '' }}{{ $('Edit Fields1').item.json.photo_1_text ? ' | Foto 2: ' + $('Edit Fields1').item.json.photo_1_text : '' }}{{ $('Edit Fields1').item.json.photo_2_text ? ' | Foto 3: ' + $('Edit Fields1').item.json.photo_2_text : '' }}{{ $('Edit Fields1').item.json.photo_3_text ? ' | Foto 4: ' + $('Edit Fields1').item.json.photo_3_text : '' }}{{ $('Edit Fields1').item.json.photo_4_text ? ' | Foto 5: ' + $('Edit Fields1').item.json.photo_4_text : '' }}\n"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        0,
+        580
+      ],
+      "id": "49a2dab4-c6b9-4513-862a-ff41e474c71b",
+      "name": "OpenAI3",
+      "credentials": {
+        "openAiApi": {
+          "id": "Ewblt2ZhxCOUhpri",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\\r\\n<html lang=\\\"es\\\">\\r\\n<head>\\r\\n    <meta charset=\\\"UTF-8\\\">\\r\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\r\\n    <title>Informe Semanal de Obra</title>\\r\\n    <style>\\r\\n        /* Reset básico */\\r\\n        * {\\r\\n            margin: 0;\\r\\n            padding: 0;\\r\\n            box-sizing: border-box;\\r\\n        }\\r\\n\\r\\n        body {\\r\\n            font-family: 'Arial', 'Helvetica', sans-serif;\\r\\n            line-height: 1.6;\\r\\n            color: #2c3e50;\\r\\n            background: #ffffff;\\r\\n            padding: 20px;\\r\\n        }\\r\\n\\r\\n        .container {\\r\\n            max-width: 800px;\\r\\n            margin: 0 auto;\\r\\n            background: #ffffff;\\r\\n            border: 1px solid #dee2e6;\\r\\n        }\\r\\n\\r\\n        /* Header optimizado para PDF */\\r\\n        .header {\\r\\n            background: #2c3e50;\\r\\n            color: #ffffff;\\r\\n            padding: 30px;\\r\\n            text-align: left;\\r\\n            border-top: 4px solid #e74c3c;\\r\\n        }\\r\\n\\r\\n        .header h1 {\\r\\n            font-size: 2em;\\r\\n            font-weight: bold;\\r\\n            margin-bottom: 10px;\\r\\n            letter-spacing: -0.5px;\\r\\n        }\\r\\n\\r\\n        .header .subtitle {\\r\\n            font-size: 1.2em;\\r\\n            opacity: 0.9;\\r\\n            font-weight: normal;\\r\\n        }\\r\\n\\r\\n        /* Content area */\\r\\n        .content {\\r\\n            padding: 30px;\\r\\n        }\\r\\n\\r\\n        /* Info grid simplificado */\\r\\n        .info-grid {\\r\\n            display: table;\\r\\n            width: 100%;\\r\\n            margin-bottom: 30px;\\r\\n            padding: 20px;\\r\\n            background: #f8f9fa;\\r\\n            border-left: 4px solid #3498db;\\r\\n        }\\r\\n\\r\\n        .info-item {\\r\\n            display: table-cell;\\r\\n            text-align: center;\\r\\n            padding: 0 15px;\\r\\n            vertical-align: top;\\r\\n        }\\r\\n\\r\\n        .info-label {\\r\\n            font-size: 0.9em;\\r\\n            color: #7f8c8d;\\r\\n            text-transform: uppercase;\\r\\n            letter-spacing: 1px;\\r\\n            margin-bottom: 5px;\\r\\n            font-weight: 600;\\r\\n            display: block;\\r\\n        }\\r\\n\\r\\n        .info-value {\\r\\n            font-size: 1.3em;\\r\\n            font-weight: 600;\\r\\n            color: #2c3e50;\\r\\n        }\\r\\n\\r\\n        /* Sections */\\r\\n        .section {\\r\\n            margin-bottom: 35px;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .section h2 {\\r\\n            font-size: 1.4em;\\r\\n            color: #2c3e50;\\r\\n            margin-bottom: 15px;\\r\\n            padding-bottom: 10px;\\r\\n            border-bottom: 2px solid #ecf0f1;\\r\\n            font-weight: 600;\\r\\n            position: relative;\\r\\n        }\\r\\n\\r\\n        .section h2::before {\\r\\n            content: '';\\r\\n            position: absolute;\\r\\n            bottom: -2px;\\r\\n            left: 0;\\r\\n            width: 50px;\\r\\n            height: 2px;\\r\\n            background: #3498db;\\r\\n        }\\r\\n\\r\\n        .section p {\\r\\n            font-size: 1em;\\r\\n            line-height: 1.7;\\r\\n            color: #34495e;\\r\\n            text-align: justify;\\r\\n            margin-bottom: 15px;\\r\\n        }\\r\\n\\r\\n        /* Progress bar simplificado */\\r\\n        .progress-container {\\r\\n            background: #ecf0f1;\\r\\n            border-radius: 10px;\\r\\n            padding: 3px;\\r\\n            margin: 15px 0;\\r\\n            height: 30px;\\r\\n        }\\r\\n\\r\\n        .progress-bar {\\r\\n            background: #27ae60;\\r\\n            height: 24px;\\r\\n            border-radius: 8px;\\r\\n            display: flex;\\r\\n            align-items: center;\\r\\n            justify-content: center;\\r\\n            color: #ffffff;\\r\\n            font-weight: 600;\\r\\n            font-size: 0.9em;\\r\\n            min-width: 60px;\\r\\n        }\\r\\n\\r\\n        /* Observation cards */\\r\\n        .observations-grid {\\r\\n            margin-bottom: 25px;\\r\\n        }\\r\\n\\r\\n        .observation-card {\\r\\n            background: #f8f9fa;\\r\\n            padding: 20px;\\r\\n            margin-bottom: 20px;\\r\\n            border-left: 4px solid #3498db;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .observation-card.incidents {\\r\\n            border-left-color: #e74c3c;\\r\\n        }\\r\\n\\r\\n        .observation-card h3 {\\r\\n            color: #2c3e50;\\r\\n            font-size: 1.1em;\\r\\n            margin-bottom: 10px;\\r\\n            font-weight: 600;\\r\\n        }\\r\\n\\r\\n        /* Audio section */\\r\\n        .audio-section {\\r\\n            background: #f39c12;\\r\\n            color: #ffffff;\\r\\n            padding: 20px;\\r\\n            margin: 20px 0;\\r\\n            text-align: center;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .audio-section h3 {\\r\\n            margin-bottom: 10px;\\r\\n            font-weight: 600;\\r\\n        }\\r\\n\\r\\n        /* Footer */\\r\\n        .footer {\\r\\n            background: #ecf0f1;\\r\\n            padding: 20px 30px;\\r\\n            text-align: center;\\r\\n            color: #7f8c8d;\\r\\n            font-size: 0.9em;\\r\\n            border-top: 1px solid #bdc3c7;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        /* Status badges */\\r\\n        .status-badge {\\r\\n            display: inline-block;\\r\\n            padding: 5px 15px;\\r\\n            border-radius: 15px;\\r\\n            font-size: 0.9em;\\r\\n            font-weight: 600;\\r\\n            text-transform: uppercase;\\r\\n            letter-spacing: 0.5px;\\r\\n        }\\r\\n\\r\\n        .status-on-time {\\r\\n            background: #d5edda;\\r\\n            color: #155724;\\r\\n        }\\r\\n\\r\\n        .status-delayed {\\r\\n            background: #f8d7da;\\r\\n            color: #721c24;\\r\\n        }\\r\\n\\r\\n        .status-ahead {\\r\\n            background: #d1ecf1;\\r\\n            color: #0c5460;\\r\\n        }\\r\\n\\r\\n        /* Print specific styles */\\r\\n        @media print {\\r\\n            body {\\r\\n                background: white;\\r\\n                padding: 0;\\r\\n            }\\r\\n            \\r\\n            .container {\\r\\n                border: none;\\r\\n                box-shadow: none;\\r\\n            }\\r\\n            \\r\\n            .section {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n            \\r\\n            .observation-card {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n\\r\\n            .audio-section {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n\\r\\n            .footer {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n        }        /* Estilos para la galería de fotos */\\r\\n        .photos-section {\\r\\n            margin: 30px 0;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .photos-grid {\\r\\n            display: table;\\r\\n            width: 100%;\\r\\n            margin-top: 20px;\\r\\n        }\\r\\n\\r\\n        .photo-row {\\r\\n            display: table-row;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .photo-card {\\r\\n            display: table-cell;\\r\\n            background: #f8f9fa;\\r\\n            margin: 0 10px 20px 0;\\r\\n            border: 1px solid #dee2e6;\\r\\n            border-left: 4px solid #3498db;\\r\\n            page-break-inside: avoid;\\r\\n            width: 48%;\\r\\n            vertical-align: top;\\r\\n        }\\r\\n\\r\\n        .photo-card:nth-child(even) {\\r\\n            margin-right: 0;\\r\\n        }\\r\\n\\r\\n        .photo-image {\\r\\n            width: 100%;\\r\\n            max-height: 200px;\\r\\n            object-fit: cover;\\r\\n            border-bottom: 1px solid #dee2e6;\\r\\n            display: block;\\r\\n        }\\r\\n\\r\\n        .photo-content {\\r\\n            padding: 15px;\\r\\n        }\\r\\n\\r\\n        .photo-title {\\r\\n            font-size: 1.1em;\\r\\n            font-weight: 600;\\r\\n            color: #3498db;\\r\\n            margin-bottom: 10px;\\r\\n        }\\r\\n\\r\\n        .photo-comment {\\r\\n            font-size: 0.9em;\\r\\n            line-height: 1.5;\\r\\n            color: #34495e;\\r\\n            margin-bottom: 10px;\\r\\n            text-align: justify;\\r\\n        }\\r\\n\\r\\n        .photo-voice-comment {\\r\\n            background: #f39c12;\\r\\n            color: #ffffff;\\r\\n            padding: 8px 12px;\\r\\n            font-size: 0.8em;\\r\\n            font-weight: 600;\\r\\n            text-align: center;\\r\\n            border-radius: 4px;\\r\\n        }\\r\\n\\r\\n        .no-photos {\\r\\n            text-align: center;\\r\\n            color: #7f8c8d;\\r\\n            font-style: italic;\\r\\n            padding: 30px;\\r\\n            background: #f8f9fa;\\r\\n            border: 1px dashed #dee2e6;\\r\\n        }\\r\\n\\r\\n        /* Responsive para pantallas pequeñas */\\r\\n        @media (max-width: 768px) {\\r\\n            body {\\r\\n                padding: 10px;\\r\\n            }\\r\\n            \\r\\n            .header, .content {\\r\\n                padding: 15px;\\r\\n            }\\r\\n            \\r\\n            .info-grid {\\r\\n                display: block;\\r\\n            }\\r\\n            \\r\\n            .info-item {\\r\\n                display: block;\\r\\n                text-align: center;\\r\\n                margin-bottom: 15px;\\r\\n            }\\r\\n            \\r\\n            .photos-grid {\\r\\n                display: block;\\r\\n            }\\r\\n            \\r\\n            .photo-card {\\r\\n                display: block;\\r\\n                width: 100%;\\r\\n                margin: 0 0 20px 0;\\r\\n            }\\r\\n            \\r\\n            .photo-image {\\r\\n                max-height: 150px;\\r\\n            }\\r\\n        }\\r\\n    </style>\\r\\n</head>\\r\\n<body>\\r\\n    <div class=\\\"container\\\">\\r\\n        <div class=\\\"header\\\">\\r\\n            <h1>📋 Informe Semanal de Obra</h1>\\r\\n            <div class=\\\"subtitle\\\">{{ $('Webhook').item.json.body.projectName || 'Proyecto de Construcción'}}</div>\\r\\n        </div>\\r\\n\\r\\n        <div class=\\\"content\\\">\\r\\n            <div class=\\\"info-grid\\\">\\r\\n                <div class=\\\"info-item\\\">\\r\\n                    <div class=\\\"info-label\\\">Fecha del Informe</div>\\r\\n                    <div class=\\\"info-value\\\">{{ $('Webhook').item.json.body.date || 'DD/MM/AAAA'}}</div>\\r\\n                </div>\\r\\n                <div class=\\\"info-item\\\">\\r\\n                    <div class=\\\"info-label\\\">Avance General</div>\\r\\n                    <div class=\\\"info-value\\\">{{ $('Webhook').item.json.body.advance || '0'}}%</div>\\r\\n                </div>\\r\\n                <div class=\\\"info-item\\\">\\r\\n                    <div class=\\\"info-label\\\">Estado</div>\\r\\n                    <div class=\\\"info-value\\\">\\r\\n                        <span class=\\\"status-badge status-on-time\\\">✅ En Plazo</span>\\r\\n                    </div>\\r\\n                </div>\\r\\n            </div>\\r\\n\\r\\n            <div class=\\\"section\\\">\\r\\n                <h2>📊 Progreso del Proyecto</h2>\\r\\n                <p>El avance actual del proyecto <strong>{{ $('Webhook').item.json.body.projectName }}</strong> se encuentra en un <strong>{{ $('Webhook').item.json.body.advance || '0'}}%</strong> de completitud según el cronograma establecido.</p>\\r\\n                <div class=\\\"progress-container\\\">\\r\\n                    <div class=\\\"progress-bar\\\" style=\\\"width: {{ $('Webhook').item.json.body.advance || '0'}}%;\\\">\\r\\n                        {{ $('Webhook').item.json.body.advance || '0'}}%\\r\\n                    </div>\\r\\n                </div>\\r\\n                <p><em>Última actualización: {{ $('Webhook').item.json.body.date }}</em></p>\\r\\n            </div>            <div class=\\\"observations-grid\\\">\\r\\n                <div class=\\\"observation-card\\\">\\r\\n                    <h3>📝 Observaciones Generales</h3>\\r\\n                    <div class=\\\"section\\\">\\r\\n                        <p>{{ $json.choices[0].message.content.obs || 'No se han registrado observaciones para este período.'}}</p>\\r\\n                    </div>\\r\\n                </div>\\r\\n\\r\\n                <div class=\\\"observation-card incidents\\\">\\r\\n                    <h3>⚠️ Incidencias y Problemas</h3>\\r\\n                    <div class=\\\"section\\\">\\r\\n                        <p>{{ $('Webhook').item.json.body.incidences || 'No se han registrado incidencias durante este período.'}}</p>\\r\\n                    </div>\\r\\n                </div>\\r\\n            </div>\\r\\n\\r\\n            <!-- Sección de fotos del proyecto -->\\r\\n            <div class=\\\"photos-section\\\">\\r\\n                <h2>📸 Registro Fotográfico</h2>\\r\\n                {{ \\r\\n                  $('Webhook').item.json.body.photos_count > 0 ? \\r\\n                  (() => {\\r\\n                    let photosHtml = '<div class=\\\"photos-grid\\\">';\\r\\n                    for(let i = 0; i < parseInt($('Webhook').item.json.body.photos_count); i++) {\\r\\n                      const imageData = $('Webhook').item.json.body['photo_' + i + '_image'];\\r\\n                      const textComment = $('Webhook').item.json.body['photo_' + i + '_text'] || '';\\r\\n                      const voiceComment = $('Webhook').item.json.body['photo_' + i + '_voice'] || '';\\r\\n                      \\r\\n                      if (i % 2 === 0) photosHtml += '<div class=\\\"photo-row\\\">';\\r\\n                      \\r\\n                      photosHtml += `\\r\\n                        <div class=\\\"photo-card\\\">\\r\\n                          ${imageData ? `<img src=\\\"${imageData}\\\" alt=\\\"Foto ${i + 1} del proyecto\\\" class=\\\"photo-image\\\" />` : ''}\\r\\n                          <div class=\\\"photo-content\\\">\\r\\n                            <div class=\\\"photo-title\\\">📷 Foto ${i + 1}</div>\\r\\n                            ${textComment ? `<div class=\\\"photo-comment\\\">${textComment}</div>` : ''}\\r\\n                            ${voiceComment ? '<div class=\\\"photo-voice-comment\\\">🎙️ Incluye comentario de voz</div>' : ''}\\r\\n                          </div>\\r\\n                        </div>\\r\\n                      `;\\r\\n                      \\r\\n                      if (i % 2 === 1 || i === parseInt($('Webhook').item.json.body.photos_count) - 1) {\\r\\n                        photosHtml += '</div>';\\r\\n                      }\\r\\n                    }\\r\\n                    photosHtml += '</div>';\\r\\n                    return photosHtml;\\r\\n                  })()                  : '<div class=\\\"no-photos\\\">📸 No se han adjuntado fotos en este informe.</div>'\\r\\n                }}\\r\\n            </div>\\r\\n\\r\\n            <!-- Sección de audio (condicional) -->\\r\\n            <div class=\\\"audio-section\\\">\\r\\n                <h3>🎙️ Observaciones</h3>\\r\\n                <p>{{ $json.choices[0].message.content.obs }}</p>\\r\\n            </div>\\r\\n\\r\\n            <div class=\\\"section\\\">\\r\\n                <h2>📋 Resumen Ejecutivo</h2>\\r\\n                <p>{{ $json.choices[0].message.content.summary }}</p>           \\r\\n            </div>\\r\\n        </div>\\r\\n\\r\\n        <div class=\\\"footer\\\">\\r\\n            <p>📄 Documento generado automáticamente el {{ $('Webhook').item.json.body.date }} | Sistema de Informes de Obra v2.0 | Confidencial</p>\\r\\n        </div>\\r\\n    </div>\\r\\n</body>\\r\\n</html>\\r\\n"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        300
+      ],
+      "id": "1b97fe81-2863-451b-bdf0-cb33b7a73606",
+      "name": "HTML1"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\\r\\n<html lang=\\\"es\\\">\\r\\n<head>\\r\\n    <meta charset=\\\"UTF-8\\\">\\r\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\r\\n    <title>Informe Semanal de Obra</title>\\r\\n    <style>\\r\\n        /* Reset básico */\\r\\n        * {\\r\\n            margin: 0;\\r\\n            padding: 0;\\r\\n            box-sizing: border-box;\\r\\n        }\\r\\n\\r\\n        body {\\r\\n            font-family: 'Arial', 'Helvetica', sans-serif;\\r\\n            line-height: 1.6;\\r\\n            color: #2c3e50;\\r\\n            background: #ffffff;\\r\\n            padding: 20px;\\r\\n        }\\r\\n\\r\\n        .container {\\r\\n            max-width: 800px;\\r\\n            margin: 0 auto;\\r\\n            background: #ffffff;\\r\\n            border: 1px solid #dee2e6;\\r\\n        }\\r\\n\\r\\n        /* Header optimizado para PDF */\\r\\n        .header {\\r\\n            background: #2c3e50;\\r\\n            color: #ffffff;\\r\\n            padding: 30px;\\r\\n            text-align: left;\\r\\n            border-top: 4px solid #e74c3c;\\r\\n        }\\r\\n\\r\\n        .header h1 {\\r\\n            font-size: 2em;\\r\\n            font-weight: bold;\\r\\n            margin-bottom: 10px;\\r\\n            letter-spacing: -0.5px;\\r\\n        }\\r\\n\\r\\n        .header .subtitle {\\r\\n            font-size: 1.2em;\\r\\n            opacity: 0.9;\\r\\n            font-weight: normal;\\r\\n        }\\r\\n\\r\\n        /* Content area */\\r\\n        .content {\\r\\n            padding: 30px;\\r\\n        }\\r\\n\\r\\n        /* Info grid simplificado */\\r\\n        .info-grid {\\r\\n            display: table;\\r\\n            width: 100%;\\r\\n            margin-bottom: 30px;\\r\\n            padding: 20px;\\r\\n            background: #f8f9fa;\\r\\n            border-left: 4px solid #3498db;\\r\\n        }\\r\\n\\r\\n        .info-item {\\r\\n            display: table-cell;\\r\\n            text-align: center;\\r\\n            padding: 0 15px;\\r\\n            vertical-align: top;\\r\\n        }\\r\\n\\r\\n        .info-label {\\r\\n            font-size: 0.9em;\\r\\n            color: #7f8c8d;\\r\\n            text-transform: uppercase;\\r\\n            letter-spacing: 1px;\\r\\n            margin-bottom: 5px;\\r\\n            font-weight: 600;\\r\\n            display: block;\\r\\n        }\\r\\n\\r\\n        .info-value {\\r\\n            font-size: 1.3em;\\r\\n            font-weight: 600;\\r\\n            color: #2c3e50;\\r\\n        }\\r\\n\\r\\n        /* Sections */\\r\\n        .section {\\r\\n            margin-bottom: 35px;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .section h2 {\\r\\n            font-size: 1.4em;\\r\\n            color: #2c3e50;\\r\\n            margin-bottom: 15px;\\r\\n            padding-bottom: 10px;\\r\\n            border-bottom: 2px solid #ecf0f1;\\r\\n            font-weight: 600;\\r\\n            position: relative;\\r\\n        }\\r\\n\\r\\n        .section h2::before {\\r\\n            content: '';\\r\\n            position: absolute;\\r\\n            bottom: -2px;\\r\\n            left: 0;\\r\\n            width: 50px;\\r\\n            height: 2px;\\r\\n            background: #3498db;\\r\\n        }\\r\\n\\r\\n        .section p {\\r\\n            font-size: 1em;\\r\\n            line-height: 1.7;\\r\\n            color: #34495e;\\r\\n            text-align: justify;\\r\\n            margin-bottom: 15px;\\r\\n        }\\r\\n\\r\\n        /* Progress bar simplificado */\\r\\n        .progress-container {\\r\\n            background: #ecf0f1;\\r\\n            border-radius: 10px;\\r\\n            padding: 3px;\\r\\n            margin: 15px 0;\\r\\n            height: 30px;\\r\\n        }\\r\\n\\r\\n        .progress-bar {\\r\\n            background: #27ae60;\\r\\n            height: 24px;\\r\\n            border-radius: 8px;\\r\\n            display: flex;\\r\\n            align-items: center;\\r\\n            justify-content: center;\\r\\n            color: #ffffff;\\r\\n            font-weight: 600;\\r\\n            font-size: 0.9em;\\r\\n            min-width: 60px;\\r\\n        }\\r\\n\\r\\n        /* Observation cards */\\r\\n        .observations-grid {\\r\\n            margin-bottom: 25px;\\r\\n        }\\r\\n\\r\\n        .observation-card {\\r\\n            background: #f8f9fa;\\r\\n            padding: 20px;\\r\\n            margin-bottom: 20px;\\r\\n            border-left: 4px solid #3498db;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .observation-card.incidents {\\r\\n            border-left-color: #e74c3c;\\r\\n        }\\r\\n\\r\\n        .observation-card h3 {\\r\\n            color: #2c3e50;\\r\\n            font-size: 1.1em;\\r\\n            margin-bottom: 10px;\\r\\n            font-weight: 600;\\r\\n        }\\r\\n\\r\\n        /* Audio section */\\r\\n        .audio-section {\\r\\n            background: #f39c12;\\r\\n            color: #ffffff;\\r\\n            padding: 20px;\\r\\n            margin: 20px 0;\\r\\n            text-align: center;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .audio-section h3 {\\r\\n            margin-bottom: 10px;\\r\\n            font-weight: 600;\\r\\n        }\\r\\n\\r\\n        /* Footer */\\r\\n        .footer {\\r\\n            background: #ecf0f1;\\r\\n            padding: 20px 30px;\\r\\n            text-align: center;\\r\\n            color: #7f8c8d;\\r\\n            font-size: 0.9em;\\r\\n            border-top: 1px solid #bdc3c7;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        /* Status badges */\\r\\n        .status-badge {\\r\\n            display: inline-block;\\r\\n            padding: 5px 15px;\\r\\n            border-radius: 15px;\\r\\n            font-size: 0.9em;\\r\\n            font-weight: 600;\\r\\n            text-transform: uppercase;\\r\\n            letter-spacing: 0.5px;\\r\\n        }\\r\\n\\r\\n        .status-on-time {\\r\\n            background: #d5edda;\\r\\n            color: #155724;\\r\\n        }\\r\\n\\r\\n        .status-delayed {\\r\\n            background: #f8d7da;\\r\\n            color: #721c24;\\r\\n        }\\r\\n\\r\\n        .status-ahead {\\r\\n            background: #d1ecf1;\\r\\n            color: #0c5460;\\r\\n        }\\r\\n\\r\\n        /* Print specific styles */\\r\\n        @media print {\\r\\n            body {\\r\\n                background: white;\\r\\n                padding: 0;\\r\\n            }\\r\\n            \\r\\n            .container {\\r\\n                border: none;\\r\\n                box-shadow: none;\\r\\n            }\\r\\n            \\r\\n            .section {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n            \\r\\n            .observation-card {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n\\r\\n            .audio-section {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n\\r\\n            .footer {\\r\\n                page-break-inside: avoid;\\r\\n            }\\r\\n        }        /* Estilos para la galería de fotos */\\r\\n        .photos-section {\\r\\n            margin: 30px 0;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .photos-grid {\\r\\n            display: table;\\r\\n            width: 100%;\\r\\n            margin-top: 20px;\\r\\n        }\\r\\n\\r\\n        .photo-row {\\r\\n            display: table-row;\\r\\n            page-break-inside: avoid;\\r\\n        }\\r\\n\\r\\n        .photo-card {\\r\\n            display: table-cell;\\r\\n            background: #f8f9fa;\\r\\n            margin: 0 10px 20px 0;\\r\\n            border: 1px solid #dee2e6;\\r\\n            border-left: 4px solid #3498db;\\r\\n            page-break-inside: avoid;\\r\\n            width: 48%;\\r\\n            vertical-align: top;\\r\\n        }\\r\\n\\r\\n        .photo-card:nth-child(even) {\\r\\n            margin-right: 0;\\r\\n        }\\r\\n\\r\\n        .photo-image {\\r\\n            width: 100%;\\r\\n            max-height: 200px;\\r\\n            object-fit: cover;\\r\\n            border-bottom: 1px solid #dee2e6;\\r\\n            display: block;\\r\\n        }\\r\\n\\r\\n        .photo-content {\\r\\n            padding: 15px;\\r\\n        }\\r\\n\\r\\n        .photo-title {\\r\\n            font-size: 1.1em;\\r\\n            font-weight: 600;\\r\\n            color: #3498db;\\r\\n            margin-bottom: 10px;\\r\\n        }\\r\\n\\r\\n        .photo-comment {\\r\\n            font-size: 0.9em;\\r\\n            line-height: 1.5;\\r\\n            color: #34495e;\\r\\n            margin-bottom: 10px;\\r\\n            text-align: justify;\\r\\n        }\\r\\n\\r\\n        .photo-voice-comment {\\r\\n            background: #f39c12;\\r\\n            color: #ffffff;\\r\\n            padding: 8px 12px;\\r\\n            font-size: 0.8em;\\r\\n            font-weight: 600;\\r\\n            text-align: center;\\r\\n            border-radius: 4px;\\r\\n        }\\r\\n\\r\\n        .no-photos {\\r\\n            text-align: center;\\r\\n            color: #7f8c8d;\\r\\n            font-style: italic;\\r\\n            padding: 30px;\\r\\n            background: #f8f9fa;\\r\\n            border: 1px dashed #dee2e6;\\r\\n        }\\r\\n\\r\\n        /* Responsive para pantallas pequeñas */\\r\\n        @media (max-width: 768px) {\\r\\n            body {\\r\\n                padding: 10px;\\r\\n            }\\r\\n            \\r\\n            .header, .content {\\r\\n                padding: 15px;\\r\\n            }\\r\\n            \\r\\n            .info-grid {\\r\\n                display: block;\\r\\n            }\\r\\n            \\r\\n            .info-item {\\r\\n                display: block;\\r\\n                text-align: center;\\r\\n                margin-bottom: 15px;\\r\\n            }\\r\\n            \\r\\n            .photos-grid {\\r\\n                display: block;\\r\\n            }\\r\\n            \\r\\n            .photo-card {\\r\\n                display: block;\\r\\n                width: 100%;\\r\\n                margin: 0 0 20px 0;\\r\\n            }\\r\\n            \\r\\n            .photo-image {\\r\\n                max-height: 150px;\\r\\n            }\\r\\n        }\\r\\n    </style>\\r\\n</head>\\r\\n<body>\\r\\n    <div class=\\\"container\\\">\\r\\n        <div class=\\\"header\\\">\\r\\n            <h1>📋 Informe Semanal de Obra</h1>\\r\\n            <div class=\\\"subtitle\\\">{{ $('Webhook').item.json.body.projectName || 'Proyecto de Construcción'}}</div>\\r\\n        </div>\\r\\n\\r\\n        <div class=\\\"content\\\">\\r\\n            <div class=\\\"info-grid\\\">\\r\\n                <div class=\\\"info-item\\\">\\r\\n                    <div class=\\\"info-label\\\">Fecha del Informe</div>\\r\\n                    <div class=\\\"info-value\\\">{{ $('Webhook').item.json.body.date || 'DD/MM/AAAA'}}</div>\\r\\n                </div>\\r\\n                <div class=\\\"info-item\\\">\\r\\n                    <div class=\\\"info-label\\\">Avance General</div>\\r\\n                    <div class=\\\"info-value\\\">{{ $('Webhook').item.json.body.advance || '0'}}%</div>\\r\\n                </div>\\r\\n                <div class=\\\"info-item\\\">\\r\\n                    <div class=\\\"info-label\\\">Estado</div>\\r\\n                    <div class=\\\"info-value\\\">\\r\\n                        <span class=\\\"status-badge status-on-time\\\">✅ En Plazo</span>\\r\\n                    </div>\\r\\n                </div>\\r\\n            </div>\\r\\n\\r\\n            <div class=\\\"section\\\">\\r\\n                <h2>📊 Progreso del Proyecto</h2>\\r\\n                <p>El avance actual del proyecto <strong>{{ $('Webhook').item.json.body.projectName }}</strong> se encuentra en un <strong>{{ $('Webhook').item.json.body.advance || '0'}}%</strong> de completitud según el cronograma establecido.</p>\\r\\n                <div class=\\\"progress-container\\\">\\r\\n                    <div class=\\\"progress-bar\\\" style=\\\"width: {{ $('Webhook').item.json.body.advance || '0'}}%;\\\">\\r\\n                        {{ $('Webhook').item.json.body.advance || '0'}}%\\r\\n                    </div>\\r\\n                </div>\\r\\n                <p><em>Última actualización: {{ $('Webhook').item.json.body.date }}</em></p>\\r\\n            </div>            <div class=\\\"observations-grid\\\">\\r\\n                <div class=\\\"observation-card\\\">\\r\\n                    <h3>📝 Observaciones Generales</h3>\\r\\n                    <div class=\\\"section\\\">\\r\\n                        <p>{{ $json.choices[0].message.content.obs || 'No se han registrado observaciones para este período.'}}</p>\\r\\n                    </div>\\r\\n                </div>\\r\\n\\r\\n                <div class=\\\"observation-card incidents\\\">\\r\\n                    <h3>⚠️ Incidencias y Problemas</h3>\\r\\n                    <div class=\\\"section\\\">\\r\\n                        <p>{{ $('Webhook').item.json.body.incidences || 'No se han registrado incidencias durante este período.'}}</p>\\r\\n                    </div>\\r\\n                </div>\\r\\n            </div>\\r\\n\\r\\n            <!-- Sección de fotos del proyecto -->\\r\\n            <div class=\\\"photos-section\\\">\\r\\n                <h2>📸 Registro Fotográfico</h2>\\r\\n                {{ \\r\\n                  $('Webhook').item.json.body.photos_count > 0 ? \\r\\n                  (() => {\\r\\n                    let photosHtml = '<div class=\\\"photos-grid\\\">';\\r\\n                    for(let i = 0; i < parseInt($('Webhook').item.json.body.photos_count); i++) {\\r\\n                      const imageData = $('Webhook').item.json.body['photo_' + i + '_image'];\\r\\n                      const textComment = $('Webhook').item.json.body['photo_' + i + '_text'] || '';\\r\\n                      const voiceComment = $('Webhook').item.json.body['photo_' + i + '_voice'] || '';\\r\\n                      \\r\\n                      if (i % 2 === 0) photosHtml += '<div class=\\\"photo-row\\\">';\\r\\n                      \\r\\n                      photosHtml += `\\r\\n                        <div class=\\\"photo-card\\\">\\r\\n                          ${imageData ? `<img src=\\\"${imageData}\\\" alt=\\\"Foto ${i + 1} del proyecto\\\" class=\\\"photo-image\\\" />` : ''}\\r\\n                          <div class=\\\"photo-content\\\">\\r\\n                            <div class=\\\"photo-title\\\">📷 Foto ${i + 1}</div>\\r\\n                            ${textComment ? `<div class=\\\"photo-comment\\\">${textComment}</div>` : ''}\\r\\n                            ${voiceComment ? '<div class=\\\"photo-voice-comment\\\">🎙️ Incluye comentario de voz</div>' : ''}\\r\\n                          </div>\\r\\n                        </div>\\r\\n                      `;\\r\\n                      \\r\\n                      if (i % 2 === 1 || i === parseInt($('Webhook').item.json.body.photos_count) - 1) {\\r\\n                        photosHtml += '</div>';\\r\\n                      }\\r\\n                    }\\r\\n                    photosHtml += '</div>';\\r\\n                    return photosHtml;\\r\\n                  })()                  : '<div class=\\\"no-photos\\\">📸 No se han adjuntado fotos en este informe.</div>'\\r\\n                }}\\r\\n            </div>\\r\\n\\r\\n            <!-- Sección de audio (condicional) -->\\r\\n            <div class=\\\"audio-section\\\">\\r\\n                <h3>🎙️ Observaciones</h3>\\r\\n                <p>{{ $json.choices[0].message.content.obs }}</p>\\r\\n            </div>\\r\\n\\r\\n            <div class=\\\"section\\\">\\r\\n                <h2>📋 Resumen Ejecutivo</h2>\\r\\n                <p>{{ $json.choices[0].message.content.summary }}</p>           \\r\\n            </div>\\r\\n        </div>\\r\\n\\r\\n        <div class=\\\"footer\\\">\\r\\n            <p>📄 Documento generado automáticamente el {{ $('Webhook').item.json.body.date }} | Sistema de Informes de Obra v2.0 | Confidencial</p>\\r\\n        </div>\\r\\n    </div>\\r\\n</body>\\r\\n</html>\\r\\n"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        340,
+        580
+      ],
+      "id": "b481c8a1-becd-436b-b6e5-34ba2f371bf2",
+      "name": "HTML2"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "html",
+        "options": {
+          "encoding": "utf8",
+          "fileName": "index.html"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        300
+      ],
+      "id": "b0d31d05-e8a5-4470-b92c-48b191696520",
+      "name": "Convert to File2"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "html",
+        "options": {
+          "encoding": "utf8",
+          "fileName": "index.html"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        580
+      ],
+      "id": "6026f06d-551f-4c47-855b-ae9c01fc0b1c",
+      "name": "Convert to File4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://gotenberg:3000/forms/chromium/convert/html",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Gotenberg-PrintBackground\t",
+              "value": "1"
+            },
+            {
+              "name": "Gotenberg-WaitTimeout",
+              "value": "1000"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "index.html",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        300
+      ],
+      "id": "31677aec-8848-410e-a1b6-ea1e07035ca5",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "sendTo": "pablo.cabello.hurtado@gmail.com",
+        "subject": "=📄Informe  {{ $('Webhook').item.json.body.projectName }} - {{ $('Webhook').item.json.body.date }}",
+        "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <style>\n      body {\n        font-family: Arial, sans-serif;\n        background-color: #f4f6f8;\n        padding: 20px;\n        color: #333;\n      }\n      .container {\n        background-color: #ffffff;\n        border-radius: 8px;\n        padding: 20px;\n        border: 1px solid #ddd;\n        max-width: 600px;\n        margin: auto;\n      }\n      h2 {\n        color: #2c3e50;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n      }\n      .footer {\n        margin-top: 20px;\n        font-size: 12px;\n        color: #777;\n        text-align: center;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h2>📄 Informe {{ $('Webhook').item.json.body.projectName }} adjunto con fecha de {{ $('Webhook').item.json.body.date }}</h2>\n      <p>\n        Hola,<br /><br />\n        Aquí tiene el <strong>informe semanal de obra</strong>.\n        Ya se encuentra registrado en el sistema y estará disponible para revisión por parte del equipo técnico y dirección facultativa.\n        <br><p>Puedes acceder al informe desde este enlace:</p>\n        <p><a href=\"{{ $json.webContentLink }}\" target=\"_blank\">Ver informe en Google Drive</a></p>\n      </p>\n      <p>\n        Si necesitas hacer alguna modificación o enviar información adicional, no dudes en responder a este mensaje.\n      </p>\n      <p>Gracias por tu colaboración.</p>\n\n      <div class=\"footer\">\n        Este mensaje ha sido generado automáticamente por el sistema de informes de obra.\n      </div>\n    </div>\n  </body>\n</html>\n",
+        "options": {
+          "appendAttribution": false,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1000,
+        300
+      ],
+      "id": "63c37571-b7fb-41e4-88d1-0c4070073910",
+      "name": "Gmail",
+      "webhookId": "99fd5e57-955a-4a90-8848-bd95a678e7f6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lSeLDCEb52CitKcx",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://gotenberg:3000/forms/chromium/convert/html",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Gotenberg-PrintBackground\t",
+              "value": "1"
+            },
+            {
+              "name": "Gotenberg-WaitTimeout",
+              "value": "1000"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "index.html",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "paperWidth",
+              "value": "8.27"
+            },
+            {
+              "name": "paperHeight",
+              "value": "11.7"
+            },
+            {
+              "name": "marginTop",
+              "value": "0.39"
+            },
+            {
+              "name": "marginBottom",
+              "value": "0.39"
+            },
+            {
+              "name": "marginLeft",
+              "value": "0.39"
+            },
+            {
+              "name": "marginRight",
+              "value": "0.39"
+            },
+            {
+              "name": "preferCSSPageSize",
+              "value": "false"
+            },
+            {
+              "name": "printBackground",
+              "value": "true"
+            },
+            {
+              "name": "landscape",
+              "value": "false"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        580
+      ],
+      "id": "7e9ec407-a173-41da-909a-6f9f379b1740",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "pablo.cabello.hurtado@gmail.com",
+        "subject": "=📄Informe  {{ $('Webhook').item.json.body.projectName }} - {{ $('Webhook').item.json.body.date }}",
+        "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <style>\n      body {\n        font-family: Arial, sans-serif;\n        background-color: #f4f6f8;\n        padding: 20px;\n        color: #333;\n      }\n      .container {\n        background-color: #ffffff;\n        border-radius: 8px;\n        padding: 20px;\n        border: 1px solid #ddd;\n        max-width: 600px;\n        margin: auto;\n      }\n      h2 {\n        color: #2c3e50;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n      }\n      .footer {\n        margin-top: 20px;\n        font-size: 12px;\n        color: #777;\n        text-align: center;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h2>📄 Informe {{ $('Webhook').item.json.body.projectName }} adjunto con fecha de {{ $('Webhook').item.json.body.date }}</h2>\n      <p>\n        Hola,<br /><br />\n        Aquí tiene el <strong>informe semanal de obra</strong>.\n        Ya se encuentra registrado en el sistema y estará disponible para revisión por parte del equipo técnico y dirección facultativa.\n        <br><p>Puedes acceder al informe desde este enlace:</p>\n        <p><a href=\"{{ $json.webContentLink }}\" target=\"_blank\">Ver informe en Google Drive</a></p>\n      </p>\n      <p>\n        Si necesitas hacer alguna modificación o enviar información adicional, no dudes en responder a este mensaje.\n      </p>\n      <p>Gracias por tu colaboración.</p>\n\n      <div class=\"footer\">\n        Este mensaje ha sido generado automáticamente por el sistema de informes de obra.\n      </div>\n    </div>\n  </body>\n</html>\n",
+        "options": {
+          "appendAttribution": false,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1000,
+        580
+      ],
+      "id": "bcd6cb8b-db4d-472c-9ef1-5c5bd11e6c36",
+      "name": "Gmail1",
+      "webhookId": "99fd5e57-955a-4a90-8848-bd95a678e7f6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lSeLDCEb52CitKcx",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "HTML1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File3": {
+      "main": [
+        [
+          {
+            "node": "OpenAI2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI2": {
+      "main": [
+        [
+          {
+            "node": "OpenAI3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI3": {
+      "main": [
+        [
+          {
+            "node": "HTML2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML2": {
+      "main": [
+        [
+          {
+            "node": "Convert to File4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Gmail1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f7cf645e-e6a5-4094-b924-2ed822e0dd8a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ffac97bb4a36135fbb0eb20a1be2bec6389d5a5ba663523ef0ca3b76ca08ebab"
+  },
+  "id": "apptV7kOCGxAVkzq",
+  "tags": []
+}

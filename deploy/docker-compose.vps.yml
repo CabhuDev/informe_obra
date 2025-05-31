@@ -1,0 +1,123 @@
+# Docker Compose para VPS Hostinger - obratec.app
+version: '3.8'
+
+services:
+  # Aplicación principal (Frontend + Proxy para N8N)
+  app:
+    build: .
+    container_name: obratec-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"    
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - WEBHOOK_URL=https://obratec.app/webhook/form-obra
+    volumes:
+      - ./public:/app/public
+    networks:
+      - obratec-network
+    depends_on:
+      - n8n
+      - gotenberg
+
+  # Gotenberg - Servicio de generación de PDFs
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: obratec-gotenberg
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3001:3000"
+    command:
+      - gotenberg
+      - --chromium-disable-web-security
+      - --chromium-allow-list=file:///*
+      - --chromium-disable-javascript=false
+      - --chromium-allow-file-access-from-files
+      - --chromium-allow-insecure-localhost
+      - --chromium-ignore-certificate-errors
+    networks:
+      - obratec-network
+
+  # N8N Workflow Automation - CONFIGURACIÓN SEGURA
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: obratec-n8n
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      # Configuración básica desde .env
+      - N8N_HOST=${N8N_HOST}
+      - N8N_PORT=${N8N_PORT}
+      - N8N_PROTOCOL=${N8N_PROTOCOL}
+      - N8N_EDITOR_BASE_URL=${N8N_EDITOR_BASE_URL}
+      - NODE_ENV=${NODE_ENV}
+      
+      # CONFIGURACIÓN DE SEGURIDAD MÁXIMA
+      - N8N_USER_MANAGEMENT_DISABLED=${N8N_USER_MANAGEMENT_DISABLED}
+      - N8N_BASIC_AUTH_ACTIVE=${N8N_BASIC_AUTH_ACTIVE}
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+      - N8N_RUNNERS_ENABLED=${N8N_RUNNERS_ENABLED}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      
+      # Bloquear funciones peligrosas
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=true
+      - N8N_FUNCTION_ALLOW_BUILTIN=
+      - N8N_FUNCTION_ALLOW_EXTERNAL=
+      - N8N_PERSONALIZATION_ENABLED=false
+      - N8N_HIRING_BANNER_ENABLED=false
+      - N8N_TEMPLATES_ENABLED=false
+      - N8N_ONBOARDING_FLOW_DISABLED=true
+      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_ANONYMOUS_USAGE_TRACKING=false
+      
+      # Limitar endpoints disponibles
+      - N8N_ENDPOINTS_REST=webhook,webhookWaiting,webhookTest
+      - N8N_ENDPOINTS_WEBHOOK=webhook
+      - N8N_ENDPOINTS_WEBHOOK_WAITING=webhook-waiting
+      - N8N_ENDPOINTS_WEBHOOK_TEST=webhook-test
+      
+      # Configuración adicional
+      - N8N_METRICS=true
+      - N8N_LOG_LEVEL=info
+      
+      # Base de datos SQLite desde .env
+      - DB_TYPE=${DB_TYPE}
+      - DB_SQLITE_DATABASE=${DB_SQLITE_DATABASE}
+      
+      # Zona horaria desde .env
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      
+      # Limpieza automática de ejecuciones
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=168
+      
+      # URLs del sistema
+      - WEBHOOK_URL=${WEBHOOK_URL}
+      
+      # API Keys (se cargan desde .env)
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GMAIL_USER=${GMAIL_USER}
+      - GMAIL_PASSWORD=${GMAIL_PASSWORD}
+      - GMAIL_CLIENT_ID=${GMAIL_CLIENT_ID}
+      - GMAIL_CLIENT_SECRET=${GMAIL_CLIENT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/home/node/.n8n/workflows
+    networks:
+      - obratec-network
+
+volumes:
+  n8n_data:
+    driver: local
+
+networks:
+  obratec-network:
+    driver: bridge

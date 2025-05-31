@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Informe semanal de obra</title>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon -->    
+  <link rel="icon" type="image/webp" href="assets/favicon.webp">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.webp">
+  <link rel="shortcut icon" href="assets/favicon.webp">
+  <link rel="manifest" href="assets/site.webmanifest">
+<meta name="theme-color" content="#3B8C88">
+<meta name="apple-mobile-web-app-status-bar-style" content="#3B8C88">
+
+</head>
+
+<body>
+  <main class="container">
+    <h1>Informe semanal</h1>
+
+    <form id="obraForm" autocomplete="off">
+      <label>
+        Email
+        <input type="email" name="email" placeholder="Email donde te llegará el informe" required />
+      </label>
+
+      <label>
+        Proyecto
+        <input name="projectName" placeholder="Nombre obra" required />
+      </label>
+
+      <label>
+        Fecha
+        <input type="date" name="date" required />
+      </label>
+
+      <label>
+        Avance (%)  
+        <input type="number" name="advance" min="0" max="100" required />
+      </label>
+
+      <label>
+        Observaciones
+        <textarea name="observations" rows="3"></textarea>
+      </label>      <label>
+        Incidencias
+        <textarea name="incidences" rows="3"></textarea>
+      </label>
+
+      <div class="photos-section">
+        <label>Fotos del proyecto (máx 5):</label>
+        <div class="photo-upload">
+          <input type="file" id="photoInput" accept="image/*" multiple capture="environment" style="display: none;" />
+          <div class="upload-buttons">
+            <button type="button" id="takePhoto" class="outline">📷 Tomar foto</button>
+            <button type="button" id="uploadPhoto" class="outline">📁 Subir foto</button>
+          </div>
+        </div>
+        <div id="photosContainer" class="photos-grid"></div>
+      </div>      <div class="audio-recorder">
+        <label>Observaciones de voz:</label>
+        <div class="recorder-controls">
+          <button type="button" id="startRecording" class="outline">🎙️ Iniciar grabación</button>
+          <button type="button" id="stopRecording" class="outline" disabled>⏹️ Detener</button>
+          <div class="recording-status-container">
+            <span id="recordingStatus"></span>
+            <div id="audioVisualizerContainer" style="display: none;">
+              <img src="assets/audio-bars.svg" alt="Grabando..." class="audio-visualizer" />
+            </div>
+          </div>
+        </div>
+        <audio id="audioPlayback" controls style="display:none; width:100%; margin-top:10px;"></audio>
+        <!-- Este campo oculto almacenará el audio como base64 -->
+        <input type="hidden" name="audioData" id="audioData">
+      </div>        <button type="submit">Enviar informe</button>
+    </form>
+
+    <div id="loadingContainer" style="display: none;" class="loading-container">
+      <img src="assets/enviando-informe.svg" alt="Enviando informe..." class="loading-icon" />
+      <span class="loading-text">Enviando informe...</span>
+    </div>
+
+    <p id="status"></p>
+        <script src="js/script.js"></script>
+    <script src="js/audioRecord.js"></script>
+    <script src="js/photoManager.js"></script>
+</body>
+</html>

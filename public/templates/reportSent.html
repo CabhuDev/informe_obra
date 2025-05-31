@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        max-width: 600px;
+        margin: auto;
+      }
+      h2 {
+        color: #2c3e50;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>📄 Informe {{ $('Webhook').item.json.body.projectName }} adjunto con fecha de {{ $('Webhook').item.json.body.date }}</h2>
+      <p>
+        Hola,<br /><br />
+        Aquí tiene el <strong>informe semanal de obra</strong>.
+        Ya se encuentra registrado en el sistema y estará disponible para revisión por parte del equipo técnico y dirección facultativa.
+        <br><p>Puedes acceder al informe desde este enlace:</p>
+        <p><a href="{{ $json["webViewLink"] }}">Ver informe en Google Drive</a></p>
+      </p>
+      <p>
+        Si necesitas hacer alguna modificación o enviar información adicional, no dudes en responder a este mensaje.
+      </p>
+      <p>Gracias por tu colaboración.</p>
+
+      <div class="footer">
+        Este mensaje ha sido generado automáticamente por el sistema de informes de obra.
+      </div>
+    </div>
+  </body>
+</html>

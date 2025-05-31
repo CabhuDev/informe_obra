@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Semanal de Obra</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+        }
+
+        /* Header optimizado para PDF */
+        .header {
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 30px;
+            text-align: left;
+            border-top: 4px solid #e74c3c;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        /* Content area */
+        .content {
+            padding: 30px;
+        }
+
+        /* Info grid simplificado */
+        .info-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+
+        .info-item {
+            display: table-cell;
+            text-align: center;
+            padding: 0 15px;
+            vertical-align: top;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .section h2::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #3498db;
+        }
+
+        .section p {
+            font-size: 1em;
+            line-height: 1.7;
+            color: #34495e;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* Progress bar simplificado */
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 10px;
+            padding: 3px;
+            margin: 15px 0;
+            height: 30px;
+        }
+
+        .progress-bar {
+            background: #27ae60;
+            height: 24px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.9em;
+            min-width: 60px;
+        }
+
+        /* Observation cards */
+        .observations-grid {
+            margin-bottom: 25px;
+        }
+
+        .observation-card {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            page-break-inside: avoid;
+        }
+
+        .observation-card.incidents {
+            border-left-color: #e74c3c;
+        }
+
+        .observation-card h3 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Audio section */
+        .audio-section {
+            background: #f39c12;
+            color: #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .audio-section h3 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #ecf0f1;
+            padding: 20px 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            border-top: 1px solid #bdc3c7;
+            page-break-inside: avoid;
+        }
+
+        /* Status badges */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-on-time {
+            background: #d5edda;
+            color: #155724;
+        }
+
+        .status-delayed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-ahead {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        /* Print specific styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                border: none;
+                box-shadow: none;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .observation-card {
+                page-break-inside: avoid;
+            }
+
+            .audio-section {
+                page-break-inside: avoid;
+            }
+
+            .footer {
+                page-break-inside: avoid;
+            }
+        }        /* Estilos para la galería de fotos */
+        .photos-section {
+            margin: 30px 0;
+            page-break-inside: avoid;
+        }
+
+        .photos-grid {
+            display: table;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .photo-row {
+            display: table-row;
+            page-break-inside: avoid;
+        }
+
+        .photo-card {
+            display: table-cell;
+            background: #f8f9fa;
+            margin: 0 10px 20px 0;
+            border: 1px solid #dee2e6;
+            border-left: 4px solid #3498db;
+            page-break-inside: avoid;
+            width: 48%;
+            vertical-align: top;
+        }
+
+        .photo-card:nth-child(even) {
+            margin-right: 0;
+        }
+
+        .photo-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #dee2e6;
+            display: block;
+        }
+
+        .photo-content {
+            padding: 15px;
+        }
+
+        .photo-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .photo-comment {
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #34495e;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .photo-voice-comment {
+            background: #f39c12;
+            color: #ffffff;
+            padding: 8px 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .no-photos {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 30px;
+            background: #f8f9fa;
+            border: 1px dashed #dee2e6;
+        }
+
+        /* Responsive para pantallas pequeñas */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header, .content {
+                padding: 15px;
+            }
+            
+            .info-grid {
+                display: block;
+            }
+            
+            .info-item {
+                display: block;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .photos-grid {
+                display: block;
+            }
+            
+            .photo-card {
+                display: block;
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+            
+            .photo-image {
+                max-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Informe Semanal de Obra</h1>
+            <div class="subtitle">{{ $('Webhook').item.json.body.projectName || 'Proyecto de Construcción'}}</div>
+        </div>
+
+        <div class="content">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Fecha del Informe</div>
+                    <div class="info-value">{{ $('Webhook').item.json.body.date || 'DD/MM/AAAA'}}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Avance General</div>
+                    <div class="info-value">{{ $('Webhook').item.json.body.advance || '0'}}%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Estado</div>
+                    <div class="info-value">
+                        <span class="status-badge status-on-time">✅ En Plazo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Progreso del Proyecto</h2>
+                <p>El avance actual del proyecto <strong>{{ $('Webhook').item.json.body.projectName }}</strong> se encuentra en un <strong>{{ $('Webhook').item.json.body.advance || '0'}}%</strong> de completitud según el cronograma establecido.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: {{ $('Webhook').item.json.body.advance || '0'}}%;">
+                        {{ $('Webhook').item.json.body.advance || '0'}}%
+                    </div>
+                </div>
+                <p><em>Última actualización: {{ $('Webhook').item.json.body.date }}</em></p>
+            </div>            <div class="observations-grid">
+                <div class="observation-card">
+                    <h3>📝 Observaciones Generales</h3>
+                    <div class="section">
+                        <p>{{ $json.choices[0].message.content.obs || 'No se han registrado observaciones para este período.'}}</p>
+                    </div>
+                </div>
+
+                <div class="observation-card incidents">
+                    <h3>⚠️ Incidencias y Problemas</h3>
+                    <div class="section">
+                        <p>{{ $('Webhook').item.json.body.incidences || 'No se han registrado incidencias durante este período.'}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de fotos del proyecto -->
+            <div class="photos-section">
+                <h2>📸 Registro Fotográfico</h2>
+                {{ 
+                  $('Webhook').item.json.body.photos_count > 0 ? 
+                  (() => {
+                    let photosHtml = '<div class="photos-grid">';
+                    for(let i = 0; i < parseInt($('Webhook').item.json.body.photos_count); i++) {
+                      const imageData = $('Webhook').item.json.body['photo_' + i + '_image'];
+                      const textComment = $('Webhook').item.json.body['photo_' + i + '_text'] || '';
+                      const voiceComment = $('Webhook').item.json.body['photo_' + i + '_voice'] || '';
+                      
+                      if (i % 2 === 0) photosHtml += '<div class="photo-row">';
+                      
+                      photosHtml += `
+                        <div class="photo-card">
+                          ${imageData ? `<img src="${imageData}" alt="Foto ${i + 1} del proyecto" class="photo-image" />` : ''}
+                          <div class="photo-content">
+                            <div class="photo-title">📷 Foto ${i + 1}</div>
+                            ${textComment ? `<div class="photo-comment">${textComment}</div>` : ''}
+                            ${voiceComment ? '<div class="photo-voice-comment">🎙️ Incluye comentario de voz</div>' : ''}
+                          </div>
+                        </div>
+                      `;
+                      
+                      if (i % 2 === 1 || i === parseInt($('Webhook').item.json.body.photos_count) - 1) {
+                        photosHtml += '</div>';
+                      }
+                    }
+                    photosHtml += '</div>';
+                    return photosHtml;
+                  })()                  : '<div class="no-photos">📸 No se han adjuntado fotos en este informe.</div>'
+                }}
+            </div>
+
+            <!-- Sección de audio (condicional) -->
+            <div class="audio-section">
+                <h3>🎙️ Observaciones</h3>
+                <p>{{ $json.choices[0].message.content.obs }}</p>
+            </div>
+
+            <div class="section">
+                <h2>📋 Resumen Ejecutivo</h2>
+                <p>{{ $json.choices[0].message.content.summary }}</p>           
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📄 Documento generado automáticamente el {{ $('Webhook').item.json.body.date }} | Sistema de Informes de Obra v2.0 | Confidencial</p>
+        </div>
+    </div>
+</body>
+</html>

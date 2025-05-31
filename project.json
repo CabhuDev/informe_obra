@@ -1,0 +1,50 @@
+{
+  "name": "obratec-informe-obra",
+  "version": "1.0.0",
+  "description": "Sistema automatizado de informes de obra con AI",
+  "structure": {
+    "root": {
+      "server.js": "Servidor principal Node.js",
+      "package.json": "Configuración del proyecto",
+      ".env": "Variables de entorno (local)",
+      ".env.example": "Plantilla de variables"
+    },
+    "directories": {
+      "public/": "Frontend de la aplicación web",
+      "n8n/": "Workflows y configuración N8N",
+      "deploy/": "Archivos de despliegue Docker/VPS",
+      "config/": "Archivos de configuración del sistema",
+      "scripts/": "Scripts de automatización y setup",
+      "tests/": "Scripts de pruebas y validación",
+      "docs/": "Documentación del proyecto"
+    }
+  },
+  "urls": {
+    "production": {
+      "frontend": "https://obratec.app",
+      "n8n": "https://n8n.obratec.app",
+      "webhook": "https://n8n.obratec.app/webhook/form-obra"
+    },
+    "development": {
+      "frontend": "http://localhost:3000",
+      "n8n": "http://localhost:5678"
+    }
+  },
+  "deployment": {
+    "vps": {
+      "host": "31.97.36.248",
+      "domain": "obratec.app",
+      "path": "/opt/informe_obra",
+      "compose": "deploy/docker-compose.vps.yml"
+    }
+  },
+  "features": {
+    "audio_recording": "Grabación nativa en navegadores",
+    "wav_conversion": "Conversión automática a WAV",
+    "ai_transcription": "OpenAI Whisper",
+    "ai_reports": "Generación automática de informes",
+    "email_automation": "Envío automático Gmail",
+    "mobile_support": "Compatible iOS/Android",
+    "https_ssl": "Certificados SSL automáticos"
+  }
+}
