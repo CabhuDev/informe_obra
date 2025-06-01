@@ -116,27 +116,28 @@ const restrictedOAuthProxy = createProxyMiddleware({
 app.use('/webhook', webhookProxy);
 app.use('/rest/oauth2-credential/callback', restrictedOAuthProxy);
 
-// Ruta principal - servir index.html
+// Ruta principal - servir landing
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'pages', 'landing.html'));
 });
 
-// Ruta beta del formulario
-app.get('/report-beta', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Ruta del formulario de informe
+app.get('/form-report', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pages', 'form-report.html'));
 });
 
-// Ruta del formulario beta - servir index.html
+// Ruta beta del formulario (mantener compatibilidad)
 app.get('/report-beta', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'pages', 'form-report.html'));
 });
+
 
 // Manejar rutas no encontradas
 app.use('*', (req, res) => {
   if (req.originalUrl.startsWith('/api/')) {
     res.status(404).json({ error: 'API endpoint not found' });
   } else {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'pages', 'landing.html'));
   }
 });
 
