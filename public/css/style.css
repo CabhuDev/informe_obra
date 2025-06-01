@@ -1,6 +1,6 @@
 /* ================================================
    CUSTOM CSS FOUNDATION - REPLACING PICOCSS
-   Color Palette: ColorHunt (#F79B72, #2A4759, #DDDDDD, #EEEEEE)
+   Color Palette: ColorHunt + Professional Green (#F79B72, #2A4759, #3B8C88, #DDDDDD, #EEEEEE)
    ================================================ */
 
 /* CSS Reset & Base Styles */
@@ -12,10 +12,11 @@
   padding: 0;
 }
 
-/* CSS Variables - ColorHunt Palette */
+/* CSS Variables - ColorHunt Palette + Professional Green */
 :root {
   --color-primary: #F79B72;     /* Naranja cálido */
   --color-secondary: #2A4759;   /* Azul oscuro */
+  --color-tertiary: #3B8C88;    /* Verde azulado profesional */
   --color-light-gray: #DDDDDD;  /* Gris claro */
   --color-bg-light: #EEEEEE;    /* Gris muy claro */
   
@@ -31,6 +32,12 @@
   --secondary-focus: rgba(42, 71, 89, 0.125);
   --secondary-inverse: #FFFFFF;
   
+  /* Tertiary colors (Professional Green) */
+  --tertiary: var(--color-tertiary);
+  --tertiary-hover: #2F6B67;
+  --tertiary-focus: rgba(59, 140, 136, 0.125);
+  --tertiary-inverse: #FFFFFF;
+  
   /* Neutral colors */
   --muted-color: var(--color-secondary);
   --muted-border-color: var(--color-light-gray);
@@ -44,7 +51,7 @@
   /* Interactive colors */
   --del-color: #E74C3C;
   --del-hover-color: #C0392B;
-  --success-color: #27AE60;
+  --success-color: var(--color-tertiary); /* Usando el verde profesional para success */
   --warning-color: #F39C12;
   
   /* Spacing & Layout */
@@ -293,6 +300,27 @@ button.secondary {
 button.secondary:hover {
   background: var(--secondary-hover);
   border-color: var(--secondary-hover);
+}
+
+/* Tertiary Button (Professional Green) */
+button.tertiary {
+  background: var(--tertiary);
+  border-color: var(--tertiary);
+  color: var(--tertiary-inverse);
+}
+
+button.tertiary:hover {
+  background: var(--tertiary-hover);
+  border-color: var(--tertiary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(59, 140, 136, 0.3);
+}
+
+button.tertiary:disabled {
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 /* Danger Button */

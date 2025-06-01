@@ -1,127 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Obratec - Sistema de Informes de Obra</title>
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Obratec - Sistema de Informes de Obra</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/landing.css" />
 
-  <!-- Favicon -->    
-  <link rel="icon" type="image/webp" href="assets/favicon.webp">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.webp">
-  <link rel="shortcut icon" href="assets/favicon.webp">
-  <link rel="manifest" href="assets/site.webmanifest">
-  <meta name="theme-color" content="#3B8C88">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#3B8C88">
-
-  <style>
-    .landing-hero {
-      text-align: center;
-      padding: 3rem 1rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .landing-hero h1 {
-      font-size: 2.5rem;
-      color: #3B8C88;
-      margin-bottom: 1rem;
-    }
-    
-    .landing-hero p {
-      font-size: 1.2rem;
-      color: #666;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: #3B8C88;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: background-color 0.3s ease;
-      margin: 0.5rem;
-    }
-    
-    .cta-button:hover {
-      background: #2d6b66;
-      color: white;
-    }
-    
-    .cta-button.secondary {
-      background: transparent;
-      color: #3B8C88;
-      border: 2px solid #3B8C88;
-    }
-    
-    .cta-button.secondary:hover {
-      background: #3B8C88;
-      color: white;
-    }
-    
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-      padding: 0 1rem;
-    }
-    
-    .feature {
-      text-align: center;
-      padding: 1.5rem;
-      background: #f8f9fa;
-      border-radius: 8px;
-    }
-    
-    .feature h3 {
-      color: #3B8C88;
-      margin-bottom: 1rem;
-    }
-    
-    .feature p {
-      color: #666;
-      line-height: 1.5;
-    }
-    
-    .footer {
-      text-align: center;
-      margin-top: 4rem;
-      padding: 2rem 1rem;
-      background: #f8f9fa;
-      color: #666;
-    }
-  </style>
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="../assets/favicon.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon.webp">
+    <link rel="shortcut icon" href="../assets/favicon.webp">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <meta name="theme-color" content="#3B8C88">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#3B8C88">
 </head>
 
 <body>
-  <div class="landing-hero">
-    <h1>🏗️ Obratec</h1>
-    <p>
-      Sistema profesional de informes de obra. Genera reportes detallados con fotos, 
-      audios y seguimiento de avance de forma rápida y eficiente.
-    </p>
-    <div>
-      <a href="/form-report" class="cta-button">Crear Informe</a>
-      <a href="/report-beta" class="cta-button secondary">Versión Beta</a>
+    <div class="landing-hero">
+        <h1>🏗️ Obratec</h1>
+        <p>
+        Sistema profesional de informes de obra. Genera reportes detallados con fotos, 
+        audios y seguimiento de avance de forma rápida y eficiente.
+        </p>        <div class="cta-buttons">
+            <a href="/form-report" class="cta-button secondary">Crear Informe de prueba</a>
+            <a href="../templates/example-report.pdf" class="cta-button secondary">Versión muestra de informe</a>
+            <a href ="/waitlist" class="cta-button tertiary">🚀 Solicitar acceso a la beta</a>
+        </div>
     </div>
-  </div>
 
   <div class="features">
     <div class="feature">
       <h3>📸 Fotos de Obra</h3>
-      <p>Adjunta múltiples fotos del progreso de la obra con descripción automática.</p>
+      <p>Adjunta múltiples fotos del progreso de la obra con descripción mediante audio o texto.</p>
     </div>
     
     <div class="feature">
       <h3>🎤 Notas de Audio</h3>
-      <p>Graba notas de voz directamente desde el dispositivo para mayor eficiencia.</p>
+      <p>Graba el contenido de tu informe mediante voz directamente desde tu dispositivo móvil para mayor eficiencia.</p>
     </div>
     
     <div class="feature">
@@ -146,8 +63,8 @@
   </div>
 
   <div class="footer">
-    <p>&copy; 2024 Obratec - Sistema de Informes de Obra</p>
-    <p>Versión 1.0 | <a href="/health" style="color: #3B8C88;">Estado del Sistema</a></p>
+    <p>&copy; 2025 Obratec - Sistema de Informes de Obra</p>
+    <p>Versión 1.0 | <a href="/health">Estado del Sistema</a></p>
   </div>
 </body>
 </html>

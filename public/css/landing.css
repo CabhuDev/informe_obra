@@ -1,0 +1,283 @@
+/* Landing Page Styles - Obratec Sistema de Informes de Obra */
+/* Usando la paleta de colores: #F79B72 (naranja), #2A4759 (azul), #3B8C88 (verde), #DDDDDD, #EEEEEE */
+
+/* Variables heredadas del sistema principal */
+.landing-page {
+  --primary: #F79B72;
+  --primary-hover: #E6804F;
+  --secondary: #2A4759;
+  --secondary-hover: #1F3342;
+  --tertiary: #3B8C88;      /* Verde azulado profesional */
+  --tertiary-hover: #2F6B67;
+  --light-gray: #DDDDDD;
+  --bg-light: #EEEEEE;
+  --white: #FFFFFF;
+  --text-dark: #2A4759;
+  --text-muted: #666666;
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(42, 71, 89, 0.08);
+  --shadow-md: 0 4px 6px rgba(42, 71, 89, 0.1);
+  --shadow-lg: 0 8px 32px rgba(42, 71, 89, 0.15);
+}
+
+/* Layout principal */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero Section */
+.landing-hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  border: 1px solid var(--light-gray);
+}
+
+.landing-hero h1 {
+  font-size: 3rem;
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.landing-hero h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.landing-hero p {
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Botones CTA */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.cta-button.primary {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.cta-button.primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(247, 155, 114, 0.4);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.cta-button.secondary:hover {
+  background: var(--secondary);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(42, 71, 89, 0.3);
+}
+
+.cta-button.tertiary {
+  background: var(--tertiary);
+  color: var(--white);
+  border-color: var(--tertiary);
+}
+
+.cta-button.tertiary:hover {
+  background: var(--tertiary-hover);
+  border-color: var(--tertiary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(59, 140, 136, 0.4);
+}
+
+/* Sección de características */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  max-width: 1200px;
+}
+
+.feature {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--light-gray);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+}
+
+.feature:nth-child(2n)::before {
+  background: linear-gradient(90deg, var(--tertiary) 0%, var(--primary) 50%, var(--secondary) 100%);
+}
+
+.feature:nth-child(3n)::before {
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--tertiary) 50%, var(--primary) 100%);
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature h3 {
+  font-size: 1.4rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.feature p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 5rem;
+  padding: 3rem 2rem;
+  background: var(--secondary);
+  color: var(--white);
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landing-hero {
+    padding: 3rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .landing-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .landing-hero p {
+    font-size: 1.1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+  
+  .feature {
+    padding: 1.5rem;
+  }
+  
+  .footer {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-hero {
+    padding: 2rem 1rem;
+  }
+  
+  .landing-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .landing-hero p {
+    font-size: 1rem;
+  }
+  
+  .feature h3 {
+    font-size: 1.2rem;
+  }
+  
+  .feature p {
+    font-size: 0.9rem;
+  }
+}

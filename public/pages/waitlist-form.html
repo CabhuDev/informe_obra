@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lista de Espera - Obratec</title>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../assets/favicon.webp">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon.webp">
+  <link rel="shortcut icon" href="../assets/favicon.webp">
+  <link rel="manifest" href="../assets/site.webmanifest">  <meta name="theme-color" content="#3B8C88">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#3B8C88">
+</head>
+
+<body>
+  <main class="container">
+    <!-- Header Hero Section -->
+    <section class="waitlist-hero">
+      <div class="hero-content">
+        <h1>🏗️ Únete a la Lista de Espera</h1>
+        <p class="hero-subtitle">
+          Sé de los primeros en acceder a <strong>Obratec</strong>, el sistema profesional 
+          de informes de obra que revolucionará tu gestión de proyectos.
+        </p>
+        <div class="hero-stats">
+          <span class="stat-item">
+            <strong>+127</strong> profesionales esperando
+          </span>
+          <span class="stat-item">
+            <strong>Beta</strong> disponible en 2 semanas
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+      <h2>🎁 ¿Qué obtienes al unirte?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h3>Acceso Temprano</h3>
+          <p>Sé el primero en probar todas las funcionalidades antes del lanzamiento público</p>
+        </div>
+        
+        <div class="benefit-card">
+            <div class="benefit-icon">💰</div>
+            <h3>Oferta fundador</h3>
+            <p>Aceeso ilimitado de por vida a la app</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h3>Configuración Personalizada</h3>
+          <p>Adaptamos el sistema específicamente a tu sector productivo</p>
+        </div>
+          <div class="benefit-card">
+          <div class="benefit-icon">📱</div>
+          <h3>Grupo VIP WhatsApp</h3>
+          <p>Acceso exclusivo a nuestro grupo de updates y networking con otros profesionales</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist Form -->
+    <section class="waitlist-form-section">
+      <div class="form-container">
+        <div class="form-header">
+          <h2>📝 Reserva tu lugar ahora</h2>
+          <p class="form-description">
+            Solo te tomará 2 minutos. Te contactaremos personalmente en las próximas 48 horas.
+          </p>
+        </div>
+
+        <form id="waitlistForm" class="waitlist-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName" class="form-label required">
+                Nombre completo
+              </label>
+              <input 
+                type="text" 
+                id="fullName" 
+                name="fullName" 
+                required 
+                placeholder="Tu nombre y apellido"
+                class="form-control"
+                autocomplete="name"
+              >
+              <div class="error-message" id="fullName-error"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email" class="form-label required">
+                Email profesional
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                placeholder="tu.email@empresa.com"
+                class="form-control"
+                autocomplete="email"
+              >
+              <div class="error-message" id="email-error"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="sector" class="form-label required">
+                Sector productivo
+              </label>
+              <select id="sector" name="sector" required class="form-control">
+                <option value="">Selecciona tu sector</option>
+                <option value="construccion-general">Construcción General</option>
+                <option value="inmobiliario">Desarrollo Inmobiliario</option>
+                <option value="infraestructura-publica">Infraestructura Pública</option>
+                <option value="arquitectura-ingenieria">Arquitectura e Ingeniería</option>
+                <option value="contratista-principal">Contratista Principal</option>
+                <option value="subcontratista">Subcontratista Especializado</option>
+                <option value="consultoria-construccion">Consultoría en Construcción</option>
+                <option value="gestion-proyectos">Gestión de Proyectos</option>
+                <option value="reforma-rehabilitacion">Reforma y Rehabilitación</option>
+                <option value="obra-civil">Obra Civil</option>
+                <option value="instalaciones">Instalaciones (Eléctricas, Fontanería, etc.)</option>
+                <option value="otro">Otro sector</option>
+              </select>
+              <div class="error-message" id="sector-error"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="position" class="form-label required">
+                Cargo en la empresa
+              </label>
+              <select id="position" name="position" required class="form-control">
+                <option value="">Selecciona tu cargo</option>
+                <option value="director-general">Director General / CEO</option>
+                <option value="director-proyectos">Director de Proyectos</option>
+                <option value="director-construccion">Director de Construcción</option>
+                <option value="jefe-obra">Jefe de Obra</option>
+                <option value="arquitecto-principal">Arquitecto Principal</option>
+                <option value="ingeniero-jefe">Ingeniero Jefe</option>
+                <option value="project-manager">Project Manager</option>
+                <option value="capataz-supervisor">Capataz / Supervisor</option>
+                <option value="coordinador-obra">Coordinador de Obra</option>
+                <option value="tecnico-obra">Técnico de Obra</option>
+                <option value="administrador-obra">Administrador de Obra</option>
+                <option value="responsable-calidad">Responsable de Calidad</option>
+                <option value="propietario-empresa">Propietario de Empresa</option>
+                <option value="otro">Otro cargo</option>
+              </select>
+              <div class="error-message" id="position-error"></div>
+            </div>
+          </div>          <div class="form-row">
+            <div class="form-group">
+              <label for="company" class="form-label optional">
+                Empresa (opcional)
+              </label>
+              <input 
+                type="text" 
+                id="company" 
+                name="company" 
+                placeholder="Nombre de tu empresa"
+                class="form-control"
+                autocomplete="organization"
+              >
+              <small class="form-help">
+                Nos ayuda a personalizar mejor la experiencia
+              </small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="whatsapp" class="form-label optional">
+                WhatsApp (opcional)
+              </label>
+              <input 
+                type="tel" 
+                id="whatsapp" 
+                name="whatsapp" 
+                placeholder="+34 600 123 456"
+                class="form-control"
+                autocomplete="tel"
+              >
+              <small class="form-help">
+                📱 Para unirte a nuestro grupo VIP de updates y networking
+              </small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group checkbox-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="notifications" name="notifications" checked>
+                <span class="checkmark"></span>
+                <span class="checkbox-text">
+                  Quiero recibir actualizaciones del desarrollo y consejos sobre gestión de obra
+                </span>
+              </label>
+            </div>
+          </div>          <div class="form-row">
+            <button type="submit" class="btn tertiary btn-waitlist" id="submitBtn">
+              🚀 Unirme a la Lista de Espera
+            </button>
+          </div>
+
+          <div class="form-footer">
+            <p class="privacy-note">
+              🔒 Tus datos están seguros. No enviamos spam, solo actualizaciones importantes.
+            </p>
+            <p>
+              <a href="/" class="back-link">← Volver al inicio</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>    <!-- Social Proof Section -->
+    <section class="social-proof">
+      <div class="social-content">
+        <h3>Se han unido profesionales de:</h3>
+        <div class="company-logos">
+          <span class="company-item">🏢 Constructoras principales</span>
+          <span class="company-item">🏗️ Estudios de arquitectura</span>
+          <span class="company-item">⚡ Instalaciones especializadas</span>
+          <span class="company-item">🔧 Empresas de reforma</span>
+        </div>
+        
+        <div class="whatsapp-cta">
+          <div class="whatsapp-highlight">
+            <h4>📱 ¡Únete a nuestro grupo VIP de WhatsApp!</h4>
+            <p>Conecta con otros profesionales del sector y recibe actualizaciones exclusivas del desarrollo de Obratec</p>
+            <div class="whatsapp-benefits">
+              <span class="whatsapp-benefit">🔥 Actualizaciones en tiempo real</span>
+              <span class="whatsapp-benefit">🤝 Networking con profesionales</span>
+              <span class="whatsapp-benefit">🎯 Acceso prioritario a beta</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trust-indicators">
+          <div class="trust-item">
+            <span class="trust-icon">✅</span>
+            <span>Datos seguros</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✅</span>
+            <span>Sin compromiso</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✅</span>
+            <span>Solo contenido de valor</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    /* Estilos específicos para el formulario de waitlist */
+    /* Usando las variables CSS definidas en style.css */
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Hero Section */
+    .waitlist-hero {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: var(--primary-inverse);
+      padding: 3rem 2rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 32px rgba(247, 155, 114, 0.3);
+    }
+
+    .waitlist-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      line-height: 1.6;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: calc(var(--border-radius) / 2);
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Benefits Section */
+    .benefits-section {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .benefits-section h2 {
+      color: var(--secondary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .benefit-card {
+      background: var(--card-background-color);
+      padding: 2rem 1.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      border: 2px solid var(--card-border-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+    }
+
+    .benefit-card:nth-child(2n)::before {
+      background: linear-gradient(90deg, var(--tertiary) 0%, var(--primary) 50%, var(--secondary) 100%);
+    }
+
+    .benefit-card:nth-child(3n)::before {
+      background: linear-gradient(90deg, var(--secondary) 0%, var(--tertiary) 50%, var(--primary) 100%);
+    }
+
+    .benefit-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(42, 71, 89, 0.15);
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .benefit-card h3 {
+      color: var(--secondary);
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .benefit-card p {
+      color: var(--muted-color);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    /* Form Section */
+    .waitlist-form-section {
+      background: var(--card-background-color);
+      border-radius: var(--border-radius);
+      padding: 0;
+      box-shadow: 0 8px 32px rgba(42, 71, 89, 0.12);
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+
+    .form-container {
+      padding: 2rem;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--color-bg-light);
+    }
+
+    .form-header h2 {
+      color: var(--secondary);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-description {
+      color: var(--muted-color);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .waitlist-form {
+      max-width: 100%;
+    }
+
+    .form-row {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .form-label.required::after {
+      content: ' *';
+      color: var(--del-color);
+      font-weight: bold;
+    }
+
+    .form-label.optional::after {
+      content: ' (opcional)';
+      color: var(--muted-color);
+      font-weight: normal;
+      font-size: 0.85rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--muted-border-color);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: var(--card-background-color);
+      color: var(--color);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-focus);
+    }
+
+    .form-control:invalid:not(:placeholder-shown) {
+      border-color: var(--del-color);
+    }
+
+    .form-control::placeholder {
+      color: #999;
+    }
+
+    .form-help {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--muted-color);
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+
+    .error-message {
+      color: var(--del-color);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    /* Checkbox Styles */
+    .checkbox-group {
+      margin: 1.5rem 0;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      line-height: 1.4;
+      padding: 0.5rem 0;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      opacity: 0;
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    .checkmark {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--muted-border-color);
+      border-radius: 4px;
+      position: relative;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checkbox-container input[type="checkbox"]:checked + .checkmark {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .checkbox-text {
+      color: var(--color);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }    /* Button Styles */
+    .btn-waitlist {
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--tertiary);
+      border-color: var(--tertiary);
+      color: var(--tertiary-inverse);
+    }
+
+    .btn-waitlist:hover {
+      background: var(--tertiary-hover);
+      border-color: var(--tertiary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(59, 140, 136, 0.4);
+    }
+
+    .btn-waitlist:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Form Footer */
+    .form-footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-bg-light);
+    }
+
+    .privacy-note {
+      color: var(--muted-color);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .back-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--primary-hover);
+      text-decoration: underline;
+    }
+
+    /* Social Proof Section */
+    .social-proof {
+      background: var(--color-bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .social-content h3 {
+      color: var(--secondary);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .company-logos {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .company-item {
+      background: var(--card-background-color);
+      padding: 0.5rem 1rem;
+      border-radius: calc(var(--border-radius) / 2);
+      font-size: 0.9rem;
+      color: var(--muted-color);
+      border: 1px solid var(--muted-border-color);
+    }
+
+    .trust-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+    }    .trust-icon {
+      color: var(--success-color);
+      font-weight: bold;
+    }
+
+    /* WhatsApp CTA Styles */
+    .whatsapp-cta {
+      margin: 2rem 0;
+    }
+
+    .whatsapp-highlight {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      margin: 1.5rem 0;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp-highlight h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .whatsapp-highlight p {
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    .whatsapp-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .whatsapp-benefit {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: calc(var(--border-radius) / 2);
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem 0.5rem;
+      }
+
+      .waitlist-hero {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .waitlist-hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .benefit-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .form-container {
+        padding: 1.5rem 1rem;
+      }
+
+      .company-logos {
+        flex-direction: column;
+        gap: 0.5rem;
+      }      .trust-indicators {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .whatsapp-benefits {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .whatsapp-highlight {
+        padding: 1.5rem 1rem;
+      }
+
+      .whatsapp-highlight h4 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .waitlist-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .benefits-section h2 {
+        font-size: 1.6rem;
+      }
+
+      .form-header h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+
+  <!-- Placeholder para JavaScript futuro -->
+  <script>
+    // TODO: Implementar manejo del formulario
+    // 
+    // PRÓXIMOS PASOS PARA EL MANEJO DEL FORMULARIO:
+    // 
+    // 1. VALIDACIÓN DEL FORMULARIO:
+    //    - Validación en tiempo real de campos requeridos
+    //    - Validación de formato de email
+    //    - Mensajes de error personalizados
+    //    - Feedback visual (bordes rojos/verdes)
+    //
+    // 2. ENVÍO DE DATOS:
+    //    - Integración con N8N workflow para recibir datos
+    //    - Endpoint POST /api/waitlist en server.js
+    //    - Manejo de estados de loading/success/error
+    //    - Prevención de envíos duplicados
+    //
+    // 3. EXPERIENCIA DE USUARIO:
+    //    - Modal de confirmación tras envío exitoso
+    //    - Animaciones de feedback
+    //    - Redirección o mensaje de bienvenida
+    //    - Tracking de conversiones (opcional)
+    //
+    // 4. BACKEND/N8N INTEGRATION:
+    //    - Crear workflow en N8N para procesar waitlist
+    //    - Guardar datos en base de datos o Google Sheets
+    //    - Envío de email de confirmación automático
+    //    - Notificación al equipo de nuevo registro
+    //
+    // 5. ANALYTICS Y SEGUIMIENTO:
+    //    - Contador dinámico de registros
+    //    - Segmentación por sector/cargo
+    //    - Métricas de conversión del formulario
+    //
+    // 6. OPTIMIZACIONES:
+    //    - A/B testing de copy y diseño
+    //    - Lazy loading de estilos no críticos
+    //    - Compresión y optimización de imágenes
+    //    - Progressive Web App features
+
+    // Funcionalidad básica temporal para desarrollo
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('waitlistForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simular envío (temporal)
+        submitBtn.textContent = '⏳ Enviando...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          alert('¡Gracias! Te hemos agregado a la lista de espera.\n\nEsto es una simulación. Próximo: integrar con N8N.');
+          submitBtn.textContent = '🚀 Unirme a la Lista de Espera';
+          submitBtn.disabled = false;
+          form.reset();
+        }, 2000);
+      });
+
+      // Validación básica visual
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(field => {
+        field.addEventListener('blur', function() {
+          if (this.value.trim() === '') {
+            this.style.borderColor = 'var(--del-color)';
+          } else {
+            this.style.borderColor = 'var(--success-color)';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

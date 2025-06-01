@@ -131,6 +131,11 @@ app.get('/report-beta', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages', 'form-report.html'));
 });
 
+// Ruta para la waitlist
+app.get('/waitlist', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pages', 'waitlist-form.html'));
+});
+
 
 // Manejar rutas no encontradas
 app.use('*', (req, res) => {

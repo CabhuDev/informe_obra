@@ -1,5 +1,5 @@
 {
-  "name": "obratec-informe Obra",
+  "name": "obratec",
   "nodes": [
     {
       "parameters": {
@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -1020,
-        400
+        -1320,
+        100
       ],
-      "id": "b9fcc67a-14ba-4005-860c-5dd0b93473a3",
+      "id": "333fd286-2189-4934-a87a-c1dec60838e9",
       "name": "Webhook",
       "webhookId": "dd6ab9a8-8f72-4d74-9eb1-390de7b04719"
     },
@@ -70,10 +70,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -800,
-        400
+        -1100,
+        100
       ],
-      "id": "ddda84ba-b3fd-4cd8-8215-e1745ec9c470",
+      "id": "7f48fd9d-7c35-4091-8927-ddbf9acaf4aa",
       "name": "Edit Fields1"
     },
     {
@@ -104,10 +104,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -620,
-        400
+        -920,
+        100
       ],
-      "id": "e2139444-22f4-4a49-9119-e9162abe4dfe",
+      "id": "e7301d52-8b02-4ee3-90d1-aced3fbef44c",
       "name": "If"
     },
     {
@@ -122,10 +122,10 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        -400,
-        580
+        -700,
+        280
       ],
-      "id": "d412fea3-276d-4770-a5de-ec9dd88d3e2e",
+      "id": "af7b4dd0-a25a-49e7-ab96-edbffe418d96",
       "name": "Convert to File3"
     },
     {
@@ -140,14 +140,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -220,
-        580
+        -520,
+        280
       ],
-      "id": "5805c182-ce93-4ab8-89bf-2976e90cbfd9",
+      "id": "b00bd9bb-c950-4956-93c0-2c9c101f827d",
       "name": "OpenAI2",
       "credentials": {
         "openAiApi": {
-          "id": "Ewblt2ZhxCOUhpri",
+          "id": "JygdjET20FHkZMl9",
           "name": "OpenAi account"
         }
       }
@@ -179,29 +179,29 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        0,
-        580
+        -300,
+        280
       ],
-      "id": "49a2dab4-c6b9-4513-862a-ff41e474c71b",
+      "id": "cc59d464-563d-4c84-889f-c7c99f93ac9d",
       "name": "OpenAI3",
       "credentials": {
         "openAiApi": {
-          "id": "Ewblt2ZhxCOUhpri",
+          "id": "JygdjET20FHkZMl9",
           "name": "OpenAi account"
         }
       }
     },
     {
       "parameters": {
-        "html": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Informe Semanal de Obra</title>\n    <style>\n        /* Reset básico */\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: 'Arial', 'Helvetica', sans-serif;\n            line-height: 1.6;\n            color: #2c3e50;\n            background: #ffffff;\n            padding: 20px;\n        }\n\n        .container {\n            max-width: 800px;\n            margin: 0 auto;\n            background: #ffffff;\n            border: 1px solid #dee2e6;\n        }\n\n        /* Header optimizado para PDF */\n        .header {\n            background: #2c3e50;\n            color: #ffffff;\n            padding: 30px;\n            text-align: left;\n            border-top: 4px solid #e74c3c;\n        }\n\n        .header h1 {\n            font-size: 2em;\n            font-weight: bold;\n            margin-bottom: 10px;\n            letter-spacing: -0.5px;\n        }\n\n        .header .subtitle {\n            font-size: 1.2em;\n            opacity: 0.9;\n            font-weight: normal;\n        }\n\n        /* Content area */\n        .content {\n            padding: 30px;\n        }\n\n        /* Info grid simplificado */\n        .info-grid {\n            display: table;\n            width: 100%;\n            margin-bottom: 30px;\n            padding: 20px;\n            background: #f8f9fa;\n            border-left: 4px solid #3498db;\n        }\n\n        .info-item {\n            display: table-cell;\n            text-align: center;\n            padding: 0 15px;\n            vertical-align: top;\n        }\n\n        .info-label {\n            font-size: 0.9em;\n            color: #7f8c8d;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n            margin-bottom: 5px;\n            font-weight: 600;\n            display: block;\n        }\n\n        .info-value {\n            font-size: 1.3em;\n            font-weight: 600;\n            color: #2c3e50;\n        }\n\n        /* Sections */\n        .section {\n            margin-bottom: 35px;\n            page-break-inside: avoid;\n        }\n\n        .section h2 {\n            font-size: 1.4em;\n            color: #2c3e50;\n            margin-bottom: 15px;\n            padding-bottom: 10px;\n            border-bottom: 2px solid #ecf0f1;\n            font-weight: 600;\n            position: relative;\n        }\n\n        .section h2::before {\n            content: '';\n            position: absolute;\n            bottom: -2px;\n            left: 0;\n            width: 50px;\n            height: 2px;\n            background: #3498db;\n        }\n\n        .section p {\n            font-size: 1em;\n            line-height: 1.7;\n            color: #34495e;\n            text-align: justify;\n            margin-bottom: 15px;\n        }\n\n        /* Progress bar simplificado */\n        .progress-container {\n            background: #ecf0f1;\n            border-radius: 10px;\n            padding: 3px;\n            margin: 15px 0;\n            height: 30px;\n        }\n\n        .progress-bar {\n            background: #27ae60;\n            height: 24px;\n            border-radius: 8px;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            color: #ffffff;\n            font-weight: 600;\n            font-size: 0.9em;\n            min-width: 60px;\n        }\n\n        /* Observation cards */\n        .observations-grid {\n            margin-bottom: 25px;\n        }\n\n        .observation-card {\n            background: #f8f9fa;\n            padding: 20px;\n            margin-bottom: 20px;\n            border-left: 4px solid #3498db;\n            page-break-inside: avoid;\n        }\n\n        .observation-card.incidents {\n            border-left-color: #e74c3c;\n        }\n\n        .observation-card h3 {\n            color: #2c3e50;\n            font-size: 1.1em;\n            margin-bottom: 10px;\n            font-weight: 600;\n        }\n\n        /* Audio section */\n        .audio-section {\n            background: #f39c12;\n            color: #ffffff;\n            padding: 20px;\n            margin: 20px 0;\n            text-align: center;\n            page-break-inside: avoid;\n        }\n\n        .audio-section h3 {\n            margin-bottom: 10px;\n            font-weight: 600;\n        }\n\n        /* Footer */\n        .footer {\n            background: #ecf0f1;\n            padding: 20px 30px;\n            text-align: center;\n            color: #7f8c8d;\n            font-size: 0.9em;\n            border-top: 1px solid #bdc3c7;\n            page-break-inside: avoid;\n        }\n\n        /* Status badges */\n        .status-badge {\n            display: inline-block;\n            padding: 5px 15px;\n            border-radius: 15px;\n            font-size: 0.9em;\n            font-weight: 600;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n\n        .status-on-time {\n            background: #d5edda;\n            color: #155724;\n        }\n\n        .status-delayed {\n            background: #f8d7da;\n            color: #721c24;\n        }\n\n        .status-ahead {\n            background: #d1ecf1;\n            color: #0c5460;\n        }\n\n        /* Print specific styles */\n        @media print {\n            body {\n                background: white;\n                padding: 0;\n            }\n            \n            .container {\n                border: none;\n                box-shadow: none;\n            }\n            \n            .section {\n                page-break-inside: avoid;\n            }\n            \n            .observation-card {\n                page-break-inside: avoid;\n            }\n\n            .audio-section {\n                page-break-inside: avoid;\n            }\n\n            .footer {\n                page-break-inside: avoid;\n            }\n        }\n\n        /* Responsive para pantallas pequeñas */\n        @media (max-width: 768px) {\n            body {\n                padding: 10px;\n            }\n            \n            .header, .content {\n                padding: 15px;\n            }\n            \n            .info-grid {\n                display: block;\n            }\n            \n            .info-item {\n                display: block;\n                text-align: center;\n                margin-bottom: 15px;\n            }\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h1>📋 Informe Semanal de Obra</h1>\n            <div class=\"subtitle\">{{ $('Webhook').item.json.body.projectName || 'Proyecto de Construcción'}}</div>\n        </div>\n\n        <div class=\"content\">\n            <div class=\"info-grid\">\n                <div class=\"info-item\">\n                    <div class=\"info-label\">Fecha del Informe</div>\n                    <div class=\"info-value\">{{ $('Webhook').item.json.body.date || 'DD/MM/AAAA'}}</div>\n                </div>\n                <div class=\"info-item\">\n                    <div class=\"info-label\">Avance General</div>\n                    <div class=\"info-value\">{{ $('Webhook').item.json.body.advance || '0'}}%</div>\n                </div>\n                <div class=\"info-item\">\n                    <div class=\"info-label\">Estado</div>\n                    <div class=\"info-value\">\n                        <span class=\"status-badge status-on-time\">✅ En Plazo</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"section\">\n                <h2>📊 Progreso del Proyecto</h2>\n                <p>El avance actual del proyecto <strong>{{ $('Webhook').item.json.body.projectName }}</strong> se encuentra en un <strong>{{ $('Webhook').item.json.body.advance || '0'}}%</strong> de completitud según el cronograma establecido.</p>\n                <div class=\"progress-container\">\n                    <div class=\"progress-bar\" style=\"width: {{ $('Webhook').item.json.body.advance || '0'}}%;\">\n                        {{ $('Webhook').item.json.body.advance || '0'}}%\n                    </div>\n                </div>\n                <p><em>Última actualización: {{ $('Webhook').item.json.body.date }}</em></p>\n            </div>\n\n            <div class=\"observations-grid\">\n                <div class=\"observation-card\">\n                    <h3>📝 Observaciones Generales</h3>\n                    <div class=\"section\">\n                        <p>{{ $json.choices[0].message.content.obs || 'No se han registrado observaciones para este período.'}}</p>\n                    </div>\n                </div>\n\n                <div class=\"observation-card incidents\">\n                    <h3>⚠️ Incidencias y Problemas</h3>\n                    <div class=\"section\">\n                        <p>{{ $('Webhook').item.json.body.incidences || 'No se han registrado incidencias durante este período.'}}</p>\n                    </div>\n                </div>\n            </div>\n\n            <!-- Sección de audio (condicional) -->\n            <div class=\"audio-section\">\n                <h3>🎙️ Observaciones</h3>\n                <p>{{ $json.choices[0].message.content.obs }}</p>\n            </div>\n\n            <div class=\"section\">\n                <h2>📋 Resumen Ejecutivo</h2>\n                <p>{{ $json.choices[0].message.content.summary }}</p>           \n            </div>\n        </div>\n\n        <div class=\"footer\">\n            <p>📄 Documento generado automáticamente el {{ $('Webhook').item.json.body.date }} | Sistema de Informes de Obra v2.0 | Confidencial</p>\n        </div>\n    </div>\n</body>\n</html>\n"
+        "html": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Informe Semanal de Obra</title>\n    <style>\n        /* Reset básico */\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: 'Arial', 'Helvetica', sans-serif;\n            line-height: 1.6;\n            color: #2c3e50;\n            background: #ffffff;\n            padding: 20px;\n        }\n\n        .container {\n            max-width: 800px;\n            margin: 0 auto;\n            background: #ffffff;\n            border: 1px solid #dee2e6;\n        }\n\n        /* Header optimizado para PDF */\n        .header {\n            background: #2c3e50;\n            color: #ffffff;\n            padding: 30px;\n            text-align: left;\n            border-top: 4px solid #e74c3c;\n        }\n\n        .header h1 {\n            font-size: 2em;\n            font-weight: bold;\n            margin-bottom: 10px;\n            letter-spacing: -0.5px;\n        }\n\n        .header .subtitle {\n            font-size: 1.2em;\n            opacity: 0.9;\n            font-weight: normal;\n        }\n\n        /* Content area */\n        .content {\n            padding: 30px;\n        }\n\n        /* Info grid simplificado */\n        .info-grid {\n            display: table;\n            width: 100%;\n            margin-bottom: 30px;\n            padding: 20px;\n            background: #f8f9fa;\n            border-left: 4px solid #3498db;\n        }\n\n        .info-item {\n            display: table-cell;\n            text-align: center;\n            padding: 0 15px;\n            vertical-align: top;\n        }\n\n        .info-label {\n            font-size: 0.9em;\n            color: #7f8c8d;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n            margin-bottom: 5px;\n            font-weight: 600;\n            display: block;\n        }\n\n        .info-value {\n            font-size: 1.3em;\n            font-weight: 600;\n            color: #2c3e50;\n        }\n\n        /* Sections */\n        .section {\n            margin-bottom: 35px;\n            page-break-inside: avoid;\n        }\n\n        .section h2 {\n            font-size: 1.4em;\n            color: #2c3e50;\n            margin-bottom: 15px;\n            padding-bottom: 10px;\n            border-bottom: 2px solid #ecf0f1;\n            font-weight: 600;\n            position: relative;\n        }\n\n        .section h2::before {\n            content: '';\n            position: absolute;\n            bottom: -2px;\n            left: 0;\n            width: 50px;\n            height: 2px;\n            background: #3498db;\n        }\n\n        .section p {\n            font-size: 1em;\n            line-height: 1.7;\n            color: #34495e;\n            text-align: justify;\n            margin-bottom: 15px;\n        }\n\n        /* Progress bar simplificado */\n        .progress-container {\n            background: #ecf0f1;\n            border-radius: 10px;\n            padding: 3px;\n            margin: 15px 0;\n            height: 30px;\n        }\n\n        .progress-bar {\n            background: #27ae60;\n            height: 24px;\n            border-radius: 8px;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            color: #ffffff;\n            font-weight: 600;\n            font-size: 0.9em;\n            min-width: 60px;\n        }\n\n        /* Observation cards */\n        .observations-grid {\n            margin-bottom: 25px;\n        }\n\n        .observation-card {\n            background: #f8f9fa;\n            padding: 20px;\n            margin-bottom: 20px;\n            border-left: 4px solid #3498db;\n            page-break-inside: avoid;\n        }\n\n        .observation-card.incidents {\n            border-left-color: #e74c3c;\n        }\n\n        .observation-card h3 {\n            color: #2c3e50;\n            font-size: 1.1em;\n            margin-bottom: 10px;\n            font-weight: 600;\n        }\n\n        /* Audio section */\n        .audio-section {\n            background: #f39c12;\n            color: #ffffff;\n            padding: 20px;\n            margin: 20px 0;\n            text-align: center;\n            page-break-inside: avoid;\n        }\n\n        .audio-section h3 {\n            margin-bottom: 10px;\n            font-weight: 600;\n        }\n\n        /* Footer */\n        .footer {\n            background: #ecf0f1;\n            padding: 20px 30px;\n            text-align: center;\n            color: #7f8c8d;\n            font-size: 0.9em;\n            border-top: 1px solid #bdc3c7;\n            page-break-inside: avoid;\n        }\n\n        /* Status badges */\n        .status-badge {\n            display: inline-block;\n            padding: 5px 15px;\n            border-radius: 15px;\n            font-size: 0.9em;\n            font-weight: 600;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n\n        .status-on-time {\n            background: #d5edda;\n            color: #155724;\n        }\n\n        .status-delayed {\n            background: #f8d7da;\n            color: #721c24;\n        }\n\n        .status-ahead {\n            background: #d1ecf1;\n            color: #0c5460;\n        }\n\n        /* Print specific styles */\n        @media print {\n            body {\n                background: white;\n                padding: 0;\n            }\n            \n            .container {\n                border: none;\n                box-shadow: none;\n            }\n            \n            .section {\n                page-break-inside: avoid;\n            }\n            \n            .observation-card {\n                page-break-inside: avoid;\n            }\n\n            .audio-section {\n                page-break-inside: avoid;\n            }\n\n            .footer {\n                page-break-inside: avoid;\n            }\n        }\n\n        /* Responsive para pantallas pequeñas */\n        @media (max-width: 768px) {\n            body {\n                padding: 10px;\n            }\n            \n            .header, .content {\n                padding: 15px;\n            }\n            \n            .info-grid {\n                display: block;\n            }\n            \n            .info-item {\n                display: block;\n                text-align: center;\n                margin-bottom: 15px;\n            }\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h1>📋 Informe Semanal de Obra</h1>\n            <div class=\"subtitle\">{{ $('Webhook').item.json.body.projectName || 'Proyecto de Construcción'}}</div>\n        </div>\n\n        <div class=\"content\">\n            <div class=\"info-grid\">\n                <div class=\"info-item\">\n                    <div class=\"info-label\">Fecha del Informe</div>\n                    <div class=\"info-value\">{{ $('Webhook').item.json.body.date || 'DD/MM/AAAA'}}</div>\n                </div>\n                <div class=\"info-item\">\n                    <div class=\"info-label\">Avance General</div>\n                    <div class=\"info-value\">{{ $('Webhook').item.json.body.advance || '0'}}%</div>\n                </div>\n                <div class=\"info-item\">\n                    <div class=\"info-label\">Estado</div>\n                    <div class=\"info-value\">\n                        <span class=\"status-badge status-on-time\">✅ En Plazo</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"section\">\n                <h2>📊 Progreso del Proyecto</h2>\n                <p>El avance actual del proyecto <strong>{{ $('Webhook').item.json.body.projectName }}</strong> se encuentra en un <strong>{{ $('Webhook').item.json.body.advance || '0'}}%</strong> de completitud según el cronograma establecido.</p>\n                <div class=\"progress-container\">\n                    <div class=\"progress-bar\" style=\"width: {{ $('Webhook').item.json.body.advance || '0'}}%;\">\n                        {{ $('Webhook').item.json.body.advance || '0'}}%\n                    </div>\n                </div>\n                <p><em>Última actualización: {{ $('Webhook').item.json.body.date }}</em></p>\n            </div>\n\n            <div class=\"observations-grid\">\n                <div class=\"observation-card\">\n                    <h3>📝 Observaciones Generales</h3>\n                    <div class=\"section\">\n                        <p>{{ $('Webhook').item.json.body.observations || 'No se han registrado observaciones para este período.'}}</p>\n                    </div>\n                </div>\n\n                <div class=\"observation-card incidents\">\n                    <h3>⚠️ Incidencias y Problemas</h3>\n                    <div class=\"section\">\n                        <p>{{ $('Webhook').item.json.body.incidences || 'No se han registrado incidencias durante este período.'}}</p>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"section\">\n                <h2>📋 Resumen Ejecutivo</h2>\n                <p>{{$('Webhook').item.json.body.observations && $('Webhook').item.json.body.incidences }}  </p>           \n            </div>\n        </div>\n\n        <div class=\"footer\">\n            <p>📄 Documento generado automáticamente el {{ $('Webhook').item.json.body.date }}  | Sistema de Informes de Obra v2.0 | Confidencial</p>\n        </div>\n    </div>\n</body>\n</html>\n"
       },
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        300,
-        300
+        0,
+        0
       ],
-      "id": "1b97fe81-2863-451b-bdf0-cb33b7a73606",
+      "id": "02160255-c16c-497a-8fab-ef6616d18a5f",
       "name": "HTML1"
     },
     {
@@ -211,10 +211,10 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        340,
-        580
+        40,
+        280
       ],
-      "id": "b481c8a1-becd-436b-b6e5-34ba2f371bf2",
+      "id": "21a94744-5bc2-48e9-b04f-dfccd933c8d8",
       "name": "HTML2"
     },
     {
@@ -229,10 +229,10 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        560,
-        300
+        260,
+        0
       ],
-      "id": "b0d31d05-e8a5-4470-b92c-48b191696520",
+      "id": "ad772798-a2ce-4645-8fba-d6c86e0544e0",
       "name": "Convert to File2"
     },
     {
@@ -247,10 +247,10 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        560,
-        580
+        260,
+        280
       ],
-      "id": "6026f06d-551f-4c47-855b-ae9c01fc0b1c",
+      "id": "73ac3b77-bf5b-454c-a09c-24e39291a76d",
       "name": "Convert to File4"
     },
     {
@@ -292,15 +292,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        780,
-        300
+        480,
+        0
       ],
-      "id": "31677aec-8848-410e-a1b6-ea1e07035ca5",
+      "id": "c98c730b-b816-49ba-8198-6880e9c94b2c",
       "name": "HTTP Request1"
     },
     {
       "parameters": {
-        "sendTo": "pablo.cabello.hurtado@gmail.com",
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
         "subject": "=📄Informe  {{ $('Webhook').item.json.body.projectName }} - {{ $('Webhook').item.json.body.date }}",
         "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <style>\n      body {\n        font-family: Arial, sans-serif;\n        background-color: #f4f6f8;\n        padding: 20px;\n        color: #333;\n      }\n      .container {\n        background-color: #ffffff;\n        border-radius: 8px;\n        padding: 20px;\n        border: 1px solid #ddd;\n        max-width: 600px;\n        margin: auto;\n      }\n      h2 {\n        color: #2c3e50;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n      }\n      .footer {\n        margin-top: 20px;\n        font-size: 12px;\n        color: #777;\n        text-align: center;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h2>📄 Informe {{ $('Webhook').item.json.body.projectName }} adjunto con fecha de {{ $('Webhook').item.json.body.date }}</h2>\n      <p>\n        Hola,<br /><br />\n        Aquí tiene el <strong>informe semanal de obra</strong>.\n        Ya se encuentra registrado en el sistema y estará disponible para revisión por parte del equipo técnico y dirección facultativa.\n        <br><p>Puedes acceder al informe desde este enlace:</p>\n        <p><a href=\"{{ $json.webContentLink }}\" target=\"_blank\">Ver informe en Google Drive</a></p>\n      </p>\n      <p>\n        Si necesitas hacer alguna modificación o enviar información adicional, no dudes en responder a este mensaje.\n      </p>\n      <p>Gracias por tu colaboración.</p>\n\n      <div class=\"footer\">\n        Este mensaje ha sido generado automáticamente por el sistema de informes de obra.\n      </div>\n    </div>\n  </body>\n</html>\n",
         "options": {
@@ -315,15 +315,15 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1000,
-        300
+        700,
+        0
       ],
-      "id": "63c37571-b7fb-41e4-88d1-0c4070073910",
+      "id": "ecefbd36-e8b9-463e-bb5a-610d5456a222",
       "name": "Gmail",
       "webhookId": "99fd5e57-955a-4a90-8848-bd95a678e7f6",
       "credentials": {
         "gmailOAuth2": {
-          "id": "lSeLDCEb52CitKcx",
+          "id": "N0yr0cMrZwNMxMYS",
           "name": "Gmail account"
         }
       }
@@ -403,15 +403,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        780,
-        580
+        480,
+        280
       ],
-      "id": "7e9ec407-a173-41da-909a-6f9f379b1740",
+      "id": "9142e57a-c825-4de4-a75a-929f7271643f",
       "name": "HTTP Request"
     },
     {
       "parameters": {
-        "sendTo": "pablo.cabello.hurtado@gmail.com",
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
         "subject": "=📄Informe  {{ $('Webhook').item.json.body.projectName }} - {{ $('Webhook').item.json.body.date }}",
         "message": "=<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <style>\n      body {\n        font-family: Arial, sans-serif;\n        background-color: #f4f6f8;\n        padding: 20px;\n        color: #333;\n      }\n      .container {\n        background-color: #ffffff;\n        border-radius: 8px;\n        padding: 20px;\n        border: 1px solid #ddd;\n        max-width: 600px;\n        margin: auto;\n      }\n      h2 {\n        color: #2c3e50;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n      }\n      .footer {\n        margin-top: 20px;\n        font-size: 12px;\n        color: #777;\n        text-align: center;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h2>📄 Informe {{ $('Webhook').item.json.body.projectName }} adjunto con fecha de {{ $('Webhook').item.json.body.date }}</h2>\n      <p>\n        Hola,<br /><br />\n        Aquí tiene el <strong>informe semanal de obra</strong>.\n        Ya se encuentra registrado en el sistema y estará disponible para revisión por parte del equipo técnico y dirección facultativa.\n        <br><p>Puedes acceder al informe desde este enlace:</p>\n        <p><a href=\"{{ $json.webContentLink }}\" target=\"_blank\">Ver informe en Google Drive</a></p>\n      </p>\n      <p>\n        Si necesitas hacer alguna modificación o enviar información adicional, no dudes en responder a este mensaje.\n      </p>\n      <p>Gracias por tu colaboración.</p>\n\n      <div class=\"footer\">\n        Este mensaje ha sido generado automáticamente por el sistema de informes de obra.\n      </div>\n    </div>\n  </body>\n</html>\n",
         "options": {
@@ -426,15 +426,15 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1000,
-        580
+        700,
+        280
       ],
-      "id": "bcd6cb8b-db4d-472c-9ef1-5c5bd11e6c36",
+      "id": "05beca21-e405-4885-96b9-f29bb29d2695",
       "name": "Gmail1",
       "webhookId": "99fd5e57-955a-4a90-8848-bd95a678e7f6",
       "credentials": {
         "gmailOAuth2": {
-          "id": "lSeLDCEb52CitKcx",
+          "id": "N0yr0cMrZwNMxMYS",
           "name": "Gmail account"
         }
       }
@@ -586,11 +586,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "f7cf645e-e6a5-4094-b924-2ed822e0dd8a",
+  "versionId": "bf9a9526-0f76-4dd6-9767-b437ebe26e0d",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "ffac97bb4a36135fbb0eb20a1be2bec6389d5a5ba663523ef0ca3b76ca08ebab"
+    "instanceId": "e9b7150ea33d8a4e4345b5184aa085613c14f7be823c580496939e661ba9d07e"
   },
-  "id": "apptV7kOCGxAVkzq",
+  "id": "7ntrnEvFS9I6MRQT",
   "tags": []
 }
