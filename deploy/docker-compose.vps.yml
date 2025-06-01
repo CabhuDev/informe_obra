@@ -1,20 +1,18 @@
 # Docker Compose para VPS Hostinger - obratec.app
 version: '3.8'
 
-services:
-  # Aplicación principal (Frontend + Proxy para N8N)
+services:  # Aplicación principal (Frontend + Proxy para N8N)
   app:
-    build: .
-    container_name: obratec-app
-    restart: unless-stopped
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: obratec-app    restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
       - WEBHOOK_URL=https://obratec.app/webhook/form-obra
-    volumes:
-      - ./public:/app/public
     networks:
       - obratec-network
     depends_on:

@@ -121,6 +121,16 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Ruta beta del formulario
+app.get('/report-beta', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Ruta del formulario beta - servir index.html
+app.get('/report-beta', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Manejar rutas no encontradas
 app.use('*', (req, res) => {
   if (req.originalUrl.startsWith('/api/')) {

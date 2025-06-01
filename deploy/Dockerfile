@@ -37,7 +37,7 @@ COPY public/ /app/public/
 COPY n8n/security.json /home/node/.n8n/config/security.json
 COPY n8n/workflows/ /home/node/.n8n/workflows/
 COPY server.js /app/
-COPY docker-entrypoint.sh /app/
+COPY deploy/docker-entrypoint.sh /app/
 COPY package*.json /app/
 
 # Instalar dependencias de Node.js para el frontend
