@@ -1,0 +1,547 @@
+/* Waitlist Form Styles - Obratec Sistema de Informes de Obra */
+/* Usando las variables CSS definidas en style.css */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Hero Section */
+.waitlist-hero {
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: var(--primary-inverse);
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 3rem;
+  box-shadow: 0 8px 32px rgba(247, 155, 114, 0.3);
+}
+
+.waitlist-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: calc(var(--border-radius) / 2);
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Benefits Section */
+.benefits-section {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.benefits-section h2 {
+  color: var(--secondary);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.benefit-card {
+  background: var(--card-background-color);
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  border: 2px solid var(--card-border-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+}
+
+.benefit-card:nth-child(2n)::before {
+  background: linear-gradient(90deg, var(--tertiary) 0%, var(--primary) 50%, var(--secondary) 100%);
+}
+
+.benefit-card:nth-child(3n)::before {
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--tertiary) 50%, var(--primary) 100%);
+}
+
+.benefit-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(42, 71, 89, 0.15);
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.benefit-card h3 {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.benefit-card p {
+  color: var(--muted-color);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* Form Section */
+.waitlist-form-section {
+  background: var(--card-background-color);
+  border-radius: var(--border-radius);
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(42, 71, 89, 0.12);
+  margin: 2rem 0;
+  overflow: hidden;
+}
+
+.form-container {
+  padding: 2rem;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-bg-light);
+}
+
+.form-header h2 {
+  color: var(--secondary);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-description {
+  color: var(--muted-color);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.waitlist-form {
+  max-width: 100%;
+}
+
+.form-row {
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: var(--del-color);
+  font-weight: bold;
+}
+
+.form-label.optional::after {
+  content: ' (opcional)';
+  color: var(--muted-color);
+  font-weight: normal;
+  font-size: 0.85rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--muted-border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--card-background-color);
+  color: var(--color);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-focus);
+}
+
+.form-control:invalid:not(:placeholder-shown) {
+  border-color: var(--del-color);
+}
+
+.form-control::placeholder {
+  color: #999;
+}
+
+.form-help {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--muted-color);
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.error-message {
+  color: var(--del-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+/* Checkbox Styles */
+.checkbox-group {
+  margin: 1.5rem 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  line-height: 1.4;
+  padding: 0.5rem 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--muted-border-color);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-text {
+  color: var(--color);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Button Styles */
+.btn-waitlist {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--tertiary);
+  border-color: var(--tertiary);
+  color: var(--tertiary-inverse);
+}
+
+.btn-waitlist:hover {
+  background: var(--tertiary-hover);
+  border-color: var(--tertiary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(59, 140, 136, 0.4);
+}
+
+.btn-waitlist:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Form Footer */
+.form-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-bg-light);
+}
+
+.privacy-note {
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Social Proof Section */
+.social-proof {
+  background: var(--color-bg-light);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.social-content h3 {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.company-logos {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.company-item {
+  background: var(--card-background-color);
+  padding: 0.5rem 1rem;
+  border-radius: calc(var(--border-radius) / 2);
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  border: 1px solid var(--muted-border-color);
+}
+
+.trust-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+}
+
+.trust-icon {
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+/* WhatsApp CTA Styles */
+.whatsapp-cta {
+  margin: 2rem 0;
+}
+
+.whatsapp-highlight {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin: 1.5rem 0;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-highlight h4 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.whatsapp-highlight p {
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+  line-height: 1.5;
+}
+
+.whatsapp-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.whatsapp-benefit {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: calc(var(--border-radius) / 2);
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.whatsapp-button-container {
+  margin-top: 1.5rem;
+}
+
+.whatsapp-button {
+  display: inline-block !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #128C7E !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: var(--border-radius) !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  border: 2px solid transparent !important;
+  text-align: center;
+}
+
+.whatsapp-button:hover {
+  background: white !important;
+  color: #075E54 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  text-decoration: none !important;
+}
+
+.whatsapp-button:visited {
+  color: #128C7E !important;
+}
+
+.whatsapp-button:visited:hover {
+  color: #075E54 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .waitlist-hero {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .waitlist-hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .benefit-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .company-logos {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .trust-indicators {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .whatsapp-benefits {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .whatsapp-highlight {
+    padding: 1.5rem 1rem;
+  }
+
+  .whatsapp-highlight h4 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .waitlist-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .benefits-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .form-header h2 {
+    font-size: 1.5rem;
+  }
+}
