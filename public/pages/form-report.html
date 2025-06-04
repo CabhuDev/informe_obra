@@ -48,19 +48,35 @@
       </label>      <label>
         Incidencias
         <textarea name="incidences" rows="3"></textarea>
-      </label>
-
-      <div class="photos-section">
+      </label>      <div class="photos-section">
         <label>Fotos del proyecto (máx 5):</label>
         <div class="photo-upload">
-          <input type="file" id="photoInput" accept="image/*" multiple capture="environment" style="display: none;" />
+          <!-- Input para subir archivos -->
+          <input type="file" id="photoInput" accept="image/*" multiple style="display: none;" />
+          <!-- Input para captura de cámara en móvil -->
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" />
+          
           <div class="upload-buttons">
             <button type="button" id="takePhoto" class="outline">📷 Tomar foto</button>
             <button type="button" id="uploadPhoto" class="outline">📁 Subir foto</button>
           </div>
+          
+          <!-- Modal para cámara en desktop -->
+          <div id="cameraModal" class="camera-modal" style="display: none;">
+            <div class="camera-content">
+              <video id="cameraVideo" autoplay muted></video>
+              <canvas id="cameraCanvas" style="display: none;"></canvas>
+              <div class="camera-controls">
+                <button type="button" id="captureBtn" class="outline">📸 Capturar</button>
+                <button type="button" id="closeCameraBtn" class="outline">❌ Cerrar</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="photosContainer" class="photos-grid"></div>
-      </div>      <div class="audio-recorder">
+      </div>      
+      
+      <div class="audio-recorder">
         <label>Observaciones de voz:</label>
         <div class="recorder-controls">
           <button type="button" id="startRecording" class="outline">🎙️ Iniciar grabación</button>
@@ -81,12 +97,12 @@
     <div id="loadingContainer" style="display: none;" class="loading-container">
       <img src="assets/enviando-informe.svg" alt="Enviando informe..." class="loading-icon" />
       <span class="loading-text">Enviando informe...</span>
-    </div>
-
-    <p id="status"></p>
+    </div>    <p id="status"></p>
     
-    <script src="js/script.js"></script>
-    <script src="js/audioRecord.js"></script>
-    <script src="js/photoManager.js"></script>
+    <!-- Scripts optimizados -->
+    <script src="../js/heicConverter.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/audioRecord.js"></script>
+    <script src="../js/photoManager.js"></script>
 </body>
 </html>

@@ -18,12 +18,12 @@ class PhotoManager {
   /**
    * Constructor - Inicializa el gestor de fotos
    * Configura las propiedades básicas y inicia los event listeners
-   */
-  constructor() {
+   */  constructor() {
     this.photos = [];           // Array que almacena todas las fotos y sus datos
     this.maxPhotos = 5;         // Límite máximo de fotos permitidas
     this.currentPhotoId = 0;    // Contador para generar IDs únicos de fotos
     this.mediaRecorders = {};   // Objeto que almacena los MediaRecorder activos por foto
+    this.cameraStream = null;   // Stream de cámara activo para desktop
     this.init();                // Inicializar event listeners
   }
   /**
@@ -32,7 +32,6 @@ class PhotoManager {
   init() {
     this.bindEvents();
   }
-
   /**
    * Configura todos los event listeners para los botones de foto
    * - Botón "Tomar foto": activa la cámara del dispositivo
@@ -43,33 +42,139 @@ class PhotoManager {
     const takePhotoBtn = document.getElementById('takePhoto');
     const uploadPhotoBtn = document.getElementById('uploadPhoto');
     const photoInput = document.getElementById('photoInput');
+    const cameraInput = document.getElementById('cameraInput');
 
     // Event listener para tomar foto con cámara
-    takePhotoBtn.addEventListener('click', () => this.capturePhoto());
+    takePhotoBtn.addEventListener('click', () => this.openCamera());
     
     // Event listener para subir foto desde archivos
     uploadPhotoBtn.addEventListener('click', () => photoInput.click());
     
-    // Event listener para cuando se seleccionan archivos
+    // Event listeners para cuando se seleccionan archivos
     photoInput.addEventListener('change', (e) => this.handleFileSelect(e));
+    cameraInput.addEventListener('change', (e) => this.handleFileSelect(e));
+
+    // Event listeners para controles de cámara
+    this.bindCameraEvents();
   }
 
   /**
-   * Activa la cámara del dispositivo para tomar una foto
-   * En móviles, usa la cámara trasera por defecto (environment)
+   * Configura los event listeners para los controles de cámara
    */
-  capturePhoto() {
-    // Para móvil: usar capture="environment" directamente
-    const photoInput = document.getElementById('photoInput');
-    photoInput.setAttribute('capture', 'environment');
-    photoInput.click();
+  bindCameraEvents() {
+    const captureBtn = document.getElementById('captureBtn');
+    const closeCameraBtn = document.getElementById('closeCameraBtn');
+
+    captureBtn.addEventListener('click', () => this.capturePhotoFromCamera());
+    closeCameraBtn.addEventListener('click', () => this.closeCamera());
   }
   /**
+   * Abre la cámara dependiendo del dispositivo
+   * En móviles, usa el input con capture. En desktop, abre modal con getUserMedia
+   */
+  openCamera() {
+    // Verificar límite máximo de fotos
+    if (this.photos.length >= this.maxPhotos) {
+      alert(`Máximo ${this.maxPhotos} fotos permitidas`);
+      return;
+    }
+
+    // Detectar si es dispositivo móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // En móvil: usar input con capture
+      const cameraInput = document.getElementById('cameraInput');
+      cameraInput.click();
+    } else {
+      // En desktop: abrir modal con cámara
+      this.openCameraModal();
+    }
+  }
+
+  /**
+   * Abre el modal de cámara para dispositivos desktop
+   */
+  async openCameraModal() {
+    const modal = document.getElementById('cameraModal');
+    const video = document.getElementById('cameraVideo');
+    
+    try {
+      // Solicitar acceso a la cámara
+      this.cameraStream = await navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          facingMode: 'environment' // Cámara trasera preferida
+        } 
+      });
+      
+      video.srcObject = this.cameraStream;
+      modal.style.display = 'flex';
+      
+    } catch (error) {
+      console.error('Error accediendo a la cámara:', error);
+      
+      if (error.name === 'NotAllowedError') {
+        alert('❌ Necesitas dar permiso para usar la cámara. Por favor, habilita el acceso en la configuración del navegador.');
+      } else if (error.name === 'NotFoundError') {
+        alert('❌ No se encontró ninguna cámara en este dispositivo.');
+      } else {
+        alert('❌ Error al acceder a la cámara. Usa "Subir foto" para seleccionar una imagen de tus archivos.');
+      }
+    }
+  }
+
+  /**
+   * Captura una foto desde el video de la cámara
+   */
+  capturePhotoFromCamera() {
+    const video = document.getElementById('cameraVideo');
+    const canvas = document.getElementById('cameraCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Establecer el tamaño del canvas igual al video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    
+    // Dibujar el frame actual del video en el canvas
+    ctx.drawImage(video, 0, 0);
+    
+    // Convertir canvas a blob
+    canvas.toBlob((blob) => {
+      if (blob) {
+        // Crear un archivo simulado desde el blob
+        const file = new File([blob], `camera-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
+        
+        // Procesar la foto capturada
+        this.processAndAddPhoto(file);
+        
+        // Cerrar el modal
+        this.closeCamera();
+      }
+    }, 'image/jpeg', 0.9);
+  }
+
+  /**
+   * Cierra el modal de cámara y detiene el stream
+   */
+  closeCamera() {
+    const modal = document.getElementById('cameraModal');
+    
+    // Detener el stream de la cámara
+    if (this.cameraStream) {
+      this.cameraStream.getTracks().forEach(track => track.stop());
+      this.cameraStream = null;
+    }
+    
+    // Ocultar modal
+    modal.style.display = 'none';
+  }/**
    * Maneja la selección de archivos desde el input file
    * Procesa múltiples archivos y valida que sean imágenes
    * @param {Event} event - Evento del input file
    */
-  handleFileSelect(event) {
+  async handleFileSelect(event) {
     const files = event.target.files;
     
     // Procesar cada archivo seleccionado
@@ -80,14 +185,124 @@ class PhotoManager {
         break;
       }
       
-      // Verificar que sea un archivo de imagen
-      if (file && file.type.startsWith('image/')) {
-        this.addPhoto(file);
-      }
+      // Procesar archivo (incluye conversión HEIC si es necesario)
+      await this.processAndAddPhoto(file);
     }
     
     // Limpiar el input para permitir seleccionar la misma foto de nuevo
     event.target.value = '';
+  }
+
+  /**
+   * Procesa un archivo de imagen (convierte HEIC, comprime, etc.) y lo añade
+   * @param {File} file - Archivo de imagen a procesar
+   */
+  async processAndAddPhoto(file) {
+    try {
+      // Mostrar indicador de procesamiento
+      this.showProcessingIndicator(true);
+
+      // Verificar si es un archivo de imagen o formato compatible
+      if (!this.isImageFile(file)) {
+        alert('❌ Por favor selecciona solo archivos de imagen (JPG, PNG, HEIC, etc.)');
+        return;
+      }
+
+      console.log(`📸 Procesando archivo: ${file.name} (${file.type || 'tipo desconocido'})`);
+
+      let processedFile = file;
+        // Si tenemos el optimizador de imágenes disponible, úsalo
+      if (window.heicConverter && window.heicConverter.needsOptimization(file)) {
+        console.log('🔄 Imagen necesita optimización...');
+        
+        const result = await window.heicConverter.processFile(file);
+        processedFile = result.file;
+          // Mostrar notificación de optimización
+        window.heicConverter.showProcessingNotification(result);
+      }
+
+      // Añadir la foto procesada
+      this.addPhoto(processedFile);
+
+    } catch (error) {
+      console.error('❌ Error procesando archivo:', error);
+      alert(`❌ Error al procesar la imagen: ${error.message}\n\nIntenta con otra foto.`);
+    } finally {
+      // Ocultar indicador de procesamiento
+      this.showProcessingIndicator(false);
+    }
+  }
+
+  /**
+   * Verifica si un archivo es una imagen (incluye HEIC)
+   * @param {File} file - Archivo a verificar
+   * @returns {boolean} - True si es imagen
+   */
+  isImageFile(file) {
+    // Tipos MIME estándar
+    if (file.type && file.type.startsWith('image/')) {
+      return true;
+    }
+
+    // Extensiones comunes (incluye HEIC)
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.heic', '.heif', '.bmp'];
+    const extension = '.' + file.name.toLowerCase().split('.').pop();
+    
+    return imageExtensions.includes(extension);
+  }
+
+  /**
+   * Muestra/oculta indicador de procesamiento
+   * @param {boolean} show - Mostrar u ocultar
+   */
+  showProcessingIndicator(show) {
+    const container = document.getElementById('photosContainer');
+    
+    if (show) {
+      // Crear indicador si no existe
+      if (!document.getElementById('processingIndicator')) {
+        const indicator = document.createElement('div');
+        indicator.id = 'processingIndicator';
+        indicator.innerHTML = `
+          <div style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px dashed #2196f3;
+            border-radius: 12px;
+            margin: 10px 0;
+            color: #1565c0;
+            font-weight: 600;
+            gap: 10px;
+          ">
+            <div style="
+              width: 20px;
+              height: 20px;
+              border: 3px solid #2196f3;
+              border-top: 3px solid transparent;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
+            "></div>
+            📱 Optimizando imagen...
+          </div>
+          <style>
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          </style>
+        `;
+        container.appendChild(indicator);
+      }
+    } else {
+      // Eliminar indicador
+      const indicator = document.getElementById('processingIndicator');
+      if (indicator) {
+        indicator.remove();
+      }
+    }
   }
 
   /**
@@ -342,48 +557,24 @@ class PhotoManager {
     audioElement.src = audioDataUrl;
     audioElement.style.display = 'block';  // Hacer visible el reproductor
   }
-
   /**
    * Actualiza los campos ocultos del formulario con los datos de las fotos
-   * Crea inputs hidden para enviar todas las fotos y sus comentarios al servidor
+   * Crea un campo JSON con todas las fotos estructuradas
    */
   updateFormData() {
     // Limpiar inputs previos para evitar duplicados
     this.clearPreviousPhotoInputs();
     
-    // Crear inputs ocultos para cada foto
-    this.photos.forEach((photo, index) => {
-      // Crear input para la imagen (base64)
-      const imageInput = document.createElement('input');
-      imageInput.type = 'hidden';
-      imageInput.name = `photo_${index}_image`;
-      imageInput.value = photo.dataUrl;
-      
-      // Crear input para el comentario de texto
-      const textInput = document.createElement('input');
-      textInput.type = 'hidden';
-      textInput.name = `photo_${index}_text`;
-      textInput.value = photo.textComment;
-      
-      // Crear input para el comentario de voz (base64)
-      const voiceInput = document.createElement('input');
-      voiceInput.type = 'hidden';
-      voiceInput.name = `photo_${index}_voice`;
-      voiceInput.value = photo.voiceComment || '';
-      
-      // Añadir todos los inputs al formulario
-      const form = document.getElementById('obraForm');
-      form.appendChild(imageInput);
-      form.appendChild(textInput);
-      form.appendChild(voiceInput);
-    });
+    // Crear un solo input con todas las fotos en formato JSON
+    const photosData = this.getPhotosData();
+    const photosInput = document.createElement('input');
+    photosInput.type = 'hidden';
+    photosInput.name = 'photos';
+    photosInput.value = JSON.stringify(photosData);
     
-    // Añadir contador total de fotos
-    const countInput = document.createElement('input');
-    countInput.type = 'hidden';
-    countInput.name = 'photos_count';
-    countInput.value = this.photos.length;
-    document.getElementById('obraForm').appendChild(countInput);
+    // Añadir al formulario
+    const form = document.getElementById('obraForm');
+    form.appendChild(photosInput);
   }
 
   /**
@@ -392,10 +583,9 @@ class PhotoManager {
    */
   clearPreviousPhotoInputs() {
     const form = document.getElementById('obraForm');
-    const photoInputs = form.querySelectorAll('input[name^="photo_"], input[name="photos_count"]');
+    const photoInputs = form.querySelectorAll('input[name="photos"]');
     photoInputs.forEach(input => input.remove());
   }
-
   /**
    * Obtiene los datos de todas las fotos en formato simplificado
    * Útil para exportar o procesar los datos de fotos
@@ -403,9 +593,9 @@ class PhotoManager {
    */
   getPhotosData() {
     return this.photos.map(photo => ({
-      image: photo.dataUrl,           // Imagen en base64
-      textComment: photo.textComment, // Comentario de texto
-      voiceComment: photo.voiceComment // Comentario de voz en base64
+      image: photo.dataUrl,                           // Imagen en base64
+      textComment: photo.textComment || '',           // Comentario de texto (string vacío si no hay)
+      voiceComment: photo.voiceComment || ''          // Comentario de voz en base64 (string vacío si no hay)
     }));
   }
 }

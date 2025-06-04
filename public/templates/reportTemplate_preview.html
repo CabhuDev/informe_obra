@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe Semanal de Obra - Vista Previa</title>
+    <style>
+        /* =============================================== */
+        /*            CSS FIJO PARA PDF A4                */
+        /*        OPTIMIZADO PARA GOTENBERG               */
+        /* =============================================== */
+        
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #2c3e50;
+            background: #ffffff;
+            width: 210mm;
+            margin: 0 auto;
+        }
+
+        .container {
+            width: 100%;
+            background: #ffffff;
+        }
+
+        /* =============================================== */
+        /*                    HEADER                       */
+        /* =============================================== */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ffffff;
+            padding: 35px;
+            text-align: left;
+            border-top: 5px solid #e74c3c;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/><stop offset="100%" style="stop-color:rgba(255,255,255,0)"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60, #3498db);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =============================================== */
+        /*                   CONTENT                       */
+        /* =============================================== */
+        .content {
+            padding: 30px;
+        }        /* =============================================== */
+        /*                  INFO GRID                      */
+        /* =============================================== */
+        .info-grid {
+            display: block;
+            width: 100%;
+            margin-bottom: 35px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 5px solid #3498db;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-grid::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }        .info-grid::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .info-item {
+            float: left;
+            width: 33.33%;
+            text-align: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* =============================================== */
+        /*                  SECTIONS                       */
+        /* =============================================== */
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #ecf0f1;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .section h2::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.3s ease;
+        }
+
+        .section:hover h2 {
+            color: #3498db;
+        }
+
+        .section:hover h2::before {
+            width: 120px;
+        }
+
+        .section p {
+            font-size: 1em;
+            line-height: 1.7;
+            color: #34495e;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* =============================================== */
+        /*                PROGRESS BAR                     */
+        /* =============================================== */
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 12px;
+            padding: 4px;
+            margin: 20px 0;
+            height: 35px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }        .progress-bar {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            height: 27px;
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95em;
+            min-width: 70px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(46, 204, 113, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            line-height: 27px;
+        }
+
+        /* =============================================== */
+        /*                OBSERVATIONS                     */
+        /* =============================================== */
+        .observations-grid {
+            margin-bottom: 30px;
+        }
+
+        .observation-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #3498db;
+            border-radius: 0 12px 12px 0;
+            page-break-inside: avoid;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .observation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), transparent);
+            border-radius: 0 12px 0 50px;
+        }
+
+        .observation-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .observation-card.incidents {
+            border-left-color: #e74c3c;
+        }
+
+        .observation-card.incidents::before {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), transparent);
+        }
+
+        .observation-card h3 {
+            color: #2c3e50;
+            font-size: 1.15em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .observation-card .section p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =============================================== */
+        /*             GALERÍA DE FOTOS                    */
+        /* =============================================== */
+        .photos-section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }        .photos-grid {
+            display: block;
+            margin-top: 25px;
+            overflow: hidden;
+        }
+
+        .photos-grid::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .photo-item {
+            float: left;
+            width: calc(50% - 10px);
+            margin-right: 20px;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            overflow: hidden;
+            page-break-inside: avoid;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .photo-item:nth-child(2n) {
+            margin-right: 0;
+        }
+
+        .photo-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), rgba(46, 204, 113, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #3498db;
+        }
+
+        .photo-item:hover::before {
+            opacity: 1;
+        }        .photo-item img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-info {
+            padding: 18px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            z-index: 2;
+        }
+
+        .photo-info h4 {
+            color: #2c3e50;
+            font-size: 1.05em;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .photo-info p {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #5a6c7d;
+        }
+
+        .voice-indicator {
+            color: #f39c12;
+            font-style: italic;
+            font-size: 0.85em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .voice-indicator::before {
+            content: '🎙️';
+            font-size: 1em;
+        }
+
+        .photos-stats {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #e8f4fd 0%, #d1ecf1 100%);
+            border-radius: 8px;
+            font-size: 0.95em;
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
+        }
+
+        /* =============================================== */
+        /*                   AUDIO                         */
+        /* =============================================== */
+        .audio-section {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: #ffffff;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            page-break-inside: avoid;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .audio-section h3 {
+            margin-bottom: 18px;
+            font-weight: 600;
+            font-size: 1.3em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .audio-section h3::before {
+            content: '🎙️';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .audio-section p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =============================================== */
+        /*                   FOOTER                        */
+        /* =============================================== */
+        .footer {
+            background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
+            padding: 25px 30px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            border-top: 3px solid #bdc3c7;
+            page-break-inside: avoid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #f39c12, #e74c3c);
+        }
+
+        .footer p {
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =============================================== */
+        /*                STATUS BADGES                    */
+        /* =============================================== */
+        .status-badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .status-on-time {
+            background: linear-gradient(135deg, #d5edda, #c3e6cb);
+            color: #155724;
+            border-color: #b8dacc;
+        }
+
+        /* =============================================== */
+        /*                 RESPONSIVE                      */
+        /* =============================================== */        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header,
+            .content {
+                padding: 15px;
+            }
+            
+            .info-grid {
+                display: block;
+            }
+            
+            .info-item {
+                float: none;
+                width: 100%;
+                display: block;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .photo-item {
+                float: none;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .photo-item img {
+                max-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ================================ CABECERA ================================ -->
+        <div class="header">
+            <h1>📋 Informe Semanal de Obra</h1>
+            <div class="subtitle">Construcción Edificio Corporativo Torre Central</div>
+        </div>
+
+        <div class="content">
+            <!-- ================================ INFO BÁSICA ================================ -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Fecha del Informe</div>
+                    <div class="info-value">03/06/2025</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Avance General</div>
+                    <div class="info-value">75%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Estado</div>
+                    <div class="info-value">
+                        <span class="status-badge status-on-time">✅ En Plazo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================================ PROGRESO ================================ -->
+            <div class="section">
+                <h2>📊 Progreso del Proyecto</h2>
+                <p>El avance actual del proyecto <strong>Construcción Edificio Corporativo Torre Central</strong> se encuentra en un <strong>75%</strong> de completitud según el cronograma establecido.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 75%;">
+                        75%
+                    </div>
+                </div>
+                <p><em>Última actualización: 03/06/2025</em></p>
+            </div>
+
+            <!-- ================================ OBSERVACIONES ================================ -->
+            <div class="observations-grid">
+                <div class="observation-card">
+                    <h3>📝 Observaciones Generales</h3>
+                    <div class="section">
+                        <p>Durante esta semana se completaron las actividades de instalación eléctrica en los pisos 8 y 9. Se observa un buen ritmo de trabajo por parte del equipo de electricistas. Las condiciones climáticas han sido favorables, permitiendo el avance de los trabajos exteriores sin contratiempos significativos.</p>
+                    </div>
+                </div>
+
+                <div class="observation-card incidents">
+                    <h3>⚠️ Incidencias y Problemas</h3>
+                    <div class="section">
+                        <p>Se registró un retraso menor en la entrega de materiales de acabados para el piso 10, lo cual ha sido resuelto con el proveedor. No se presentaron accidentes laborales durante la semana. Se mantuvo el cumplimiento de todos los protocolos de seguridad establecidos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================================ GALERÍA DE FOTOS DINÁMICA ================================ -->
+            <div class="section photos-section">
+                <h2>📷 Documentación Fotográfica</h2>
+                <p>Total de fotografías adjuntas: <strong>4</strong></p>
+                
+                <div class="photos-grid">
+                    <div class="photo-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'%3E%3Crect width='400' height='220' fill='%23e9ecef'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236c757d' font-size='16'%3EInstalación Eléctrica Piso 8%3C/text%3E%3C/svg%3E" alt="Instalación Eléctrica">
+                        <div class="photo-info">
+                            <h4>Avance Instalación Eléctrica - Piso 8</h4>
+                            <p>Completado el 95% de la instalación eléctrica. Conexiones principales terminadas según especificaciones técnicas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'%3E%3Crect width='400' height='220' fill='%23f8f9fa'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236c757d' font-size='16'%3EEstructura Fachada Exterior%3C/text%3E%3C/svg%3E" alt="Fachada Exterior">
+                        <div class="photo-info">
+                            <h4>Progreso Fachada Exterior</h4>
+                            <p>Montaje de paneles de fachada en cara norte del edificio. Excelente alineación y acabado.</p>
+                            <div class="voice-indicator">Comentario de audio disponible</div>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'%3E%3Crect width='400' height='220' fill='%23e8f4fd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236c757d' font-size='16'%3EÁrea de Seguridad%3C/text%3E%3C/svg%3E" alt="Seguridad">
+                        <div class="photo-info">
+                            <h4>Implementación Medidas de Seguridad</h4>
+                            <p>Nueva señalización de seguridad instalada en todas las áreas de trabajo activas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'%3E%3Crect width='400' height='220' fill='%23f0f8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236c757d' font-size='16'%3EÁrea de Almacenamiento%3C/text%3E%3C/svg%3E" alt="Almacenamiento">
+                        <div class="photo-info">
+                            <h4>Organización Área de Almacenamiento</h4>
+                            <p>Reorganización completa del almacén de materiales para optimizar el flujo de trabajo.</p>
+                            <div class="voice-indicator">Comentario de audio disponible</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Estadísticas de fotos -->
+                <div class="photos-stats">
+                    📊 <strong>Estadísticas:</strong> 
+                    4 fotos con comentarios | 
+                    2 fotos con audio
+                </div>
+            </div>
+
+            <!-- ================================ AUDIO OBSERVACIONES ================================ -->
+            <div class="audio-section">
+                <h3>Observaciones de Audio</h3>
+                <p>Se registraron comentarios adicionales sobre el progreso de la fachada exterior y la optimización del área de almacenamiento. Las grabaciones de audio complementan la documentación visual proporcionando detalles técnicos específicos del avance semanal.</p>
+            </div>
+
+            <!-- ================================ RESUMEN EJECUTIVO ================================ -->
+            <div class="section">
+                <h2>📋 Resumen Ejecutivo</h2>
+                <p>La semana presenta un balance positivo con un avance del 75% del proyecto total. Se mantiene el cronograma establecido sin retrasos significativos. Las instalaciones eléctricas avanzan según lo programado y la fachada exterior muestra excelente calidad de acabado. Se recomienda mantener el ritmo actual de trabajo para cumplir con los objetivos del próximo hito del proyecto.</p>           
+            </div>
+
+        </div><!-- /content -->
+
+        <!-- ================================ FOOTER ================================ -->
+        <div class="footer">
+            <p>📄 Documento generado automáticamente el 03/06/2025 | Sistema de Informes de Obra v2.0 | Confidencial</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Informe Semanal de Obra</title>
+<style>
+/* =============================================== */
+/*            CSS FIJO PARA PDF A4                */
+/*        OPTIMIZADO PARA GOTENBERG               */
+/* =============================================== */
+
+@page {
+  size: A4;
+  margin: 5mm;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #2c3e50;
+  background: #ffffff;
+  width: 210mm;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* HEADER FIJO */
+.header {
+  background: #2c3e50;
+  color: #ffffff;
+  padding: 20px;
+  text-align: left;
+  border-top: 4px solid #e74c3c;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.header .subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* CONTENT */
+.content {
+  padding: 0 20px;
+}
+
+/* INFO GRID FIJO - 3 COLUMNAS EXACTAS */
+.info-grid {
+  width: 100%;
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  padding: 15px;
+  margin-bottom: 25px;
+  height: 80px;
+}
+
+.info-item {
+  width: 180px;
+  float: left;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.info-grid::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.info-label {
+  font-size: 10px;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: 25px;
+  page-break-inside: avoid;
+}
+
+.section h2 {
+  font-size: 16px;
+  color: #2c3e50;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ecf0f1;
+  font-weight: 600;
+  position: relative;
+}
+
+.section h2::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #3498db;
+}
+
+.section p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #34495e;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+/* PROGRESS BAR FIJO */
+.progress-container {
+  background: #ecf0f1;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 10px 0;
+  height: 24px;
+  width: 100%;
+}
+
+.progress-bar {
+  background: #27ae60;
+  height: 20px;
+  border-radius: 3px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 11px;
+  text-align: center;
+  line-height: 20px;
+  min-width: 50px;
+}
+
+/* OBSERVATIONS */
+.observations-grid {
+  margin-bottom: 20px;
+}
+
+.observation-card {
+  background: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #3498db;
+  page-break-inside: avoid;
+}
+
+.observation-card.incidents {
+  border-left-color: #e74c3c;
+}
+
+.observation-card h3 {
+  color: #2c3e50;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* GALERÍA DE FOTOS FIJA - 2 COLUMNAS EXACTAS */
+.photos-section {
+  margin-bottom: 25px;
+  page-break-inside: avoid;
+}
+
+.photos-grid {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.photos-grid::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.photo-item {
+  float: left;
+  width: 270px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+
+.photo-item:nth-child(2n) {
+  margin-right: 0;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-info {
+  padding: 10px;
+  background: #f8f9fa;
+}
+
+.photo-info h4 {
+  color: #2c3e50;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.photo-info p {
+  font-size: 11px;
+  line-height: 1.3;
+  margin-bottom: 5px;
+  text-align: left;
+  color: #5a6c7d;
+}
+
+.voice-indicator {
+  color: #f39c12;
+  font-style: italic;
+  font-size: 10px;
+}
+
+.voice-indicator::before {
+  content: '🎙️ ';
+}
+
+.no-photos {
+  text-align: center;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  color: #7f8c8d;
+  border: 2px dashed #dee2e6;
+}
+
+.photos-stats {
+  margin-top: 15px;
+  padding: 10px;
+  background: #e8f4fd;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #2c3e50;
+  border-left: 3px solid #3498db;
+}
+
+/* AUDIO SECTION */
+.audio-section {
+  background: #f39c12;
+  color: #ffffff;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
+  page-break-inside: avoid;
+  border-radius: 6px;
+}
+
+.audio-section h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.audio-section h3::before {
+  content: '🎙️ ';
+}
+
+/* FOOTER */
+.footer {
+  background: #ecf0f1;
+  padding: 15px 20px;
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 10px;
+  border-top: 1px solid #bdc3c7;
+  page-break-inside: avoid;
+  margin-top: 20px;
+}
+
+/* STATUS BADGES */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-on-time {
+  background: #d5edda;
+  color: #155724;
+}
+
+.status-delayed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-ahead {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+/* PRINT OPTIMIZATIONS */
+@media print {
+  body {
+    background: #ffffff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .container {
+    border: none;
+    box-shadow: none;
+  }
+  
+  .section,
+  .observation-card,
+  .audio-section,
+  .footer,
+  .photo-item {
+    page-break-inside: avoid;
+  }
+}
+
+/* NO RESPONSIVE - DISEÑO FIJO PARA PDF A4 */
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- ---------- CABECERA ---------- -->
+  <div class="header">
+    <h1>📋 Informe Semanal de Obra</h1>
+    <div class="subtitle">{{ $('Webhook').item.json.body.projectName || 'Proyecto de Construcción'}}</div>
+  </div>
+
+  <div class="content">
+    <!-- ---------- INFO BÁSICA ---------- -->
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="info-label">Fecha del Informe</div>
+        <div class="info-value">{{ $('Webhook').item.json.body.date || 'DD/MM/AAAA'}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Avance General</div>
+        <div class="info-value">{{ $('Webhook').item.json.body.advance || '0'}}%</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Estado</div>
+        <div class="info-value">
+          <span class="status-badge status-on-time">✅ En Plazo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- PROGRESO ---------- -->
+    <div class="section">
+      <h2>📊 Progreso del Proyecto</h2>
+      <p>El avance actual del proyecto <strong>{{ $('Webhook').item.json.body.projectName }}</strong> se encuentra en un <strong>{{ $('Webhook').item.json.body.advance || '0'}}%</strong> de completitud según el cronograma establecido.</p>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: {{ $('Webhook').item.json.body.advance || '0'}}%;">
+          {{ $('Webhook').item.json.body.advance || '0'}}%
+        </div>
+      </div>
+      <p><em>Última actualización: {{ $('Webhook').item.json.body.date }}</em></p>
+    </div>
+
+    <!-- ---------- OBSERVACIONES ---------- -->
+    <div class="observations-grid">
+      <div class="observation-card">
+        <h3>📝 Observaciones Generales</h3>
+        <div class="section">
+          <p>{{ $('Webhook').item.json.body.observations || 'No se han registrado observaciones para este período.'}}</p>
+        </div>
+      </div>
+
+      <div class="observation-card incidents">
+        <h3>⚠️ Incidencias y Problemas</h3>
+        <div class="section">
+          <p>{{ $('Webhook').item.json.body.incidences || 'No se han registrado incidencias durante este período.'}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- GALERÍA DE FOTOS DINÁMICA ---------- -->
+    <div class="section photos-section">
+      <h2>📷 Documentación Fotográfica</h2>
+      <p>Total de fotografías adjuntas: <strong>{{ $json.totalPhotos || 0 }}</strong></p>
+      
+      <div class="photos-grid">
+        {{ $('ArrayPhotos').item.json.photosHtml }}
+      </div>
+      
+      <!-- Estadísticas de fotos -->
+      <div class="photos-stats">
+        📊 <strong>Estadísticas:</strong> 
+        {{ $json.photosWithComments || 0 }} fotos con comentarios | 
+        {{ $json.photosWithVoice || 0 }} fotos con audio
+      </div>
+    </div>
+    <!-- ---------- / FIN GALERÍA ---------- -->
+
+  </div><!-- /content -->
+
+  <!-- ---------- FOOTER ---------- -->
+  <div class="footer">
+    <p>📄 Documento generado automáticamente el {{ $('Webhook').item.json.body.date }} | Sistema de Informes de Obra v2.0 | Confidencial</p>
+  </div>
+</div>
+</body>
+</html>

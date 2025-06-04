@@ -1,4 +1,4 @@
-# 🏗️ Obratec - Sistema de Informes de Obra con IA
+# 🏗️ Obratec - Sistema de Informes de Obra 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -71,14 +71,14 @@ obratec-informe-obra/
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/tuusuario/obratec-informe-obra.git
-cd obratec-informe-obra
+git clone https://github.com/CabhuDev/informe_obra.git
+cd informe_obra
 
 # Instalar dependencias
 npm install
 
 # Configurar variables de entorno
-cp .env.example .env
+cp .env.example
 # Editar .env con tus credenciales
 
 # Iniciar servidor
@@ -212,9 +212,9 @@ Este proyecto está bajo la Licencia MIT - ver [LICENSE](LICENSE) para detalles.
 ## 👨‍💻 Autor
 
 **Pablo Cabello**
-- Email: [tu-email@ejemplo.com]
+- Email: [obratecapp@gmail.com]
 - LinkedIn: [tu-linkedin]
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+- GitHub: [CabhuDev](https://github.com/CabhuDev)
 
 ## 🙏 Reconocimientos
 
