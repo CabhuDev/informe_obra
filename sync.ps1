@@ -16,22 +16,25 @@ if ($DryRun) {
 
 # Archivos principales a sincronizar
 $files = @(
-    "server.js",
-    "package.json",
-    "docker-compose.yml",
+    #".env",
+    #"server.js",
+    #"package.json",
+    #"docker-compose.yml",
     "public\pages\landing.html",
     "public\pages\form-report.html",
     "public\pages\waitlist-form.html",
     "public\css\style.css",
     "public\css\landing.css",
-    "public\css\waitlist.css",
-    "public\js\script.js",
-    "public\js\audioRecord.js",
-    "public\js\photoManager.js",
-    "public\js\waitlist.js",
-    "public\templates\reportTemplate.html",
-    "public\templates\example-report.pdf",
-    "n8n\workflows\informe_obra_n8n_workflow.json"
+    "public\css\waitlist.css"
+    #"public\js\script.js",
+    #"public\js\audioRecord.js",
+    #"public\js\photoManager.js",
+    #"public\js\waitlist.js",
+    #"public\js\heicConverter.js",
+    #"public\templates\reportTemplateAI.html",
+    #"public\templates\example-report.pdf",
+    #"public\templates\reportphotos.js",
+    #"n8n\workflows\informe_obra_n8n_workflow.json"
 )
 
 Write-Host "Archivos a sincronizar:" -ForegroundColor Yellow

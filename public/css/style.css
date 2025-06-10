@@ -146,6 +146,43 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Navigation Header Styles */
+.nav-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--muted-border-color);
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--card-background-color);
+  border: 2px solid var(--muted-border-color);
+  border-radius: var(--border-radius);
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.back-button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-inverse);
+  text-decoration: none;
+  transform: translateX(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.back-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-focus);
+}
+
 /* Layout Components */
 .container {
   max-width: 1000px;

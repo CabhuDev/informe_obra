@@ -2,54 +2,41 @@
 const WEBHOOK_URL = (() => {
   const hostname = window.location.hostname;
   const protocol = window.location.protocol;
-  
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    // Desarrollo local
-    return "http://localhost:10000/webhook/form-obra";
-
-    // Desarrollo local con n8n en puerto 5678
-    // Cambia el puerto según tu configuración local
-    //return "http://localhost:5678/webhook-test/form-obra";
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    // Desarrollo local - n8n en puerto 5678
+    return "https://n8n.obratec.app/webhook-test/form-obra";
   } else {
-    // Producción en Render
-    return `${protocol}//${hostname}/webhook/form-obra`;
+    // Producción en obratec.app
+    return "https://obratec.app/webhook/form-obra";
   }
 })();
 
 let form = document.getElementById("obraForm");
 let status = document.getElementById("status");
 let audioRecord = document.getElementById("audioPlayback");
-let loadingContainer = document.getElementById("loadingContainer");
 
 console.log("🔗 Webhook URL configurada:", WEBHOOK_URL);
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   // Mostrar estado de carga
-  status.textContent = "";
+  status.textContent = "⏳ Enviando informe...";
   const submitButton = form.querySelector('button[type="submit"]');
   submitButton.disabled = true;
-  
-  // Mostrar SVG de envío
-  if (loadingContainer) {
-    loadingContainer.style.display = "flex";
-  }
 
-  // Usar FormData para manejar archivos
-  const formData = new FormData(form);
-  
-  console.log("📤 Enviando datos a:", WEBHOOK_URL);
-  
-  fetch(WEBHOOK_URL, {
-    method: "POST",
-    body: formData
-  })  .then(response => {
-    // Ocultar SVG de envío
-    if (loadingContainer) {
-      loadingContainer.style.display = "none";
-    }
+  try {
+    // Usar FormData para manejar archivos
+    const formData = new FormData(form);
     
-    if (response.ok) {
+    console.log("📤 Enviando datos a:", WEBHOOK_URL);
+    
+    let res = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      body: formData
+    });
+
+    if (res.ok) {
       status.textContent = "✅ Informe enviado correctamente";
       form.reset();
       
@@ -61,25 +48,13 @@ form.addEventListener("submit", (e) => {
       document.getElementById("startRecording").disabled = false;
       document.getElementById("stopRecording").disabled = true;
       
-      // Resetear fotos si existe el photoManager
-      if (window.photoManager) {
-        photoManager.photos = [];
-        photoManager.currentPhotoId = 0;
-        document.getElementById('photosContainer').innerHTML = '';
-      }
     } else {
       status.textContent = "❌ Error al enviar";
     }
-  })  .catch(err => {
-    // Ocultar SVG de envío en caso de error
-    if (loadingContainer) {
-      loadingContainer.style.display = "none";
-    }
-    
+  } catch (err) {
     console.error("Error de red:", err);
     status.textContent = "❌ Error de red";
-  })
-  .finally(() => {
+  } finally {
     submitButton.disabled = false;
-  });
+  }
 });
