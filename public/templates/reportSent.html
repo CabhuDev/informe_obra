@@ -3,52 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <style>
+      :root {
+        --primary: #F79B72;
+        --secondary: #2A4759;
+        --tertiary: #3B8C88;
+        --light-gray: #DDDDDD;
+        --bg-light: #EEEEEE;
+        --success: #3B8C88;
+      }
       body {
         font-family: Arial, sans-serif;
-        background-color: #f4f6f8;
+        background-color: var(--bg-light);
         padding: 20px;
-        color: #333;
+        color: var(--secondary);
       }
       .container {
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 20px;
-        border: 1px solid #ddd;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 24px 20px 20px 20px;
+        border: 1px solid var(--light-gray);
         max-width: 600px;
         margin: auto;
+        box-shadow: 0 4px 24px rgba(42,71,89,0.07);
+      }
+      .web-link {
+        display: block;
+        text-align: center;
+        margin-bottom: 18px;
+        margin-top: -8px;
+      }
+      .web-link a {
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1.08rem;
+        text-decoration: none;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 2px;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .web-link a:hover {
+        color: var(--tertiary);
+        border-color: var(--tertiary);
       }
       h2 {
-        color: #2c3e50;
+        color: var(--secondary);
+        margin-bottom: 20px;
+        font-size: 1.35rem;
+        text-align: center;
       }
       p {
         font-size: 16px;
         line-height: 1.5;
+        margin-bottom: 15px;
+      }
+      .attachment-notice {
+        background-color: #e8f5e8;
+        border: 1.5px solid var(--success);
+        border-radius: 6px;
+        padding: 15px;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .attachment-notice strong {
+        color: var(--success);
+        font-size: 18px;
+      }
+      .project-info {
+        background-color: #f8f9fa;
+        border-left: 4px solid var(--primary);
+        padding: 15px;
+        margin: 15px 0;
+        color: var(--secondary);
+      }
+      ul {
+        margin: 0 0 15px 20px;
+        color: var(--secondary);
       }
       .footer {
-        margin-top: 20px;
+        margin-top: 30px;
         font-size: 12px;
-        color: #777;
+        color: #7f8c8d;
         text-align: center;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+      }
+      .footer a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 600;
+      }
+      .footer a:hover {
+        color: var(--tertiary);
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h2>📄 Informe {{ $('Webhook').item.json.body.projectName }} adjunto con fecha de {{ $('Webhook').item.json.body.date }}</h2>
+      <div class="web-link">
+        <a href="https://obratec.app" target="_blank">🌐 Visita obratec.app</a>
+      </div>
+      <h2>📋 Informe Semanal de Obra - {{ $('Webhook').item.json.body.projectName }}</h2>
+      <p>Estimado/a,</p>
       <p>
-        Hola,<br /><br />
-        Aquí tiene el <strong>informe semanal de obra</strong>.
-        Ya se encuentra registrado en el sistema y estará disponible para revisión por parte del equipo técnico y dirección facultativa.
-        <br><p>Puedes acceder al informe desde este enlace:</p>
-        <p><a href="{{ $json["webViewLink"] }}">Ver informe en Google Drive</a></p>
+        Le enviamos adjunto el <strong>informe semanal de obra</strong> correspondiente al proyecto
+        <strong>{{ $('Webhook').item.json.body.projectName }}</strong> con fecha
+        <strong>{{ $('Webhook').item.json.body.date }}</strong>.
+      </p>
+      <div class="attachment-notice">
+        <strong>📎 Informe PDF adjunto a este email</strong><br>
+        <small>El archivo contiene toda la información detallada del progreso de la obra</small>
+      </div>
+      <p>
+        Si necesita realizar alguna consulta sobre el contenido del informe o requiere
+        información adicional, no dude en contactarnos respondiendo a este mensaje.
       </p>
       <p>
-        Si necesitas hacer alguna modificación o enviar información adicional, no dudes en responder a este mensaje.
+        Gracias por mantener la comunicación fluida y el seguimiento constante del proyecto.
       </p>
-      <p>Gracias por tu colaboración.</p>
-
+      <p>Saludos cordiales,<br>
+      <strong>Sistema de Informes Obratec</strong></p>
       <div class="footer">
-        Este mensaje ha sido generado automáticamente por el sistema de informes de obra.
+        Este mensaje y el informe adjunto han sido generados automáticamente por el sistema de informes de obra Obratec.<br>
+        Para soporte técnico o consultas, visita <a href="https://obratec.app">obratec.app</a>
       </div>
     </div>
   </body>

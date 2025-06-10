@@ -1,5 +1,20 @@
 param([switch]$DryRun = $false)
 
+# ================================================================
+# SYNC SCRIPT - SISTEMA OBRATEC 
+# ================================================================
+# Última actualización: Junio 2025
+# 
+# MEJORAS INCLUIDAS EN ESTA SINCRONIZACIÓN:
+# ✅ Empty State Interactivo y Accesible
+# ✅ Separación completa JavaScript/HTML  
+# ✅ Event listeners modernos (sin onclick inline)
+# ✅ URLs de webhook corregidas (localhost:5678)
+# ✅ Navegación y colores corporativos mejorados
+# ✅ Hero banner y assets visuales integrados
+# ✅ Sistema de fotos completamente funcional
+# ================================================================
+
 $VPS_HOST = "31.97.36.248"
 $VPS_USER = "root"  
 $VPS_PATH = "/opt/informe_obra"
@@ -16,25 +31,37 @@ if ($DryRun) {
 
 # Archivos principales a sincronizar
 $files = @(
-    #".env",
-    #"server.js",
-    #"package.json",
-    #"docker-compose.yml",
+    # === PÁGINAS HTML ===
     "public\pages\landing.html",
-    "public\pages\form-report.html",
+    "public\pages\form-report.html",           # ✅ Actualizado: Empty state mejorado, separación JS/HTML
     "public\pages\waitlist-form.html",
-    "public\css\style.css",
+    "public\templates\reportSent.html",        # ✅ Actualizado: Colores corporativos, obratec.app
+    
+    # === CSS STYLES ===
+    "public\css\style.css",                    # ✅ Actualizado: Empty state styles, tips interactivos
     "public\css\landing.css",
-    "public\css\waitlist.css"
-    #"public\js\script.js",
-    #"public\js\audioRecord.js",
-    #"public\js\photoManager.js",
-    #"public\js\waitlist.js",
-    #"public\js\heicConverter.js",
-    #"public\templates\reportTemplateAI.html",
-    #"public\templates\example-report.pdf",
-    #"public\templates\reportphotos.js",
-    #"n8n\workflows\informe_obra_n8n_workflow.json"
+    "public\css\waitlist.css",
+    
+    # === JAVASCRIPT ===
+    "public\js\photoManager.js",               # ✅ CRÍTICO: Separación JS/HTML, event listeners modernos
+    "public\js\script.js",                     # ✅ Actualizado: URLs webhook corregidas
+    "public\js\waitlist.js",                   # ✅ Actualizado: Refactorizado, Array.from() fix
+    "public\js\audioRecord.js",
+    "public\js\heicConverter.js",
+    
+    # === ASSETS NUEVOS ===
+    "public\assets\empty-state.png",           # ✅ NUEVO: Imagen para empty state
+    "public\assets\hero.png",                  # ✅ NUEVO: Hero banner imagen
+    
+    # === TEMPLATES ===
+    "public\templates\reportTemplateAI.html",
+    "public\templates\reportphotos.js",
+    
+    # === WORKFLOWS N8N ===
+    "n8n\workflows\informe_obra_n8n_workflow.json"
+    
+    # === DOCUMENTACIÓN ===
+    # "docs\EMPTY_STATE_MEJORAS_FINALES.md"   # Solo para referencia local
 )
 
 Write-Host "Archivos a sincronizar:" -ForegroundColor Yellow

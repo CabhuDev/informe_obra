@@ -17,8 +17,7 @@
 
 </head>
 
-<body>
-  <main class="container">
+<body>  <main class="container">
     <!-- Botón de navegación -->
     <div class="nav-header">
       <a href="../pages/landing.html" class="back-button" title="Volver al inicio">
@@ -26,7 +25,18 @@
       </a>
     </div>
     
-    <h1>Informe semanal</h1>
+    <!-- Hero Section Integrada -->
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>📋 Informe semanal</h1>
+          <p class="hero-subtitle">Crea informes profesionales de obra con fotos, audio y seguimiento de avance</p>
+        </div>
+        <div class="hero-image">
+          <img src="../assets/hero.png" alt="Obratec - Sistema de Informes de Obra" class="hero-img" />
+        </div>
+      </div>
+    </div>
 
     <form id="obraForm" autocomplete="off">
       <label>
@@ -63,11 +73,6 @@
           <!-- Input para captura de cámara en móvil -->
           <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" />
           
-          <div class="upload-buttons">
-            <button type="button" id="takePhoto" class="outline">📷 Tomar foto</button>
-            <button type="button" id="uploadPhoto" class="outline">📁 Subir foto</button>
-          </div>
-          
           <!-- Modal para cámara en desktop -->
           <div id="cameraModal" class="camera-modal" style="display: none;">
             <div class="camera-content">
@@ -79,8 +84,21 @@
               </div>
             </div>
           </div>
+        </div><div id="photosContainer" class="photos-grid">
+          <div id="emptyStatePhotos" class="empty-state" role="region" aria-label="Zona para añadir fotos">
+            <div class="empty-state-content">
+              <img src="../assets/empty-state.png" alt="Ilustración de cámara - Sin fotos añadidas aún" class="empty-state-img" />
+              <h3>📷 Añade fotos a tu informe</h3>
+              <p>Las fotos ayudan a documentar el progreso de la obra de manera visual y profesional</p>              <div class="empty-state-tips" role="list" aria-label="Opciones disponibles">
+                <span class="tip clickable" role="listitem" aria-label="Opción: Tomar foto con cámara" 
+                      data-action="take-photo" tabindex="0">📸 Tomar foto</span>
+                <span class="tip clickable" role="listitem" aria-label="Opción: Subir archivo desde dispositivo" 
+                      data-action="upload-photo" tabindex="0">📁 Subir archivo</span>
+                <span class="tip info" role="listitem" aria-label="Límite: Máximo 5 fotos permitidas">💡 Máximo 5 fotos</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="photosContainer" class="photos-grid"></div>
       </div>      
       
       <div class="audio-recorder">

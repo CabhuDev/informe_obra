@@ -31,31 +31,75 @@ class PhotoManager {
    */
   init() {
     this.bindEvents();
-  }
-  /**
+  }  /**
    * Configura todos los event listeners para los botones de foto
-   * - Botón "Tomar foto": activa la cámara del dispositivo
-   * - Botón "Subir foto": abre el selector de archivos
    * - Input de archivo: maneja la selección de archivos
+   * - Input de cámara: maneja la captura desde móviles
+   * - Tips del empty state: maneja las acciones de tomar foto y subir archivo
    */
   bindEvents() {
-    const takePhotoBtn = document.getElementById('takePhoto');
-    const uploadPhotoBtn = document.getElementById('uploadPhoto');
     const photoInput = document.getElementById('photoInput');
     const cameraInput = document.getElementById('cameraInput');
 
-    // Event listener para tomar foto con cámara
-    takePhotoBtn.addEventListener('click', () => this.openCamera());
-    
-    // Event listener para subir foto desde archivos
-    uploadPhotoBtn.addEventListener('click', () => photoInput.click());
-    
     // Event listeners para cuando se seleccionan archivos
     photoInput.addEventListener('change', (e) => this.handleFileSelect(e));
     cameraInput.addEventListener('change', (e) => this.handleFileSelect(e));
-
+    
     // Event listeners para controles de cámara
     this.bindCameraEvents();
+    
+    // Event listeners para los tips del empty state
+    this.bindEmptyStateTips();
+  }
+  /**
+   * Configura los event listeners para los tips del empty state
+   * Maneja clicks y navegación por teclado de forma limpia y separada del HTML
+   */
+  bindEmptyStateTips() {
+    // Usar event delegation para manejar los tips
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('[data-action="take-photo"]')) {
+        this.openCamera();
+      } else if (e.target.matches('[data-action="upload-photo"]')) {
+        document.getElementById('photoInput').click();
+      }
+    });
+
+    // Manejar navegación por teclado (Enter y Espacio)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target.matches('[data-action="take-photo"]')) {
+          e.preventDefault();
+          this.openCamera();
+        } else if (e.target.matches('[data-action="upload-photo"]')) {
+          e.preventDefault();
+          document.getElementById('photoInput').click();
+        }
+      }
+    });
+  }
+
+  /**
+   * Configura los event listeners específicos para una foto individual
+   * @param {HTMLElement} photoElement - Elemento DOM de la foto
+   * @param {number} photoId - ID de la foto
+   */
+  bindPhotoEvents(photoElement, photoId) {
+    // Botón eliminar foto
+    const deleteBtn = photoElement.querySelector('[data-action="delete-photo"]');
+    deleteBtn.addEventListener('click', () => this.deletePhoto(photoId));
+
+    // Textarea para comentario de texto
+    const textarea = photoElement.querySelector('[data-action="update-comment"]');
+    textarea.addEventListener('change', (e) => this.updateTextComment(photoId, e.target.value));
+
+    // Botón iniciar grabación
+    const startRecordingBtn = photoElement.querySelector('[data-action="start-recording"]');
+    startRecordingBtn.addEventListener('click', () => this.startVoiceRecording(photoId));
+
+    // Botón detener grabación
+    const stopRecordingBtn = photoElement.querySelector('[data-action="stop-recording"]');
+    stopRecordingBtn.addEventListener('click', () => this.stopVoiceRecording(photoId));
   }
 
   /**
@@ -335,8 +379,7 @@ class PhotoManager {
     
     // Iniciar la lectura del archivo como data URL (base64)
     reader.readAsDataURL(file);
-  }
-  /**
+  }  /**
    * Renderiza una foto en el DOM con todos sus controles
    * Crea la estructura HTML completa para mostrar la foto y sus funcionalidades
    * @param {Object} photo - Objeto foto con toda la información
@@ -344,16 +387,18 @@ class PhotoManager {
   renderPhoto(photo) {
     const container = document.getElementById('photosContainer');
     
+    // Ocultar empty state cuando hay fotos
+    this.toggleEmptyState();
+    
     // Crear elemento contenedor para la foto
     const photoElement = document.createElement('div');
     photoElement.className = 'photo-item';
     photoElement.dataset.photoId = photo.id;
-    
-    // Estructura HTML completa de la foto con controles
+      // Estructura HTML completa de la foto con controles
     photoElement.innerHTML = `
       <div class="photo-controls">
         <span class="photo-number">Foto ${this.photos.length}</span>
-        <button type="button" class="delete-photo" onclick="photoManager.deletePhoto(${photo.id})">
+        <button type="button" class="delete-photo" data-action="delete-photo" data-photo-id="${photo.id}">
           🗑️ Eliminar
         </button>
       </div>
@@ -364,7 +409,7 @@ class PhotoManager {
         <label>Comentario de texto:</label>
         <textarea 
           placeholder="Describe lo que se ve en la foto..."
-          onchange="photoManager.updateTextComment(${photo.id}, this.value)"
+          data-action="update-comment" data-photo-id="${photo.id}"
           rows="2"
         ></textarea>
       </div>
@@ -372,10 +417,10 @@ class PhotoManager {
       <div class="voice-comment">
         <label>Comentario de voz:</label>
         <div class="voice-controls">
-          <button type="button" class="outline" onclick="photoManager.startVoiceRecording(${photo.id})">
+          <button type="button" class="outline" data-action="start-recording" data-photo-id="${photo.id}">
             🎙️ Grabar
           </button>
-          <button type="button" class="outline" onclick="photoManager.stopVoiceRecording(${photo.id})" disabled>
+          <button type="button" class="outline" data-action="stop-recording" data-photo-id="${photo.id}" disabled>
             ⏹️ Parar
           </button>
           <span class="recording-status"></span>
@@ -386,8 +431,10 @@ class PhotoManager {
     
     // Añadir al contenedor de fotos
     container.appendChild(photoElement);
-  }
-  /**
+    
+    // Configurar event listeners específicos para esta foto
+    this.bindPhotoEvents(photoElement, photo.id);
+  }  /**
    * Elimina una foto del sistema (array y DOM)
    * @param {number} photoId - ID de la foto a eliminar
    */
@@ -405,8 +452,9 @@ class PhotoManager {
     this.updatePhotoNumbers();
     // Actualizar campos ocultos del formulario
     this.updateFormData();
+    // Mostrar/ocultar empty state según corresponda
+    this.toggleEmptyState();
   }
-
   /**
    * Actualiza la numeración de las fotos después de eliminar una
    * Recorre todos los elementos de foto y actualiza el número mostrado
@@ -419,6 +467,24 @@ class PhotoManager {
         numberSpan.textContent = `Foto ${index + 1}`;
       }
     });
+  }
+  /**
+   * Controla la visibilidad del empty state según si hay fotos o no
+   * Muestra el empty state cuando no hay fotos, lo oculta cuando hay fotos
+   */
+  toggleEmptyState() {
+    const emptyState = document.getElementById('emptyStatePhotos');
+    const photosGrid = document.getElementById('photosContainer');
+    
+    if (emptyState && photosGrid) {
+      if (this.photos.length === 0) {
+        emptyState.style.display = 'flex';
+        photosGrid.classList.remove('has-photos');
+      } else {
+        emptyState.style.display = 'none';
+        photosGrid.classList.add('has-photos');
+      }
+    }
   }
 
   /**
