@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJPR65MK21"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JJPR65MK21');
+  </script>
+
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Wait List - Obratec</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  <title>Wait List - Obratec</title>
   
-  <!-- Custom CSS -->
+  <!-- Custom CSS - Order matters for proper overrides -->
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/landing.css" />
   <link rel="stylesheet" href="../css/waitlist.css" />
   
   <!-- Favicon -->
@@ -14,19 +24,28 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon.webp">
   <link rel="shortcut icon" href="../assets/favicon.webp">
   <link rel="manifest" href="../assets/site.webmanifest">
-  <meta name="theme-color" content="#3B8C88">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#3B8C88">
+  <meta name="theme-color" content="#F79B72">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#F79B72">
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="../assets/logo.PNG" as="image">
 </head>
 
-<body>
+<body class="waitlist-page">
+  <!-- Premium Navigation Header -->
+  <header class="premium-header">
+    <nav class="premium-nav">
+      <div class="nav-brand">
+        <img src="../assets/logo.PNG" alt="Obratec Logo" class="logo-img">
+        <span class="brand-text">Obratec</span>
+      </div>
+      <div class="nav-actions">
+        <a href="../pages/landing.html" class="nav-link">← Volver al inicio</a>
+        <a href="../pages/form-report.html" class="nav-link">Crear Informe</a>
+      </div>
+    </nav>
+  </header>
   <main class="container">
-    <!-- Botón de navegación -->
-    <div class="nav-header">
-      <a href="../pages/landing.html" class="back-button" title="Volver al inicio">
-        ← Volver al inicio
-      </a>
-    </div>
-    
     <!-- Header Hero Section -->
     <section class="waitlist-hero">
       <div class="hero-content">
@@ -37,16 +56,14 @@
         </p>
         <div class="hero-stats">
           <span class="stat-item">
-            <strong>+127</strong> profesionales esperando
+            <strong>+13</strong> profesionales esperando
           </span>
           <span class="stat-item">
             <strong>Beta</strong> disponible en 2 meses
           </span>
         </div>
       </div>
-    </section>
-
-    <!-- Benefits Section -->
+    </section>    <!-- Benefits Section -->
     <section class="benefits-section">
       <h2>🎁 ¿Qué obtienes al unirte?</h2>
       <div class="benefits-grid">
@@ -58,33 +75,16 @@
         
         <div class="benefit-card">
           <div class="benefit-icon">💰</div>
-          <h3>Precio Especial</h3>
-          <p>Acceso a precios de lanzamiento con descuentos exclusivos para miembros fundadores</p>
-        </div>
-        
+          <h3>Plan Founder Exclusivo</h3>
+          <p>Acceso anticipado a precios de lanzamiento + <strong>Plan Founder</strong> con 10 informes mensuales de por vida.</p>
+        </div>   
+
         <div class="benefit-card">
           <div class="benefit-icon">🏆</div>
           <h3>Influye en el Desarrollo</h3>
           <p>Tu feedback ayudará a mejorar la plataforma antes del lanzamiento oficial</p>
-        </div>
-        
-        <div class="benefit-card">
-          <div class="benefit-icon">📞</div>
-          <h3>Soporte Prioritario</h3>
-          <p>Atención personalizada y soporte directo del equipo de desarrollo</p>
-        </div>
-        
-        <div class="benefit-card">
-          <div class="benefit-icon">🎓</div>
-          <h3>Capacitación Gratuita</h3>
-          <p>Sesiones de onboarding y tutoriales exclusivos para maximizar tu productividad</p>
-        </div>
-        
-        <div class="benefit-card">
-          <div class="benefit-icon">🌟</div>
-          <h3>Comunidad Exclusiva</h3>
-          <p>Acceso a grupo privado de profesionales de la construcción y mejores prácticas</p>
-        </div>
+        </div> 
+
       </div>
     </section>
 
@@ -139,7 +139,7 @@
                 id="telefono" 
                 name="telefono" 
                 class="form-control" 
-                placeholder="+56 9 1234 5678"
+                placeholder="+34 912 345 678"
                 autocomplete="tel"
               />
               <small class="form-help">Para contacto directo y soporte prioritario</small>
@@ -225,15 +225,17 @@
                 <div class="whatsapp-benefit">🎯 Invitaciones beta prioritarias</div>
               </div>
               <div class="whatsapp-button-container">
-                <a href="https://wa.me/56912345678?text=Hola%2C%20quiero%20unirme%20al%20grupo%20de%20difusión%20de%20Obratec" 
+                <!--<a href="https://wa.me/56912345678?text=Hola%2C%20quiero%20unirme%20al%20grupo%20de%20difusión%20de%20Obratec" 
                    target="_blank" 
                    class="whatsapp-button">
                   📢 Únete a nuestro grupo de difusión
-                </a>
+                </a> -->
+                <button class="whatsapp-button disabled" disabled>
+                  🚧 Próximamente disponible
+                </button>
               </div>
             </div>
           </div>
-
           <!-- Términos y Condiciones -->
           <div class="checkbox-group">
             <label class="checkbox-container">

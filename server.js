@@ -17,6 +17,42 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
+// MIDDLEWARE DE VERIFICACIÓN DE DOMINIO
+const domainVerification = (req, res, next) => {
+  const allowedDomains = [
+    'obratec.app',
+    'www.obratec.app',
+    'localhost',
+    '127.0.0.1'
+  ];
+  
+  // Obtener el host del request
+  const host = req.get('host');
+  
+  // Verificar si el dominio está permitido
+  const isAllowed = allowedDomains.some(domain => 
+    host === domain || 
+    host.startsWith(`${domain}:`) || // Para puertos locales
+    (process.env.NODE_ENV === 'development' && host.includes('localhost'))
+  );
+  
+  if (!isAllowed) {
+    console.warn(`🚫 BLOCKED ACCESS from unauthorized domain: ${host} - IP: ${req.ip}`);
+    return res.status(403).json({
+      error: 'Domain not authorized',
+      message: 'Este dominio no está autorizado para acceder a este servicio',
+      timestamp: new Date().toISOString(),
+      host: host
+    });
+  }
+  
+  console.log(`✅ Authorized domain access: ${host}`);
+  next();
+};
+
+// Aplicar verificación de dominio
+app.use(domainVerification);
+
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -136,7 +172,6 @@ app.get('/waitlist', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages', 'waitlist-form.html'));
 });
 
-
 // Manejar rutas no encontradas
 app.use('*', (req, res) => {
   if (req.originalUrl.startsWith('/api/')) {
@@ -162,6 +197,7 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`⚙️ N8N Proxy: http://localhost:${PORT}/n8n/`);
   console.log(`🔗 Webhook Proxy: http://localhost:${PORT}/webhook/`);
   console.log(`💊 Health Check: http://localhost:${PORT}/health`);
+  console.log(`🔒 Domain verification active for: obratec.app`);
 });
 
 module.exports = app;

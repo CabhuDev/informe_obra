@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJPR65MK21"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JJPR65MK21');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Informe semanal de obra</title>
-  <!-- Custom CSS -->
+  <title>Informe semanal de obra</title>  <!-- Custom CSS - Order matters for proper inheritance -->
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/form-report-enhanced.css" />
 
-  <!-- Favicon -->    
+  <!-- Favicon -->
   <link rel="icon" type="image/webp" href="../assets/favicon.webp">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon.webp">
   <link rel="shortcut icon" href="../assets/favicon.webp">
@@ -17,7 +26,7 @@
 
 </head>
 
-<body>  <main class="container">
+<body class="form-report-page">  <main class="container">
     <!-- Botón de navegación -->
     <div class="nav-header">
       <a href="../pages/landing.html" class="back-button" title="Volver al inicio">
@@ -67,17 +76,16 @@
         <textarea name="incidences" rows="3"></textarea>
       </label>      <div class="photos-section">
         <label>Fotos del proyecto (máx 5):</label>
-        <div class="photo-upload">
-          <!-- Input para subir archivos -->
-          <input type="file" id="photoInput" accept="image/*" multiple style="display: none;" />
+        <div class="photo-upload">          <!-- Input para subir archivos -->
+          <input type="file" id="photoInput" accept="image/*" multiple class="hidden-input" />
           <!-- Input para captura de cámara en móvil -->
-          <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" />
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden-input" />
           
           <!-- Modal para cámara en desktop -->
-          <div id="cameraModal" class="camera-modal" style="display: none;">
+          <div id="cameraModal" class="camera-modal-hidden">
             <div class="camera-content">
               <video id="cameraVideo" autoplay muted></video>
-              <canvas id="cameraCanvas" style="display: none;"></canvas>
+              <canvas id="cameraCanvas" class="hidden"></canvas>
               <div class="camera-controls">
                 <button type="button" id="captureBtn" class="outline">📸 Capturar</button>
                 <button type="button" id="closeCameraBtn" class="outline">❌ Cerrar</button>
@@ -107,24 +115,21 @@
           <button type="button" id="startRecording" class="outline">🎙️ Iniciar grabación</button>
           <button type="button" id="stopRecording" class="outline" disabled>⏹️ Detener</button>
           <div class="recording-status-container">
-            <span id="recordingStatus"></span>
-            <div id="audioVisualizerContainer" style="display: none;">
+            <span id="recordingStatus"></span>            <div id="audioVisualizerContainer" class="audio-visualizer-hidden">
               <img src="assets/audio-bars.svg" alt="Grabando..." class="audio-visualizer" />
             </div>
           </div>
         </div>
-        <audio id="audioPlayback" controls style="display:none; width:100%; margin-top:10px;"></audio>
+        <audio id="audioPlayback" controls class="audio-playback-hidden"></audio>
         <!-- Este campo oculto almacenará el audio como base64 -->
         <input type="hidden" name="audioData" id="audioData">
       </div>        <button type="submit">Enviar informe</button>
-    </form>
-
-    <div id="loadingContainer" style="display: none;" class="loading-container">
+    </form>    <div id="loadingContainer" class="loading-container-hidden">
       <img src="assets/enviando-informe.svg" alt="Enviando informe..." class="loading-icon" />
       <span class="loading-text">Enviando informe...</span>
-    </div>    <p id="status"></p>
-    
-    <!-- Scripts optimizados -->
+    </div><p id="status"></p>
+      <!-- Scripts optimizados -->
+    <script src="../js/cssUtils.js"></script>
     <script src="../js/heicConverter.js"></script>
     <script src="../js/script.js"></script>
     <script src="../js/audioRecord.js"></script>

@@ -99,16 +99,15 @@ async function startRecording() {
     const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: true,
         video: false
-    });
-      // Actualizar UI
+    });    // Actualizar UI
     recordingStatus.textContent = "Grabando...";
     startRecordingButton.disabled = true;
     stopRecordingButton.disabled = false;
-    audioPlayback.style.display = "none";
+    CSSUtils.hide(audioPlayback, 'audio');
     
     // Mostrar visualizador de audio
     if (audioVisualizerContainer) {
-        audioVisualizerContainer.style.display = "block";
+        CSSUtils.show(audioVisualizerContainer, 'visualizer');
         audioVisualizerContainer.classList.add("recording");
     }
     
@@ -136,11 +135,10 @@ async function startRecording() {
         const originalBlob = new Blob(audioChunks, { 
             type: blobType
         });
-      
         // Crear URL para reproducir el audio
         const audioUrl = URL.createObjectURL(originalBlob);
         audioPlayback.src = audioUrl;
-        audioPlayback.style.display = "block";
+        CSSUtils.show(audioPlayback, 'audio');
         
         // Convertir a WAV para compatibilidad con OpenAI Whisper
         try {
@@ -178,10 +176,9 @@ async function startRecording() {
   } catch (err) {        console.error("Error al iniciar la grabación:", err);
         recordingStatus.textContent = "❌ Error: " + (err.message || "No se pudo acceder al micrófono");
         startRecordingButton.disabled = false;
-        
-        // Ocultar visualizador en caso de error
+          // Ocultar visualizador en caso de error
         if (audioVisualizerContainer) {
-            audioVisualizerContainer.style.display = "none";
+            CSSUtils.hide(audioVisualizerContainer, 'visualizer');
             audioVisualizerContainer.classList.remove("recording");
         }
   }
@@ -197,14 +194,13 @@ function stopRecording() {
   
     try {
         mediaRecorder.stop();
-        isRecording = false;
-          recordingStatus.textContent = "✅ Grabación completada";
+        isRecording = false;        recordingStatus.textContent = "✅ Grabación completada";
         startRecordingButton.disabled = false;
         stopRecordingButton.disabled = true;
         
         // Ocultar visualizador de audio
         if (audioVisualizerContainer) {
-            audioVisualizerContainer.style.display = "none";
+            CSSUtils.hide(audioVisualizerContainer, 'visualizer');
             audioVisualizerContainer.classList.remove("recording");
         }
         
@@ -219,14 +215,14 @@ function stopRecording() {
  * Limpia la grabación actual
  */
 function clearRecording() {
-    audioPlayback.style.display = "none";
+    CSSUtils.hide(audioPlayback, 'audio');
     audioPlayback.src = "";
     audioData.value = "";
     recordingStatus.textContent = "";
     
     // Ocultar visualizador de audio
     if (audioVisualizerContainer) {
-        audioVisualizerContainer.style.display = "none";
+        CSSUtils.hide(audioVisualizerContainer, 'visualizer');
         audioVisualizerContainer.classList.remove("recording");
     }
 }

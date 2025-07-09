@@ -1,547 +1,1345 @@
-/* Waitlist Form Styles - Obratec Sistema de Informes de Obra */
-/* Usando las variables CSS definidas en style.css */
+/* ================================================================
+   OBRATEC WAITLIST FORM - OPTIMIZED CSS (NO EXCESSIVE !important)
+   ================================================================
+   Clean, professional CSS following best practices
+   Brand Colors: #F79B72 (primary), #2A4759 (secondary), #3B8C88 (tertiary)
+   ================================================================ */
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+/* ================================================================
+   CSS VARIABLES - INHERITING FROM STYLE.CSS
+   ================================================================ */
+
+/* Additional waitlist-specific variables only */
+.waitlist-page {
+    /* WhatsApp specific colors */
+    --whatsapp: #25D366;
+    --whatsapp-dark: #128C7E;
+    --whatsapp-darker: #075E54;
+    
+    /* Enhanced spacing for waitlist */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+    --spacing-3xl: 3rem;
+    --spacing-4xl: 4rem;
+    --spacing-5xl: 5rem;
+    
+    /* Enhanced border radius */
+    --border-radius-lg: 12px;
+    --border-radius-xl: 16px;
+    --border-radius-2xl: 20px;
+    --border-radius-full: 9999px;
+    
+    /* Enhanced shadow system */
+    --shadow-xs: 0 1px 2px rgba(42, 71, 89, 0.05);
+    --shadow-2xl: 0 25px 50px -12px rgba(42, 71, 89, 0.25);
+    --shadow-inner: inset 0 2px 4px 0 rgba(42, 71, 89, 0.06);
+    
+    /* Enhanced transitions */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hero Section */
+/* ================================================================
+   GLOBAL STYLES - WAITLIST SPECIFIC
+   ================================================================ */
+
+.waitlist-page {
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 50%, rgba(247, 155, 114, 0.05) 100%);
+    min-height: 100vh;
+}
+
+/* ================================================================
+   PREMIUM NAVIGATION HEADER
+   ================================================================ */
+
+.premium-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(42, 71, 89, 0.08);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.premium-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    height: 70px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--secondary);
+    font-weight: 700;
+    font-size: 1.25rem;
+    transition: var(--transition-fast);
+}
+
+.nav-brand:hover {
+    color: var(--primary);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition-normal);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-xs);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.brand-text {
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--tertiary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: var(--secondary); /* Fallback */
+    letter-spacing: -0.025em;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+    background: rgba(247, 155, 114, 0.1);
+    border-color: var(--primary);
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ================================================================
+   CONTAINER & LAYOUT
+   ================================================================ */
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 90px 2rem 3rem;
+    position: relative;
+    min-height: calc(100vh - 90px);
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(247, 155, 114, 0.1) 0%, transparent 50%), 
+                radial-gradient(circle at 70% 80%, rgba(59, 140, 136, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    opacity: 0.6;
+    z-index: -1;
+    border-radius: var(--border-radius-xl);
+}
+
+/* ================================================================
+   HERO SECTION
+   ================================================================ */
+
 .waitlist-hero {
-  text-align: center;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-  color: var(--primary-inverse);
-  padding: 3rem 2rem;
-  border-radius: var(--border-radius);
-  margin-bottom: 3rem;
-  box-shadow: 0 8px 32px rgba(247, 155, 114, 0.3);
+    background: linear-gradient(135deg, var(--primary) 0%, #E6804F 50%, #D6804F 100%);
+    color: #FFFFFF;
+    padding: var(--spacing-4xl) var(--spacing-2xl);
+    border-radius: var(--border-radius-2xl);
+    margin-bottom: var(--spacing-4xl);
+    box-shadow: var(--shadow-2xl);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.waitlist-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 2px);
+    background-size: 60px 60px;
+    animation: float 25s linear infinite;
+    opacity: 0.7;
+}
+
+.waitlist-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .waitlist-hero h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  line-height: 1.2;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.95;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+    font-size: 1.35rem;
+    margin-bottom: var(--spacing-2xl);
+    opacity: 0.95;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
 }
 
 .hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
 }
 
 .stat-item {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: calc(var(--border-radius) / 2);
-  font-size: 0.9rem;
-  backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition-normal);
+    cursor: default;
+    text-align: center;
+    min-width: 180px;
 }
 
-/* Benefits Section */
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ================================================================
+   BENEFITS SECTION
+   ================================================================ */
+
 .benefits-section {
-  margin: 3rem 0;
-  text-align: center;
+    margin-bottom: var(--spacing-4xl);
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
 }
 
 .benefits-section h2 {
-  color: var(--secondary);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  font-weight: 600;
+    color: var(--secondary);
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-3xl);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.025em;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-3xl);
+    padding: 0 var(--spacing-lg);
 }
 
 .benefit-card {
-  background: var(--card-background-color);
-  padding: 2rem 1.5rem;
-  border-radius: var(--border-radius);
-  text-align: center;
-  border: 2px solid var(--card-border-color);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+    background: #FFFFFF;
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+    border-radius: var(--border-radius-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid #E1E8ED;
+    text-align: center;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
 }
 
 .benefit-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--tertiary) 50%, var(--secondary) 100%);
-}
-
-.benefit-card:nth-child(2n)::before {
-  background: linear-gradient(90deg, var(--tertiary) 0%, var(--primary) 50%, var(--secondary) 100%);
-}
-
-.benefit-card:nth-child(3n)::before {
-  background: linear-gradient(90deg, var(--secondary) 0%, var(--tertiary) 50%, var(--primary) 100%);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+    transform: scaleX(0);
+    transition: var(--transition-normal);
 }
 
 .benefit-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(42, 71, 89, 0.15);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-2xl);
+    border-color: var(--primary);
+}
+
+.benefit-card:hover::before {
+    transform: scaleX(1);
+}
+
+.benefit-card:nth-child(1) {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.benefit-card:nth-child(2) {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.benefit-card:nth-child(3) {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
 }
 
 .benefit-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  display: block;
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-xl);
+    display: block;
+    line-height: 1;
+    opacity: 0.9;
+    transition: var(--transition-normal);
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+    opacity: 1;
 }
 
 .benefit-card h3 {
-  color: var(--secondary);
-  font-size: 1.3rem;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: -0.025em;
 }
 
 .benefit-card p {
-  color: var(--muted-color);
-  line-height: 1.5;
-  font-size: 0.95rem;
+    color: #6C757D;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    font-weight: 400;
 }
 
-/* Form Section */
+.benefit-card p strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* ================================================================
+   FORM SECTION
+   ================================================================ */
+
 .waitlist-form-section {
-  background: var(--card-background-color);
-  border-radius: var(--border-radius);
-  padding: 0;
-  box-shadow: 0 8px 32px rgba(42, 71, 89, 0.12);
-  margin: 2rem 0;
-  overflow: hidden;
+    background: #FFFFFF;
+    border-radius: var(--border-radius-2xl);
+    padding: 0;
+    box-shadow: var(--shadow-xl);
+    margin: var(--spacing-4xl) 0;
+    overflow: hidden;
+    border: 1px solid #E1E8ED;
+    position: relative;
+}
+
+.waitlist-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
 }
 
 .form-container {
-  padding: 2rem;
+    padding: var(--spacing-3xl);
 }
 
 .form-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid var(--color-bg-light);
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    padding-bottom: var(--spacing-2xl);
+    border-bottom: 2px solid #F8F9FA;
+    position: relative;
+}
+
+.form-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--primary);
 }
 
 .form-header h2 {
-  color: var(--secondary);
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+    color: var(--secondary);
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: -0.025em;
 }
 
 .form-description {
-  color: var(--muted-color);
-  font-size: 1rem;
-  line-height: 1.5;
+    color: #6C757D;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.waitlist-form {
-  max-width: 100%;
-}
-
+/* Form Styles */
 .form-row {
-  margin-bottom: 1.5rem;
+    margin-bottom: var(--spacing-2xl);
 }
 
 .form-group {
-  position: relative;
+    position: relative;
 }
 
 .form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--secondary);
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.form-label.required::after {
-  content: ' *';
-  color: var(--del-color);
-  font-weight: bold;
+    display: block;
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.95rem;
 }
 
 .form-label.optional::after {
-  content: ' (opcional)';
-  color: var(--muted-color);
-  font-weight: normal;
-  font-size: 0.85rem;
+    content: ' (opcional)';
+    color: #8A9BA8;
+    font-weight: 400;
+    font-size: 0.85rem;
 }
 
 .form-control {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--muted-border-color);
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background: var(--card-background-color);
-  color: var(--color);
+    width: 100%;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border: 2px solid #E1E8ED;
+    border-radius: var(--border-radius-lg);
+    font-size: 1rem;
+    font-family: var(--font-family);
+    color: var(--secondary);
+    background: #FFFFFF;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-xs);
 }
 
 .form-control:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-focus);
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(247, 155, 114, 0.1), var(--shadow-md);
+    transform: translateY(-1px);
 }
 
-.form-control:invalid:not(:placeholder-shown) {
-  border-color: var(--del-color);
+.form-control:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-control::placeholder {
-  color: #999;
+    color: #ADB5BD;
+    font-size: 0.95rem;
 }
 
 .form-help {
-  display: block;
-  margin-top: 0.25rem;
-  color: var(--muted-color);
-  font-size: 0.85rem;
-  line-height: 1.3;
+    display: block;
+    color: #8A9BA8;
+    font-size: 0.85rem;
+    margin-top: var(--spacing-sm);
+    line-height: 1.4;
 }
 
-.error-message {
-  color: var(--del-color);
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-  display: none;
+select.form-control {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-/* Checkbox Styles */
-.checkbox-group {
-  margin: 1.5rem 0;
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+    font-family: var(--font-family);
 }
 
-.checkbox-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  cursor: pointer;
-  line-height: 1.4;
-  padding: 0.5rem 0;
-}
+/* ================================================================
+   WHATSAPP CTA SECTION
+   ================================================================ */
 
-.checkbox-container input[type="checkbox"] {
-  opacity: 0;
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.checkmark {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--muted-border-color);
-  border-radius: 4px;
-  position: relative;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.checkbox-container input[type="checkbox"]:checked + .checkmark {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-
-.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
-  content: '✓';
-  position: absolute;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.checkbox-text {
-  color: var(--color);
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-/* Button Styles */
-.btn-waitlist {
-  width: 100%;
-  font-size: 1.1rem;
-  padding: 1rem 2rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  position: relative;
-  overflow: hidden;
-  background: var(--tertiary);
-  border-color: var(--tertiary);
-  color: var(--tertiary-inverse);
-}
-
-.btn-waitlist:hover {
-  background: var(--tertiary-hover);
-  border-color: var(--tertiary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(59, 140, 136, 0.4);
-}
-
-.btn-waitlist:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Form Footer */
-.form-footer {
-  text-align: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-bg-light);
-}
-
-.privacy-note {
-  color: var(--muted-color);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.back-link {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.back-link:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
-}
-
-/* Social Proof Section */
-.social-proof {
-  background: var(--color-bg-light);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  text-align: center;
-  margin-top: 3rem;
-}
-
-.social-content h3 {
-  color: var(--secondary);
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
-.company-logos {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.company-item {
-  background: var(--card-background-color);
-  padding: 0.5rem 1rem;
-  border-radius: calc(var(--border-radius) / 2);
-  font-size: 0.9rem;
-  color: var(--muted-color);
-  border: 1px solid var(--muted-border-color);
-}
-
-.trust-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--muted-color);
-  font-size: 0.9rem;
-}
-
-.trust-icon {
-  color: var(--success-color);
-  font-weight: bold;
-}
-
-/* WhatsApp CTA Styles */
 .whatsapp-cta {
-  margin: 2rem 0;
+    margin: var(--spacing-3xl) 0;
 }
 
 .whatsapp-highlight {
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: white;
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  text-align: center;
-  margin: 1.5rem 0;
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+    color: #FFFFFF;
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+    border-radius: var(--border-radius-2xl);
+    text-align: center;
+    margin: var(--spacing-2xl) 0;
+    box-shadow: 0 20px 40px rgba(37, 211, 102, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-highlight::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 2px);
+    background-size: 50px 50px;
+    animation: float 20s linear infinite;
+    opacity: 0.8;
+}
+
+.whatsapp-highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.04) 50%, transparent 70%);
+    animation: shimmer 4s ease-in-out infinite;
 }
 
 .whatsapp-highlight h4 {
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .whatsapp-highlight p {
-  margin-bottom: 1.5rem;
-  opacity: 0.95;
-  line-height: 1.5;
+    margin-bottom: var(--spacing-2xl);
+    opacity: 0.95;
+    line-height: 1.6;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .whatsapp-benefits {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.8rem;
-  margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-2xl) 0;
+    position: relative;
+    z-index: 2;
 }
 
 .whatsapp-benefit {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: calc(var(--border-radius) / 2);
-  font-size: 0.9rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    font-size: 0.95rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    text-align: center;
+    transition: var(--transition-normal);
+    cursor: default;
+}
+
+.whatsapp-benefit:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .whatsapp-button-container {
-  margin-top: 1.5rem;
+    margin-top: var(--spacing-2xl);
+    position: relative;
+    z-index: 2;
 }
 
 .whatsapp-button {
-  display: inline-block !important;
-  background: rgba(255, 255, 255, 0.9) !important;
-  color: #128C7E !important;
-  padding: 0.75rem 1.5rem !important;
-  border-radius: var(--border-radius) !important;
-  text-decoration: none !important;
-  font-weight: 600 !important;
-  font-size: 1rem !important;
-  transition: all 0.3s ease !important;
-  border: 2px solid transparent !important;
-  text-align: center;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--whatsapp-dark);
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition-normal);
+    border: 2px solid transparent;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(37,211,102,0.1), transparent);
+    transition: var(--transition-slow);
+}
+
+.whatsapp-button:hover::before {
+    left: 100%;
 }
 
 .whatsapp-button:hover {
-  background: white !important;
-  color: #075E54 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  text-decoration: none !important;
+    background: #FFFFFF;
+    color: var(--whatsapp-darker);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
 }
 
-.whatsapp-button:visited {
-  color: #128C7E !important;
+.whatsapp-button.disabled {
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
-.whatsapp-button:visited:hover {
-  color: #075E54 !important;
+.whatsapp-button.disabled:hover {
+    transform: none;
+    box-shadow: var(--shadow-lg);
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem 0.5rem;
-  }
+.whatsapp-button.disabled::before {
+    display: none;
+}
 
-  .waitlist-hero {
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-  }
+/* ================================================================
+   CHECKBOX SYSTEM
+   ================================================================ */
 
-  .waitlist-hero h1 {
-    font-size: 2rem;
-  }
+.checkbox-group {
+    margin: var(--spacing-2xl) 0;
+}
 
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+    cursor: pointer;
+    line-height: 1.6;
+    padding: var(--spacing-xl);
+    background: #F8F9FA;
+    border-radius: var(--border-radius-lg);
+    border: 2px solid #E1E8ED;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
 
-  .hero-stats {
-    flex-direction: column;
-    gap: 1rem;
-  }
+.checkbox-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+    transform: scaleX(0);
+    transition: var(--transition-normal);
+}
 
-  .benefits-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+.checkbox-container:hover {
+    background: rgba(247, 155, 114, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
 
-  .benefit-card {
-    padding: 1.5rem 1rem;
-  }
+.checkbox-container:hover::before {
+    transform: scaleX(1);
+}
 
-  .form-container {
-    padding: 1.5rem 1rem;
-  }
+.checkbox-container input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
 
-  .company-logos {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+.checkmark {
+    width: 28px;
+    height: 28px;
+    border: 3px solid #CED4DA;
+    border-radius: var(--border-radius);
+    position: relative;
+    transition: var(--transition-normal);
+    flex-shrink: 0;
+    margin-top: 2px;
+    background: #FFFFFF;
+    box-shadow: var(--shadow-xs);
+}
 
-  .trust-indicators {
-    flex-direction: column;
-    gap: 1rem;
-  }
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
 
-  .whatsapp-benefits {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
 
-  .whatsapp-highlight {
-    padding: 1.5rem 1rem;
-  }
+.checkbox-container:hover .checkmark {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
 
-  .whatsapp-highlight h4 {
+.checkbox-text {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.checkbox-text a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition-fast);
+}
+
+.checkbox-text a:hover {
+    border-bottom-color: var(--primary);
+    color: #E6804F;
+}
+
+/* ================================================================
+   SUBMIT BUTTON
+   ================================================================ */
+
+.btn-waitlist {
+    width: 100%;
     font-size: 1.2rem;
-  }
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    font-weight: 700;
+    margin-top: var(--spacing-2xl);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--tertiary), #2F6B67);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: 0 8px 25px rgba(59, 140, 136, 0.4);
+    letter-spacing: 0.025em;
+}
+
+.btn-waitlist::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transition-slow);
+}
+
+.btn-waitlist:hover::before {
+    left: 100%;
+}
+
+.btn-waitlist:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(59, 140, 136, 0.5);
+    background: linear-gradient(135deg, #2F6B67, var(--tertiary));
+}
+
+.btn-waitlist:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(59, 140, 136, 0.4);
+}
+
+/* Loading state */
+.btn-waitlist.loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.btn-waitlist.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid #FFFFFF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ================================================================
+   SOCIAL PROOF SECTION
+   ================================================================ */
+
+.social-proof {
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    padding: var(--spacing-4xl) var(--spacing-2xl);
+    border-radius: var(--border-radius-2xl);
+    text-align: center;
+    margin-top: var(--spacing-4xl);
+    border: 1px solid #E1E8ED;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-proof::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+}
+
+.social-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.social-content h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-2xl);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+.company-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+    align-items: center;
+    justify-items: center;
+}
+
+.company-item {
+    background: #FFFFFF;
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    border-radius: var(--border-radius-lg);
+    font-size: 1rem;
+    color: var(--secondary);
+    border: 2px solid #E1E8ED;
+    font-weight: 500;
+    text-align: center;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.company-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+    transform: scaleX(0);
+    transition: var(--transition-normal);
+}
+
+.company-item:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+}
+
+.company-item:hover::before {
+    transform: scaleX(1);
+}
+
+.trust-indicators {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-3xl);
+    align-items: center;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    color: var(--secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    background: #FFFFFF;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--border-radius-full);
+    border: 2px solid #E1E8ED;
+    transition: var(--transition-normal);
+    text-align: center;
+    cursor: default;
+    box-shadow: var(--shadow-sm);
+    min-width: 150px;
+}
+
+.trust-item:hover {
+    background: var(--primary);
+    color: #FFFFFF;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+}
+
+.trust-icon {
+    font-size: 1.25rem;
+    color: inherit;
+    font-weight: 700;
+}
+
+/* ================================================================
+   FORM FOOTER
+   ================================================================ */
+
+.form-footer {
+    text-align: center;
+    margin-top: var(--spacing-3xl);
+    padding-top: var(--spacing-2xl);
+    border-top: 2px solid #F8F9FA;
+    position: relative;
+}
+
+.form-footer::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--primary);
+}
+
+.privacy-note {
+    color: #6C757D;
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-2xl);
+    line-height: 1.6;
+    background: rgba(247, 155, 114, 0.1);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    border-left: 4px solid var(--primary);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-normal);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: rgba(247, 155, 114, 0.1);
+}
+
+.back-link:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+    border-color: var(--primary);
+    text-decoration: none;
+    transform: translateX(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ================================================================
+   FORM VALIDATION STATES
+   ================================================================ */
+
+.form-control.valid {
+    border-color: #22C55E;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.form-control.invalid {
+    border-color: #EF4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Premium Messages */
+.message {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-lg) 0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    animation: slideInDown 0.3s ease;
+}
+
+.message.success {
+    background: linear-gradient(135deg, #DCFCE7, #BBF7D0);
+    color: #15803D;
+    border: 1px solid #22C55E;
+}
+
+.message.error {
+    background: linear-gradient(135deg, #FEE2E2, #FECACA);
+    color: #DC2626;
+    border: 1px solid #EF4444;
+}
+
+.message.info {
+    background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+    color: #1D4ED8;
+    border: 1px solid #3B82F6;
+}
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================================================
+   RESPONSIVE DESIGN
+   ================================================================ */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 90px 1.5rem 2rem;
+    }
+
+    .premium-nav {
+        padding: 1rem;
+    }
+
+    .nav-actions {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .waitlist-hero {
+        padding: var(--spacing-3xl) var(--spacing-xl);
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .waitlist-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-stats {
+        gap: var(--spacing-lg);
+    }
+
+    .stat-item {
+        min-width: 150px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 0.9rem;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        padding: 0;
+    }
+    
+    .benefit-card {
+        padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+    
+    .benefits-section h2 {
+        font-size: 2rem;
+    }
+    
+    .benefit-icon {
+        font-size: 3rem;
+    }
+
+    .form-container {
+        padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+
+    .form-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .whatsapp-highlight {
+        padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+
+    .whatsapp-highlight h4 {
+        font-size: 1.5rem;
+    }
+
+    .whatsapp-benefits {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .company-logos {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .trust-indicators {
+        gap: var(--spacing-lg);
+    }
+
+    .trust-item {
+        min-width: 130px;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
-  .waitlist-hero h1 {
-    font-size: 1.8rem;
-  }
+    .container {
+        padding: 90px 1rem 1.5rem;
+    }
 
-  .benefits-section h2 {
-    font-size: 1.6rem;
-  }
+    .waitlist-hero h1 {
+        font-size: 2rem;
+    }
 
-  .form-header h2 {
-    font-size: 1.5rem;
-  }
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .form-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .whatsapp-highlight h4 {
+        font-size: 1.3rem;
+    }
+
+    .social-content h3 {
+        font-size: 1.6rem;
+    }
+
+    .form-container {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .btn-waitlist {
+        font-size: 1.1rem;
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .trust-indicators {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
 }
+
+/* ================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+    }
+}
+
+/* Focus states for accessibility */
+.nav-link:focus,
+.form-control:focus,
+.btn-waitlist:focus,
+.checkbox-container:focus-within,
+.whatsapp-button:focus,
+.back-link:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* GPU acceleration for smooth animations */
+.waitlist-hero,
+.benefit-card,
+.whatsapp-highlight,
+.btn-waitlist,
+.form-control,
+.checkbox-container,
+.nav-link,
+.logo-img {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Optimize repaints */
+.benefit-card::before,
+.whatsapp-highlight::before,
+.waitlist-hero::before,
+.checkbox-container::before {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* ================================================================
+   END OF WAITLIST CSS - CLEAN & OPTIMIZED
+   ================================================================ */

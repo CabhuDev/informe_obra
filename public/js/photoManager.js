@@ -152,9 +152,8 @@ class PhotoManager {
           facingMode: 'environment' // Cámara trasera preferida
         } 
       });
-      
-      video.srcObject = this.cameraStream;
-      modal.style.display = 'flex';
+        video.srcObject = this.cameraStream;
+      CSSUtils.show(modal, 'flex');
       
     } catch (error) {
       console.error('Error accediendo a la cámara:', error);
@@ -210,9 +209,8 @@ class PhotoManager {
       this.cameraStream.getTracks().forEach(track => track.stop());
       this.cameraStream = null;
     }
-    
-    // Ocultar modal
-    modal.style.display = 'none';
+      // Ocultar modal
+    CSSUtils.hide(modal, 'camera');
   }/**
    * Maneja la selección de archivos desde el input file
    * Procesa múltiples archivos y valida que sean imágenes
@@ -475,13 +473,12 @@ class PhotoManager {
   toggleEmptyState() {
     const emptyState = document.getElementById('emptyStatePhotos');
     const photosGrid = document.getElementById('photosContainer');
-    
-    if (emptyState && photosGrid) {
+      if (emptyState && photosGrid) {
       if (this.photos.length === 0) {
-        emptyState.style.display = 'flex';
+        CSSUtils.show(emptyState, 'flex');
         photosGrid.classList.remove('has-photos');
       } else {
-        emptyState.style.display = 'none';
+        CSSUtils.hide(emptyState);
         photosGrid.classList.add('has-photos');
       }
     }
@@ -617,11 +614,10 @@ class PhotoManager {
   showVoicePlayback(photoId, audioDataUrl) {
     const photoElement = document.querySelector(`[data-photo-id="${photoId}"]`);
     if (!photoElement) return;
-    
-    // Encontrar el elemento audio y configurarlo
+      // Encontrar el elemento audio y configurarlo
     const audioElement = photoElement.querySelector('.voice-playback');
     audioElement.src = audioDataUrl;
-    audioElement.style.display = 'block';  // Hacer visible el reproductor
+    CSSUtils.show(audioElement, 'block');  // Hacer visible el reproductor
   }
   /**
    * Actualiza los campos ocultos del formulario con los datos de las fotos

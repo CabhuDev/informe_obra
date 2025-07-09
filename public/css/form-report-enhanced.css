@@ -1,0 +1,802 @@
+/* ================================================================
+   OBRATEC FORM-REPORT - OPTIMIZED CSS ENHANCEMENT
+   ================================================================
+   Clean CSS enhancements for the form-report page
+   Eliminating inline styles and improving user experience
+   Brand Colors: #F79B72 (primary), #2A4759 (secondary), #3B8C88 (tertiary)
+   ================================================================ */
+
+/* ================================================================
+   FORM-REPORT SPECIFIC ENHANCEMENTS
+   ================================================================ */
+
+/* Enhanced navigation for report form */
+.form-report-page .nav-header {
+    background: linear-gradient(135deg, rgba(247, 155, 114, 0.1) 0%, rgba(59, 140, 136, 0.1) 100%);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(247, 155, 114, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .nav-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+}
+
+.form-report-page .back-button {
+    background: var(--white);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(247, 155, 114, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(247, 155, 114, 0.1), transparent);
+    transition: all 0.5s ease;
+}
+
+.form-report-page .back-button:hover::before {
+    left: 100%;
+}
+
+/* Enhanced hero banner */
+.form-report-page .hero-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #E6804F 50%, var(--tertiary) 100%);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 20px 40px rgba(247, 155, 114, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 2px);
+    background-size: 60px 60px;
+    animation: heroFloat 20s linear infinite;
+    opacity: 0.6;
+}
+
+.form-report-page .hero-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+    animation: heroShimmer 3s ease-in-out infinite;
+}
+
+.form-report-page .hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.form-report-page .hero-text h1 {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease;
+}
+
+.form-report-page .hero-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.form-report-page .hero-img {
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.form-report-page .hero-img:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced form styling */
+.form-report-page form {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    border: 1px solid rgba(247, 155, 114, 0.2);
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 15px 35px rgba(42, 71, 89, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+}
+
+/* Enhanced labels */
+.form-report-page label {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.form-report-page label::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+/* Enhanced inputs */
+.form-report-page input,
+.form-report-page textarea,
+.form-report-page select {
+    border: 2px solid #E1E8ED;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(42, 71, 89, 0.05);
+    position: relative;
+}
+
+.form-report-page input:focus,
+.form-report-page textarea:focus,
+.form-report-page select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(247, 155, 114, 0.1), 0 4px 12px rgba(42, 71, 89, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-report-page input:hover,
+.form-report-page textarea:hover,
+.form-report-page select:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(42, 71, 89, 0.08);
+}
+
+/* Enhanced photos section */
+.form-report-page .photos-section {
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    border: 2px solid rgba(247, 155, 114, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 25px rgba(42, 71, 89, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .photos-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+}
+
+.form-report-page .photos-section > label {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-report-page .photos-section > label::before {
+    content: '📷';
+    font-size: 1.5rem;
+}
+
+/* Enhanced empty state */
+.form-report-page .empty-state {
+    background: linear-gradient(135deg, #FFFFFF 0%, rgba(247, 155, 114, 0.05) 100%);
+    border: 2px dashed rgba(247, 155, 114, 0.3);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .empty-state:hover {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(247, 155, 114, 0.05) 0%, #FFFFFF 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(247, 155, 114, 0.2);
+}
+
+.form-report-page .empty-state::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(247, 155, 114, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.form-report-page .empty-state-content {
+    position: relative;
+    z-index: 1;
+}
+
+.form-report-page .empty-state h3 {
+    color: var(--secondary);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.form-report-page .empty-state p {
+    color: #6C757D;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Enhanced tips */
+.form-report-page .tip.clickable {
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .tip.clickable::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.5s ease;
+}
+
+.form-report-page .tip.clickable:hover::before {
+    left: 100%;
+}
+
+.form-report-page .tip.clickable:hover {
+    background: #E6804F;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(247, 155, 114, 0.4);
+}
+
+.form-report-page .tip.info {
+    background: var(--tertiary);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Enhanced audio recorder */
+.form-report-page .audio-recorder {
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    border: 2px solid rgba(59, 140, 136, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 25px rgba(42, 71, 89, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .audio-recorder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--tertiary), var(--primary));
+}
+
+.form-report-page .audio-recorder > label {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-report-page .audio-recorder > label::before {
+    content: '🎙️';
+    font-size: 1.5rem;
+}
+
+.form-report-page .recorder-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-report-page .recorder-controls button {
+    background: var(--tertiary);
+    color: white;
+    border: 2px solid var(--tertiary);
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .recorder-controls button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.5s ease;
+}
+
+.form-report-page .recorder-controls button:hover::before {
+    left: 100%;
+}
+
+.form-report-page .recorder-controls button:hover {
+    background: #2F6B67;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 140, 136, 0.4);
+}
+
+.form-report-page .recorder-controls button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.form-report-page .recorder-controls button:disabled::before {
+    display: none;
+}
+
+/* Enhanced submit button */
+.form-report-page button[type="submit"] {
+    background: linear-gradient(135deg, var(--primary) 0%, #E6804F 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1.25rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 100%;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(247, 155, 114, 0.4);
+}
+
+.form-report-page button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.5s ease;
+}
+
+.form-report-page button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+.form-report-page button[type="submit"]:hover {
+    background: linear-gradient(135deg, #E6804F 0%, var(--primary) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(247, 155, 114, 0.5);
+}
+
+/* Enhanced loading container */
+.form-report-page .loading-container {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    border: 2px solid rgba(247, 155, 114, 0.2);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(42, 71, 89, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page .loading-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--tertiary));
+    animation: loadingShimmer 2s ease-in-out infinite;
+}
+
+.form-report-page .loading-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 4px 12px rgba(247, 155, 114, 0.3));
+    animation: loadingPulse 2s ease-in-out infinite;
+}
+
+.form-report-page .loading-text {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    animation: loadingFade 2s ease-in-out infinite;
+}
+
+/* Enhanced status messages */
+.form-report-page #status {
+    border-radius: 12px;
+    padding: 1.25rem 2rem;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-report-page #status.success {
+    background: linear-gradient(135deg, #D4F4DD 0%, #C8E6C9 100%);
+    color: #2E7D32;
+    border-color: #4CAF50;
+}
+
+.form-report-page #status.error {
+    background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+    color: #C62828;
+    border-color: #F44336;
+}
+
+.form-report-page #status.info {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    color: #1565C0;
+    border-color: #2196F3;
+}
+
+/* Hidden elements - replacing inline styles */
+.form-report-page .hidden {
+    display: none !important;
+}
+
+.form-report-page .hidden-input {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.form-report-page .audio-playback-hidden {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 8px;
+}
+
+.form-report-page .audio-playback-visible {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(59, 140, 136, 0.2);
+}
+
+.form-report-page .camera-modal-hidden {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.form-report-page .camera-modal-visible {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: center;
+}
+
+.form-report-page .camera-content {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.form-report-page .camera-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.form-report-page .audio-visualizer-hidden {
+    display: none;
+}
+
+.form-report-page .audio-visualizer-visible {
+    display: block;
+    margin-left: 1rem;
+}
+
+/* Loading container states */
+.form-report-page .loading-container-hidden {
+    display: none;
+}
+
+.form-report-page .loading-container-visible {
+    display: block;
+}
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
+
+@keyframes heroFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+}
+
+@keyframes heroShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loadingShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes loadingPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes loadingFade {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ================================================================
+   RESPONSIVE DESIGN
+   ================================================================ */
+
+@media (max-width: 768px) {
+    .form-report-page .hero-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .form-report-page .hero-text h1 {
+        font-size: 2rem;
+    }
+    
+    .form-report-page .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .form-report-page form {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-report-page .photos-section,
+    .form-report-page .audio-recorder {
+        padding: 1.5rem;
+    }
+    
+    .form-report-page .recorder-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-report-page .camera-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .form-report-page .camera-controls {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-report-page .hero-banner {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .form-report-page .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .form-report-page form {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-report-page .nav-header {
+        padding: 1rem;
+    }
+    
+    .form-report-page .empty-state {
+        padding: 2rem 1rem;
+    }
+    
+    .form-report-page .loading-container {
+        padding: 2rem 1rem;
+    }
+    
+    .form-report-page .loading-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .form-report-page button[type="submit"] {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* ================================================================
+   ACCESSIBILITY & PERFORMANCE OPTIMIZATIONS
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .form-report-page *,
+    .form-report-page *::before,
+    .form-report-page *::after {
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+    }
+}
+
+/* Focus states for accessibility */
+.form-report-page .back-button:focus,
+.form-report-page input:focus,
+.form-report-page textarea:focus,
+.form-report-page select:focus,
+.form-report-page button:focus,
+.form-report-page .tip.clickable:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* GPU acceleration for smooth animations */
+.form-report-page .hero-banner,
+.form-report-page .hero-img,
+.form-report-page form,
+.form-report-page .photos-section,
+.form-report-page .audio-recorder,
+.form-report-page input,
+.form-report-page textarea,
+.form-report-page button {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* ================================================================
+   END OF FORM-REPORT ENHANCEMENT CSS
+   ================================================================ */

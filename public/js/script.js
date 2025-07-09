@@ -4,7 +4,7 @@ const WEBHOOK_URL = (() => {
   const protocol = window.location.protocol;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
     // Desarrollo local - n8n en puerto 5678
-    return "https://n8n.obratec.app/webhook-test/form-obra";
+    return "https://n8n.obratec.app/webhook-test/wait-list";
   } else {
     // Producción en obratec.app
     return "https://obratec.app/webhook/form-obra";
@@ -34,14 +34,13 @@ form.addEventListener("submit", async (e) => {
     let res = await fetch(WEBHOOK_URL, {
       method: "POST",
       body: formData
-    });
-
-    if (res.ok) {
+    });    if (res.ok) {
       status.textContent = "✅ Informe enviado correctamente";
       form.reset();
       
-      // Resetear completamente la interfaz de audio
-      audioRecord.style.display = "none";
+      // Resetear completamente la interfaz de audio usando CSS utilities
+      const audioRecord = document.getElementById("audioPlayback");
+      CSSUtils.hide(audioRecord, 'audio');
       audioRecord.src = "";
       document.getElementById("audioData").value = "";
       document.getElementById("recordingStatus").textContent = "";

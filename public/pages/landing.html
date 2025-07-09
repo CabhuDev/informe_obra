@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJPR65MK21"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JJPR65MK21');
+    </script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Obratec - Sistema de Informes de Obra</title>
+    <title>Obratec - Sistema Profesional de Informes de Obra</title>
+    <meta name="description" content="Sistema profesional de informes de obra con fotos, audio y seguimiento de avance. Genera reportes detallados en minutos.">
+    
     <!-- Custom CSS -->
-
     <link rel="stylesheet" href="../css/landing.css" />
     <link rel="stylesheet" href="../css/style.css" />
 
@@ -16,56 +26,222 @@
     <link rel="manifest" href="../assets/site.webmanifest">
     <meta name="theme-color" content="#3B8C88">
     <meta name="apple-mobile-web-app-status-bar-style" content="#3B8C88">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="../assets/logo.PNG" as="image">
+    <link rel="preload" href="../assets/hero.png" as="image">
 </head>
 
 <body>
-    <div class="landing-hero">
-        <h1>🏗️ Obratec</h1>
-        <p>
-        Sistema profesional de informes de obra. Genera reportes detallados con fotos, 
-        audios y seguimiento de avance de forma rápida y eficiente.
-        </p>        <div class="cta-buttons">
-            <a href="/form-report" class="cta-button secondary">Crear Informe de prueba</a>
-            <a href="/templates/example-report.pdf" class="cta-button secondary">Versión muestra de informe</a>
-            <a href ="/waitlist" class="cta-button tertiary">🚀 Solicitar acceso a la beta</a>
+    <!-- Navigation Header Premium -->
+    <header class="premium-header">
+        <nav class="premium-nav">
+            <div class="nav-brand">
+                <img src="../assets/logo.PNG" alt="Obratec Logo" class="logo-img">
+                <span class="brand-text">Obratec</span>
+            </div>
+            <div class="nav-actions">
+                <a href="/form-report" class="nav-link">Crear Informe</a>
+                <a href="/templates/example-report.pdf" class="nav-link">Ver Ejemplo</a>
+                <a href="/waitlist" class="btn-beta">🚀 Únete a la Beta</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section Premium -->
+    <section class="hero-premium">
+        <div class="hero-background">
+            <div class="hero-pattern"></div>
         </div>
-    </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🏗️</span>
+                    <span class="badge-text">Sistema Profesional</span>
+                </div>
+                <h1 class="hero-title">
+                    Transforma tus 
+                    <span class="title-highlight">informes de obra</span>
+                    en documentos profesionales
+                </h1>
+                <p class="hero-subtitle">
+                    Genera reportes detallados con fotos, audios y seguimiento de avance 
+                    de forma rápida y eficiente. Perfecto para constructoras, arquitectos e ingenieros.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">+9</span>
+                        <span class="stat-label">Profesionales en beta</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">5 min</span>
+                        <span class="stat-label">Tiempo promedio</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">PDF</span>
+                        <span class="stat-label">Entrega automática</span>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="/form-report" class="btn-primary-large">
+                        <span class="btn-icon">📋</span>
+                        Crear Mi Primer Informe
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a href="/templates/example-report.pdf" class="btn-secondary-large">
+                        Ver Ejemplo de Informe
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <span class="trust-text">🔒 Datos seguros</span>
+                    <span class="trust-divider">•</span>
+                    <span class="trust-text">✅ Empresa española</span>
+                    <span class="trust-divider">•</span>
+                    <span class="trust-text">⚡ Entrega instantánea</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-container">
+                    <img src="../assets/hero.png" alt="Sistema Obratec en acción" class="hero-image">
+                    <div class="hero-overlay">
+                        <div class="overlay-card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-content">
+                                <div class="card-title">Avance: 45%</div>
+                                <div class="card-subtitle">Actualizado ahora</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="features">
-    <div class="feature">
-      <h3>📸 Fotos de Obra</h3>
-      <p>Adjunta múltiples fotos del progreso de la obra con descripción mediante audio o texto.</p>
-    </div>
-    
-    <div class="feature">
-      <h3>🎤 Notas de Audio</h3>
-      <p>Graba el contenido de tu informe mediante voz directamente desde tu dispositivo móvil para mayor eficiencia.</p>
-    </div>
-    
-    <div class="feature">
-      <h3>📊 Seguimiento de Avance</h3>
-      <p>Control preciso del porcentaje de avance y observaciones detalladas.</p>
-    </div>
-    
-    <div class="feature">
-      <h3>📧 Entrega Automática</h3>
-      <p>Los informes se envían automáticamente por email en formato PDF profesional.</p>
-    </div>
-    
-    <div class="feature">
-      <h3>⚡ Proceso Rápido</h3>
-      <p>Interfaz intuitiva que permite crear informes completos en pocos minutos.</p>
-    </div>
-    
-    <div class="feature">
-      <h3>🔒 Seguro y Confiable</h3>
-      <p>Tus datos están protegidos con las mejores prácticas de seguridad.</p>
-    </div>
-  </div>
+    <!-- Features Section Premium -->
+    <section class="features-premium">
+        <div class="features-container">
+            <div class="features-header">
+                <h2 class="features-title">Todo lo que necesitas para informes profesionales</h2>
+                <p class="features-subtitle">Potencia tu gestión de obra con herramientas diseñadas para profesionales</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3 class="feature-title">Documentación Visual</h3>
+                    <p class="feature-description">Adjunta múltiples fotos del progreso con descripciones de audio o texto. Perfecto para evidenciar avances.</p>
+                    <div class="feature-highlight">Hasta 5 fotos por informe</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3 class="feature-title">Notas de Voz</h3>
+                    <p class="feature-description">Graba observaciones mediante voz desde tu móvil. Más rápido que escribir, más personal que texto.</p>
+                    <div class="feature-highlight">Grabación integrada</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Control de Avance</h3>
+                    <p class="feature-description">Seguimiento preciso del porcentaje de avance con observaciones detalladas y cronología.</p>
+                    <div class="feature-highlight">Métricas en tiempo real</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h3 class="feature-title">Entrega Automática</h3>
+                    <p class="feature-description">PDF profesional enviado automáticamente por email. Sin configuraciones, sin complicaciones.</p>
+                    <div class="feature-highlight">Instantáneo y confiable</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Rapidez Extrema</h3>
+                    <p class="feature-description">Interfaz intuitiva optimizada para crear informes completos en menos de 5 minutos.</p>
+                    <div class="feature-highlight">Optimizado para móvil</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Máxima Seguridad</h3>
+                    <p class="feature-description">Tus datos protegidos con estándares europeos. Empresa española, servidores seguros.</p>
+                    <div class="feature-highlight">RGPD compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="footer">
-    <p>&copy; 2025 Obratec - Sistema de Informes de Obra</p>
-    <p>Versión 1.0 | <a href="/health">Estado del Sistema</a></p>
-  </div>
+    <!-- CTA Section Premium -->
+    <section class="cta-premium">
+        <div class="cta-container">
+            <div class="cta-content">
+                <h2 class="cta-title">¿Listo para profesionalizar tus informes?</h2>
+                <p class="cta-subtitle">Únete a más de 127 profesionales que ya usan Obratec para sus proyectos</p>
+                <div class="cta-buttons">
+                    <a href="/form-report" class="btn-cta-primary">
+                        Crear Informe Gratis
+                        <span class="btn-sparkle">✨</span>
+                    </a>
+                    <a href="/waitlist" class="btn-cta-secondary">
+                        🚀 Únete a la Beta
+                    </a>
+                </div>
+                <div class="cta-note">
+                    Sin registro • Sin límites • Sin complicaciones
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Premium -->
+    <footer class="footer-premium">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../assets/logo.PNG" alt="Obratec" class="footer-logo-img">
+                    <span class="footer-brand-text">Obratec</span>
+                </div>
+                <p class="footer-tagline">Sistema profesional de informes de obra</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4 class="footer-title">Producto</h4>
+                    <a href="/form-report" class="footer-link">Crear Informe</a>
+                    <a href="/templates/example-report.pdf" class="footer-link">Ver Ejemplo</a>
+                    <a href="/waitlist" class="footer-link">Únete a la Beta</a>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Soporte</h4>
+                    <a href="/health" class="footer-link">Estado del Sistema</a>
+                    <a href="#" class="footer-link">Ayuda</a>
+                    <a href="#" class="footer-link">Contacto</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-container">
+                <div class="footer-copyright">
+                    <span>&copy; 2025 Obratec. Todos los derechos reservados.</span>
+                </div>
+                <div class="footer-version">
+                    <span>Versión 2.0 • Hecho en España 🇪🇸</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth scroll behavior -->
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
